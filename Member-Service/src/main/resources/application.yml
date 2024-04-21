@@ -1,0 +1,32 @@
+server:
+  port: 3002
+  address: localhost
+#  ssl:
+#    key-store: fullchain.pfx
+#    key-store-password: privatekey
+#    key-store-type: privatekey
+#    key-password: PKCS12
+  error:
+    whitelabel:
+      enabled: false
+    
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/member_service
+    username: root
+    password: privatekey
+    hikari:
+      idle-timeout: 300000
+      max-lifetime: 297000
+  application:
+    name: Member-Service
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: privatekey
+      
+token:
+  secret: Y2hvcHBhLWRvbnQtYml0ZS1tZS1zcHJpbmctYm9vdC1qd3QtdGVzdC1zZWNyZXQta2V5LWNob3BwYS1kb250LWJpdGUtbWUtc3ByaW5nLWJvb3Qtand0LXRlc3Qtc2VjcmV0LWtleQo=
+  issuer: Blanc-et-Noir
