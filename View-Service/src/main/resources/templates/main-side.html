@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>사이드바</title>
+</head>
+<body>
+	<div name="main-side" class="side close" th:fragment="fragment">
+		<div class="side-container">
+			<div class="side-container-button" onclick="switchSideBar('main-side')">
+				<img class="side-container-button-svg" src="/svg/메뉴.svg">
+			</div>
+			<div class="side-container-header">뷰 매니저</div>
+			<div class="side-container-body">
+				<div class="side-container-body-container">
+					<div class="side-container-body-container-title">메인</div>
+					<div name="home" class="side-container-body-container-box">
+						<img class="side-container-body-container-box-svg" src="/svg/집.svg">
+						<div class="side-container-body-container-box-subtitle">홈 화면</div>
+					</div>
+					<div name="intro" class="side-container-body-container-box">
+						<img class="side-container-body-container-box-svg" src="/svg/소개.svg">
+						<div class="side-container-body-container-box-subtitle">서비스 소개</div>
+					</div>
+				</div>
+				<div class="side-container-body-container">
+					<div class="side-container-body-container-title">커뮤니티</div>
+					<div name="board" class="side-container-body-container-box">
+						<img class="side-container-body-container-box-svg" src="/svg/쇼핑.svg">
+						<div class="side-container-body-container-box-subtitle">직거래 게시판</div>
+					</div>
+					<div name="manage" class="side-container-body-container-box">
+						<img class="side-container-body-container-box-svg" src="/svg/게시글.svg">
+						<div class="side-container-body-container-box-subtitle">게시글 관리</div>
+					</div>
+				</div>
+				<div class="side-container-body-container">
+					<div class="side-container-body-container-title">내 정보</div>
+					<div name="account" class="side-container-body-container-box">
+						<img class="side-container-body-container-box-svg" src="/svg/계정관리.svg">
+						<div class="side-container-body-container-box-subtitle">계정 관리</div>
+					</div>
+					<div name="reservation" class="side-container-body-container-box">
+						<img class="side-container-body-container-box-svg" src="/svg/예약.svg">
+						<div class="side-container-body-container-box-subtitle">예약 관리</div>
+					</div>
+				</div>
+				<div class="side-container-body-container">
+					<div class="side-container-body-container-title">고객센터</div>
+					<div name="report" class="side-container-body-container-box">
+						<img class="side-container-body-container-box-svg" src="/svg/신고.svg">
+						<div class="side-container-body-container-box-subtitle">신고하기</div>
+					</div>
+					<div name="withdraw" class="side-container-body-container-box">
+						<img class="side-container-body-container-box-svg" src="/svg/탈퇴.svg">
+						<div class="side-container-body-container-box-subtitle">회원 탈퇴</div>
+					</div>
+				</div>
+			</div>
+			<div id="main-side-container-footer"class="side-container-footer">
+				<div name='login' class='main-side-container-footer-button'>
+					<img class="main-side-container-footer-button-svg svg-green" src="/svg/언락.svg">
+					<div class="main-side-container-footer-button-title">로그인</div>
+				</div>
+				<div name='join' class='main-side-container-footer-button'>
+					<img class="main-side-container-footer-button-svg svg-blue" src="/svg/사람.svg">
+					<div class="main-side-container-footer-button-title">회원가입</div>
+				</div>
+				<div name='logout' class='main-side-container-footer-button'>
+					<img class="main-side-container-footer-button-svg svg-purple" src="/svg/락.svg">
+					<div class="main-side-container-footer-button-title">로그아웃</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

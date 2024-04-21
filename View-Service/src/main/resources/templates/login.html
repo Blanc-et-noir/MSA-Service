@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/default.css">
+<link rel="stylesheet" href="/css/modal.css">
+<link rel="stylesheet" href="/css/side.css">
+<link rel="stylesheet" href="/css/login.css">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/default.js"></script>
+<script type="text/javascript" src="/js/modal.js"></script>
+<script type="text/javascript" src="/js/jsrsasign.js"></script>
+<script type="text/javascript" src="/js/jwt.js"></script>
+<script type="text/javascript" src="/js/side.js"></script>
+<script type="text/javascript" src="/js/login.js"></script>
+<title>로그인</title>
+</head>
+<body>
+	<div class="container">
+		<div class="side" th:replace="~{./main-side.html :: fragment}"></div>
+		<div class="modal"></div>
+		<div class="header"></div>
+		<div class="body">
+			<div class="login-container">
+				<div class="login-container-header">
+					
+				</div>
+				<div class="login-container-body">
+					<div class="login-container-body-input-field">
+						<div class="login-container-body-input-field-placeholder">아이디</div>
+						<input name="member-id" class="login-container-body-input-field-input" placeholder="영어 및 숫자를 모두 포함하여 6 - 16 자리">
+					</div>
+					<div class="login-container-body-input-field">
+						<div class="login-container-body-input-field-placeholder">비밀번호</div>
+						<input type="password" name="member-pw" class="login-container-body-input-field-input" placeholder="영어, 숫자 및 특수문자를 모두 포함하여 8 - 16 자리">
+					</div>
+					<div id="login-button" class="login-container-button" name="login">
+						<img class="login-container-body-input-field-placeholder-svg svg-green" src="/svg/언락.svg">
+						<div name="login" class="login-container-body-input-filed-placeholder-button">로그인</div>
+					</div>
+					<div style="display:flex; margin-top:10px;">
+						<div id="find-button" class="login-container-button" name="find" style="flex:1; margin-rignt:10px;">
+							<img class="login-container-body-input-field-placeholder-svg svg-orange" src="/svg/검색.svg">
+							<div name="find" class="login-container-body-input-filed-placeholder-button">ID / PW 찾기</div>
+						</div>
+						<div id="join-button" class="login-container-button" name="join" style="flex:1; margin-left:10px;">
+							<img class="login-container-body-input-field-placeholder-svg svg-blue" src="/svg/사람.svg">
+							<div name="join" class="login-container-body-input-filed-placeholder-button">회원가입</div>
+						</div>
+					</div>
+				</div>
+				<div class="login-container-footer">
+					
+				</div>
+			</div>
+		</div>
+		<div class="footer" th:replace="~{./footer.html :: fragment}"></div>
+	</div>
+</body>
+</html>

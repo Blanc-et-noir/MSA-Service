@@ -1,0 +1,186 @@
+#find-pw-box{
+	display:none;
+}
+
+.find-container{
+	width:300px;
+	background-color:none;
+}
+
+.find-container-header{
+	display:flex;
+}
+
+.find-container-header-button{
+	text-align:center;
+	font-size:12px;
+	color:#808080;
+	flex:1;
+	padding:12px 10px;
+	border-bottom:1px solid #808080;
+}
+
+.find-container-header-button:hover{
+	color:#f29100;
+	border-bottom:1px solid #f29100;
+}
+
+.find-container-header-button.focused{
+	color:#f29100;
+	border-bottom:1px solid #f29100;
+}
+
+.find-container-box{
+	margin:30px 0px;
+}
+
+.find-container-body-input-field{
+	margin:30px 0px;
+}
+
+.find-container-body-input-field-placeholder{
+	font-family:Pretendard-Regular;
+	color:#2f2f2f;
+	font-size:12px;
+	
+}
+
+.find-container-body-input-field-placeholder[name="find"],
+.find-container-body-input-field-placeholder[name="login"],
+.find-container-body-input-field-placeholder[name="join"]{
+	color:gray;
+	display:flex;
+	transition:0.2s;
+}
+
+.find-container-body-input-field-placeholder[name="find"]:hover{
+	color:#f29100;
+}
+
+.find-container-body-input-field-placeholder[name="login"]:hover{
+	color:#5d9528;
+}
+
+.find-container-body-input-field-placeholder[name="join"]:hover{
+	color:#0059a5;
+}
+
+.find-container-body-input-field-input{
+	display:block;
+	width:100%;
+	height:35px;
+	border:none;
+	outline:none;
+	border-bottom:1px solid #2f2f2f;
+	font-size:12px;
+	transition:0.2s;
+}
+
+.find-container-body-input-field-input:focus{
+	display:block;
+	height:35px;
+	border:none;
+	outline:none;
+	border-bottom:1px solid #f29100;
+	font-size:12px;
+	text-indent:10px;
+}
+
+.find-container-body-input-field-input-button{
+	width:100px;
+	margin-left:5px;
+}
+
+.find-container-body-input-field-input:focus::placeholder{
+	text-indent:10px;
+	transition:0.2s;
+	color:#f29100;
+}
+
+.find-container-body-input-field-input[name="member-email-domain"],
+.find-container-body-input-field-input[name="member-email"],
+.find-container-body-input-field-input[name="member-email-verification-code"]{
+	flex:1;
+}
+
+.find-container-body-input-field-placeholder-svg{
+	width:12px;
+	height:12px;
+	display:block;
+}
+
+.find-container-body-input-field-input-button-svg{
+	width:12px;
+	display:block;
+}
+
+.find-container-body-input-field-input-button-placeholder{
+	font-size:12px;
+	line-height:35px;
+	margin-left:5px;
+	font-family:Pretendard-Regular;
+	color:gray;
+}
+
+.find-container-body-input-field-input-button{
+	width:50px;
+	display:flex;
+	justify-content:space-around;
+}
+
+.find-container-body-input-field-input-button >.find-container-body-input-field-input-button-placeholder:hover{
+	transition:0.2s;
+}
+
+.find-container-body-input-field-input-button[name="send"] >.find-container-body-input-field-input-button-placeholder:hover,
+.find-container-body-input-field-input-button[name="find"] >.find-container-body-input-field-input-button-placeholder:hover{
+	color:#f0575f;
+}
+
+.find-container-body-input-field-input-button[name="verify"] >.find-container-body-input-field-input-button-placeholder:hover{
+	color:#804996;
+}
+
+.find-container-body-input-field-input.selected{
+	border-bottom:1px solid #f0575f;
+}
+
+.find-container-body-input-field-input.selected::placeholder{
+	transition:0.2s;
+	color:#f0575f;
+}
+
+.find-container-button{
+	display:flex;
+	background-color:rgba(128,128,128,0.1);
+	font-size:12px;
+	border-radius:7px;
+	padding:10px;
+	color:#808080;
+	justify-content:center;
+}
+
+.find-container-button > *{
+	margin:0px 5px;
+}
+
+#login-button:hover{
+	color:#5d9528;
+	background-color:rgba(93, 149, 40,0.1);
+}
+
+#find-button:hover{
+	color:#f09100;
+	background-color:rgba(240, 145, 0,0.1);
+}
+
+#join-button:hover{
+	color:#0059a5;
+	background-color:rgba(0, 89, 165,0.1)
+}
+
+.join-container-body-input-field-placeholder-svg{
+	width:12px;
+	height:12px;
+	display:block;
+}

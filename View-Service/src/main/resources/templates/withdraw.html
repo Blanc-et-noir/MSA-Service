@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/default.css">
+<link rel="stylesheet" href="/css/modal.css">
+<link rel="stylesheet" href="/css/side.css">
+
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/default.js"></script>
+<script type="text/javascript" src="/js/modal.js"></script>
+<script type="text/javascript" src="/js/jsrsasign.js"></script>
+<script type="text/javascript" src="/js/jwt.js"></script>
+<script type="text/javascript" src="/js/side.js"></script>
+
+<title>회원 탈퇴</title>
+</head>
+<body>
+	<div class="container">
+		<div class="side" th:replace="~{./main-side.html :: fragment}"></div>
+		<div class="modal"></div>
+		<div class="header"></div>
+		<div class="body">
+			탈퇴페이지
+		</div>
+		<div class="footer" th:replace="~{./footer.html :: fragment}"></div>
+	</div>
+</body>
+</html>

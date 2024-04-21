@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/default.css">
+<link rel="stylesheet" href="/css/modal.css">
+<link rel="stylesheet" href="/css/side.css">
+<link rel="stylesheet" href="/css/join.css">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/default.js"></script>
+<script type="text/javascript" src="/js/modal.js"></script>
+<script type="text/javascript" src="/js/jsrsasign.js"></script>
+<script type="text/javascript" src="/js/jwt.js"></script>
+<script type="text/javascript" src="/js/side.js"></script>
+<script type="text/javascript" src="/js/join.js"></script>
+<title>회원가입</title>
+</head>
+<body>
+	<div class="container">
+		<div class="side" th:replace="~{./main-side.html :: fragment}"></div>
+		<div class="modal"></div>
+		<div class="header"></div>
+		<div class="body">
+			<div class="join-container">
+				<div class="join-container-header">
+				
+				</div>
+				<div class="join-container-body">
+					<div class="join-container-body-input-field">
+						<div class="join-container-body-input-field-placeholder">아이디</div>
+						<input name="member-id" class="join-container-body-input-field-input" placeholder="영어 및 숫자를 모두 포함하여 6 - 16 자리">
+					</div>
+					<div class="join-container-body-input-field">
+						<div class="join-container-body-input-field-placeholder">비밀번호</div>
+						<input type="password" name="member-pw" class="join-container-body-input-field-input" placeholder="영어, 숫자 및 특수문자를 모두 포함하여 8 - 16 자리">
+					</div>
+					<div class="join-container-body-input-field">
+						<div class="join-container-body-input-field-placeholder">비밀번호 확인</div>
+						<input type="password" name="member-pw-check" class="join-container-body-input-field-input" placeholder="영어, 숫자 및 특수문자를 모두 포함하여 8 - 16 자리">
+					</div>
+					<div class="join-container-body-input-field" style="margin-top:80px;">
+						<div class="join-container-body-input-field-placeholder">이름</div>
+						<input name="member-name" class="join-container-body-input-field-input" placeholder="한글로 2 - 5 자리">
+					</div>
+					<div class="join-container-body-input-field">
+						<div class="join-container-body-input-field-placeholder">이메일</div>
+						<div style="display:flex;">
+							<input name="member-email" class="join-container-body-input-field-input" placeholder="등록할 이메일">
+							<div style="font-size:12px;font-family:Pretendard-Regular; line-height:35px;">@</div>
+							<select name="member-email-domain" class="join-container-body-input-field-input">
+								<option name="gmail.com" value="gmail.com">gmail.com</option>
+								<option name="naver.com" value="naver.com">naver.com</option>
+								<option name="daum.net" value="daum.net">daum.net</option>
+							</select>
+							<div name="send" class="join-container-body-input-field-input-button">
+								<img class="join-container-body-input-field-input-button-svg svg-red" src="/svg/메일.svg">
+								<div class="join-container-body-input-field-input-button-placeholder">발급</div>
+							</div>
+						</div>
+					</div>
+					<div class="join-container-body-input-field">
+						<div class="join-container-body-input-field-placeholder">이메일 인증코드</div>
+						<div style="display:flex;">
+							<input type="password" name="member-email-verification-code" class="join-container-body-input-field-input" placeholder="이메일 인증코드를 입력하세요.">
+							<div name="verify" class="join-container-body-input-field-input-button">
+								<img class="join-container-body-input-field-input-button-svg svg-purple" src="/svg/검증.svg">
+								<div class="join-container-body-input-field-input-button-placeholder">검증</div>
+							</div>
+						</div>
+					</div>
+					<div id="join-button" class="join-container-button" name="join">
+						<img class="join-container-body-input-field-placeholder-svg svg-blue" src="/svg/사람.svg">
+						<div name="join" class="join-container-body-input-filed-placeholder-button">회원가입</div>
+					</div>
+					<div style="display:flex; margin-top:10px;">
+						<div id="login-button" class="join-container-button" name="login" style="flex:1; margin-rignt:10px;">
+							<img class="join-container-body-input-field-placeholder-svg svg-green" src="/svg/언락.svg">
+							<div name="login" class="join-container-body-input-filed-placeholder-button">로그인</div>
+						</div>
+						<div id="find-button" class="join-container-button" name="find" style="flex:1; margin-left:10px;">
+							<img class="join-container-body-input-field-placeholder-svg svg-orange" src="/svg/검색.svg">
+							<div name="find" class="join-container-body-input-filed-placeholder-button">ID / PW 찾기</div>
+						</div>
+					</div>
+				</div>
+				<div class="join-container-footer">
+					
+				</div>
+			</div>
+		</div>
+		<div class="footer" th:replace="~{./footer.html :: fragment}"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/default.css">
+<link rel="stylesheet" href="/css/modal.css">
+<link rel="stylesheet" href="/css/side.css">
+<link rel="stylesheet" href="/css/find.css">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/default.js"></script>
+<script type="text/javascript" src="/js/modal.js"></script>
+<script type="text/javascript" src="/js/jsrsasign.js"></script>
+<script type="text/javascript" src="/js/jwt.js"></script>
+<script type="text/javascript" src="/js/side.js"></script>
+<script type="text/javascript" src="/js/find.js"></script>
+<title>ID / PW 찾기</title>
+</head>
+<body>
+	<div class="container">
+		<div class="side" th:replace="~{./main-side.html :: fragment}"></div>
+		<div class="modal"></div>
+		<div class="header"></div>
+		<div class="body">
+			<div class="find-container">
+				<div class="find-container-header">
+					<div name="find-id" class="find-container-header-button focused">아이디 찾기</div>
+					<div name="find-pw" class="find-container-header-button">비밀번호 발급</div>
+				</div>
+				<div class="find-container-body">
+					<div id="find-id-box" class="find-container-box">
+						<div class="find-container-body-input-field">
+							<div class="find-container-body-input-field-placeholder">이메일</div>
+							<div style="display:flex;">
+								<input id="member-email-input-for-find-member-id" name="member-email" class="find-container-body-input-field-input" placeholder="등록한 이메일 ">
+								<div style="font-size:12px;font-family:Pretendard-Regular; line-height:35px;">@</div>
+								<select id="member-email-domain-input-for-find-member-id" name="member-email-domain" class="find-container-body-input-field-input">
+									<option name="gmail.com" value="gmail.com">gmail.com</option>
+									<option name="naver.com" value="naver.com">naver.com</option>
+									<option name="daum.net" value="daum.net">daum.net</option>
+								</select>
+								<div name="find" class="find-container-body-input-field-input-button">
+									<img class="find-container-body-input-field-input-button-svg svg-red" src="/svg/메일.svg">
+									<div class="find-container-body-input-field-input-button-placeholder">찾기</div>
+								</div>
+							</div>
+						</div>
+						<div class="find-container-body-input-field">
+							<div class="find-container-body-input-field-placeholder">아이디</div>
+							<input id="member-id-input-for-find-member-id" name="member-id" class="find-container-body-input-field-input" readonly placeholder="해당 이메일에 연동된 아이디는 이곳에 표시됩니다.">
+						</div>
+					</div>					
+					<div id="find-pw-box" class="find-container-box">
+						<div class="find-container-body-input-field">
+							<div class="find-container-body-input-field-placeholder">아이디</div>
+							<input id="member-id-input-for-find-member-pw" name="member-id" class="find-container-body-input-field-input" placeholder="회원 가입시 등록한 아이디를 입력하세요.">
+						</div>
+					
+						<div class="find-container-body-input-field">
+							<div class="find-container-body-input-field-placeholder">이메일</div>
+							<div style="display:flex;">
+								<input id="member-email-input-for-find-member-pw" name="member-email" class="find-container-body-input-field-input" placeholder="등록한 이메일">
+								<div style="font-size:12px;font-family:Pretendard-Regular; line-height:35px;">@</div>
+								<select id="member-email-domain-input-for-find-member-pw" name="member-email-domain" class="find-container-body-input-field-input">
+									<option name="gmail.com" value="gmail.com">gmail.com</option>
+									<option name="naver.com" value="naver.com">naver.com</option>
+									<option name="daum.net" value="daum.net">daum.net</option>
+								</select>
+								<div name="send" class="find-container-body-input-field-input-button">
+									<img class="find-container-body-input-field-input-button-svg svg-red" src="/svg/메일.svg">
+									<div class="find-container-body-input-field-input-button-placeholder">발급</div>
+								</div>
+							</div>
+						</div>
+						<div class="find-container-body-input-field">
+							<div class="find-container-body-input-field-placeholder">이메일 인증코드</div>
+							<div style="display:flex;">
+								<input type="password" name="member-email-verification-code" class="find-container-body-input-field-input" placeholder="임시 비밀번호를 발급하려면 인증코드를 입력하세요.">
+								<div name="verify" class="find-container-body-input-field-input-button">
+									<img class="find-container-body-input-field-input-button-svg svg-purple" src="/svg/검증.svg">
+									<div class="find-container-body-input-field-input-button-placeholder">변경</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="display:flex;">
+						<div id="login-button" class="find-container-button" name="login" style="flex:1; margin-right:10px;">
+							<img class="find-container-body-input-field-placeholder-svg svg-green" src="/svg/언락.svg">
+							<div name="login" class="join-container-body-input-filed-placeholder-button">로그인</div>
+						</div>
+						<div id="join-button" class="find-container-button" name="join" style="flex:1; margin-left:10px;">
+							<img class="find-container-body-input-field-placeholder-svg svg-blue" src="/svg/사람.svg">
+							<div name="join" class="find-container-body-input-filed-placeholder-button">회원가입</div>
+						</div>
+					</div>
+				</div>
+				<div class="find-container-footer">
+					
+				</div>
+			</div>
+		</div>
+		<div class="footer" th:replace="~{./footer.html :: fragment}"></div>
+	</div>
+</body>
+</html>
