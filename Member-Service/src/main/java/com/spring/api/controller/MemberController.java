@@ -14,6 +14,7 @@ import com.spring.api.dto.MemberDTO;
 import com.spring.api.dto.ResponseDTO;
 import com.spring.api.dto.SimpleMemberDTO;
 import com.spring.api.dto.UpdateMemberPWRequestDTO;
+import com.spring.api.dto.UpdateMemberRequestDTO;
 import com.spring.api.dto.UpdateMemberTokensRequestDTO;
 import com.spring.api.service.MemberService;
 
@@ -45,6 +46,12 @@ public class MemberController {
 	@PatchMapping("/{member-ids}/member-pws")
 	public ResponseDTO<?> updateMemberPW(@PathVariable("member-ids") String memberID, @RequestBody UpdateMemberPWRequestDTO dto) {
 		return ResponseDTO.success("회원 PW 변경 성공",memberService.updateMemberPW(memberID, dto));
+	}
+	
+	@PatchMapping("/{member-ids}")
+	public ResponseDTO<?> updateMember(@PathVariable("member-ids") String memberID, @RequestBody UpdateMemberRequestDTO dto) {
+		memberService.updateMember(memberID, dto);
+		return ResponseDTO.success("회원 PW 변경 성공");
 	}
 	
 	@PostMapping("")

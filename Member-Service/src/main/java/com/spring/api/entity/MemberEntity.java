@@ -68,7 +68,15 @@ public class MemberEntity {
 		this.memberRefreshToken = memberRefreshToken;
 	}
 	
-	public void updatePw(String memberPW) {
+	public void updateMemberPW(String memberPW) {
 		this.memberPW = memberPW;
+	}
+	
+	public void updateMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	
+	public void updateMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
 	}
 }

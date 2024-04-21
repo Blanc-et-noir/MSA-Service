@@ -127,6 +127,10 @@ jQuery(function(){
 			
 			$.ajax({
 				"url":API_GATEWAY+"/api/v1/tokens",
+				"headers":{
+					"member-access-token":memberAccessToken,
+					"member-refresh-token":memberRefreshToken
+				},
 				"type":"delete",
 				"contentType":"application/json",
 				"dataType":"json",

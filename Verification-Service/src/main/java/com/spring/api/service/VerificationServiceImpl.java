@@ -123,7 +123,7 @@ public class VerificationServiceImpl implements VerificationService{
 			.build()
 		);
 		
-		sendTemporaryMemberPW(dto.getMemberEmail(), TEMPORARY_MEMBER_PW);
+		sendTemporaryMemberPW(dto.getMemberID(), dto.getMemberEmail(), TEMPORARY_MEMBER_PW);
 		
 		//인증완료시, 인증코드 삭제 및 이메일 30분간 인증처리
 		redisUtil.delete(PREFIX_FOR_VERIFICATION_CODE_WITH_MEMBER_PW+dto.getMemberEmail());
@@ -136,7 +136,7 @@ public class VerificationServiceImpl implements VerificationService{
 		try {
 			mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
 	        mimeMessageHelper.setTo(memberEmail);
-	        mimeMessageHelper.setSubject("회원가입 인증코드");
+	        mimeMessageHelper.setSubject("이메일 인증코드");
 	        mimeMessageHelper.setText(memberEmail+"에 대한 인증코드는 "+VERIFICATION_CODE+" 입니다.\n해당 인증코드는 "+VERIFICATION_CODE_DURATION+"초 동안 유효합니다.", false);
 	        javaMailSender.send(mimeMessage);
 	        redisUtil.setString(PREFIX_FOR_VERIFICATION_CODE_WITH_MEMBER_EMAIL+memberEmail, VERIFICATION_CODE, VERIFICATION_CODE_DURATION*1000);
@@ -152,7 +152,7 @@ public class VerificationServiceImpl implements VerificationService{
 		try {
 			mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
 	        mimeMessageHelper.setTo(memberEmail);
-	        mimeMessageHelper.setSubject("PW 찾기 인증코드");
+	        mimeMessageHelper.setSubject("이메일 인증코드");
 	        mimeMessageHelper.setText(memberEmail+"에 대한 인증코드는 "+VERIFICATION_CODE+" 입니다.\n해당 인증코드는 "+VERIFICATION_CODE_DURATION+"초 동안 유효합니다.", false);
 	        javaMailSender.send(mimeMessage);
 	        redisUtil.setString(PREFIX_FOR_VERIFICATION_CODE_WITH_MEMBER_PW+memberEmail, VERIFICATION_CODE, VERIFICATION_CODE_DURATION*1000);
@@ -162,14 +162,14 @@ public class VerificationServiceImpl implements VerificationService{
 	}
 	
 	@Async
-	private void sendTemporaryMemberPW(String memberEmail, String TEMPORARY_MEMBER_PW) {
+	private void sendTemporaryMemberPW(String memberID, String memberEmail, String TEMPORARY_MEMBER_PW) {
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		MimeMessageHelper mimeMessageHelper;
 		try {
 			mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
 	        mimeMessageHelper.setTo(memberEmail);
 	        mimeMessageHelper.setSubject("임시 PW");
-	        mimeMessageHelper.setText(memberEmail+"에 대한 임시 PW는 "+TEMPORARY_MEMBER_PW+" 입니다.\n임시 PW를 사용하여 로그인후, 반드시 PW를 변경해주시기 바랍니다.", false);
+	        mimeMessageHelper.setText(memberID+"에 대한 임시 PW는 "+TEMPORARY_MEMBER_PW+" 입니다.\n임시 PW를 사용하여 로그인후, 반드시 PW를 변경해주시기 바랍니다.", false);
 	        javaMailSender.send(mimeMessage);
 		} catch (MessagingException e) {
 			throw new CustomException(ErrorCode.MEMBER_EMAIL_VERIFICATION_CODE_NOT_SENT);

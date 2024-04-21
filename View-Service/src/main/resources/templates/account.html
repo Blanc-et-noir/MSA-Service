@@ -22,7 +22,69 @@
 		<div class="modal"></div>
 		<div class="header"></div>
 		<div class="body">
-		
+			<div class="account-container">
+				<div class="account-container-header">
+					<div name="update-name" class="account-container-header-button focused">이름 변경</div>
+					<div name="update-pw" class="account-container-header-button">비밀번호 변경</div>
+					<div name="update-email" class="account-container-header-button">이메일 변경</div>
+				</div>
+				<div class="account-container-body">
+					<div id="update-name-box" class="account-container-box">
+						<div class="account-container-body-input-field">
+							<div class="account-container-body-input-field-placeholder">이름</div>
+							<input name="member-name" class="account-container-body-input-field-input" placeholder="한글로 2 - 5 자리">
+						</div>
+					</div>
+					<div id="update-pw-box" class="account-container-box" style="display:none;">
+						<div class="account-container-body-input-field">
+							<div class="account-container-body-input-field-placeholder">비밀번호</div>
+							<input type="password" name="member-pw" class="account-container-body-input-field-input" placeholder="영어, 숫자 및 특수문자를 모두 포함하여 8 - 16 자리">
+						</div>
+						<div class="account-container-body-input-field">
+							<div class="account-container-body-input-field-placeholder">비밀번호 확인</div>
+							<input type="password" name="member-pw-check" class="account-container-body-input-field-input" placeholder="영어, 숫자 및 특수문자를 모두 포함하여 8 - 16 자리">
+						</div>
+					</div>
+					<div id="update-email-box" class="account-container-box" style="display:none;">
+						<div class="account-container-body-input-field">
+							<div class="account-container-body-input-field-placeholder">이메일</div>
+							<div style="display:flex;">
+								<input name="member-email" class="account-container-body-input-field-input" placeholder="등록할 이메일">
+								<div style="font-size:12px;font-family:Pretendard-Regular; line-height:35px;">@</div>
+								<select name="member-email-domain" class="account-container-body-input-field-input">
+									<option name="gmail.com" value="gmail.com">gmail.com</option>
+									<option name="naver.com" value="naver.com">naver.com</option>
+									<option name="daum.net" value="daum.net">daum.net</option>
+								</select>
+								<div name="send" class="account-container-body-input-field-input-button">
+									<img class="account-container-body-input-field-input-button-svg svg-red" src="/svg/메일.svg">
+									<div class="account-container-body-input-field-input-button-placeholder">발급</div>
+								</div>
+							</div>
+						</div>
+						<div class="account-container-body-input-field">
+							<div class="account-container-body-input-field-placeholder">이메일 인증코드</div>
+							<div style="display:flex;">
+								<input type="password" name="member-email-verification-code" class="account-container-body-input-field-input" placeholder="이메일 인증코드를 입력하세요.">
+								<div name="verify" class="account-container-body-input-field-input-button">
+									<img class="account-container-body-input-field-input-button-svg svg-purple" src="/svg/검증.svg">
+									<div class="account-container-body-input-field-input-button-placeholder">검증</div>
+								</div>
+							</div>
+						</div>					
+					</div>
+					<div style="display:flex;">
+						<div id="update-button" class="account-container-button" name="update" style="flex:1; margin-rignt:10px;">
+							<img class="account-container-body-input-field-placeholder-svg svg-blue" src="/svg/이름.svg">
+							<div name="update" class="join-container-body-input-filed-placeholder-button">회원정보 변경</div>
+						</div>
+						<div id="reset-button" class="account-container-button" name="reset" style="flex:1; margin-left:10px;">
+							<img class="account-container-body-input-field-placeholder-svg svg-orange" src="/svg/리셋.svg">
+							<div name="reset" class="account-container-body-input-filed-placeholder-button">초기화</div>
+						</div>
+					</div>
+				</div>				
+			</div>
 		</div>
 		<div class="footer" th:replace="~{./footer.html :: fragment}"></div>
 	</div>
