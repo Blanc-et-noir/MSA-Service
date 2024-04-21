@@ -1,0 +1,50 @@
+server:
+  port: 3003
+  address: 0.0.0.0
+#  ssl:
+#    key-store: fullchain.pfx
+#    key-store-password: privatekey
+#    key-store-type: privatekey
+#    key-password: PKCS12
+  error:
+    whitelabel:
+      enabled: false
+#logging:
+#  pattern:
+#    console: "%msg%n"
+    
+spring:
+#  datasource:
+#    driver-class-name: org.mariadb.jdbc.Driver
+#    url: jdbc:mariadb://localhost:3306/token_service
+#    username: root
+#    password: privatekey
+#    hikari:
+#      idle-timeout: 300000
+#      max-lifetime: 297000
+  application:
+    name: Verification-Service
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: dign9060@gmail.com
+    password: kdncapqlrdbpzuvh
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: privatekey
+      
+verification:
+  duration: 1800
+  code:
+    duration: 300
+    length: 6
+temporary:
+  member:
+    pw:
+      length: 13
+    
