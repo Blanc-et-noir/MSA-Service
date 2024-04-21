@@ -11,6 +11,7 @@ import com.spring.api.dto.CreateMemberRequestDTO;
 import com.spring.api.dto.MemberDTO;
 import com.spring.api.dto.SimpleMemberDTO;
 import com.spring.api.dto.UpdateMemberPWRequestDTO;
+import com.spring.api.dto.UpdateMemberRequestDTO;
 import com.spring.api.dto.UpdateMemberTokensRequestDTO;
 import com.spring.api.entity.MemberEntity;
 import com.spring.api.enumeration.MemberRole;
@@ -74,8 +75,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void updateMemberTokens(String memberId, UpdateMemberTokensRequestDTO dto) {
-		Optional<MemberEntity> member = memberRepository.findById(memberId);
+	public void updateMemberTokens(String memberID, UpdateMemberTokensRequestDTO dto) {
+		Optional<MemberEntity> member = memberRepository.findById(memberID);
 		
 		if(!member.isPresent()||!member.get().isMemberStatusNormal()) {
 			throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
@@ -85,15 +86,15 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberDTO readMemberByMemberID(String memberId) {
-		Optional<MemberEntity> member = memberRepository.findById(memberId);
+	public MemberDTO readMemberByMemberID(String memberID) {
+		Optional<MemberEntity> member = memberRepository.findById(memberID);
 		
 		if(!member.isPresent()||!member.get().isMemberStatusNormal()) {
 			throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
 		}
 		
 		return MemberDTO.builder()
-				.memberID(memberId)
+				.memberID(memberID)
 				.memberRole(member.get().getMemberRole())
 				.memberPW(member.get().getMemberPW())
 				.memberEmail(member.get().getMemberEmail())
@@ -103,14 +104,14 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberDTO updateMemberPW(String memberId, UpdateMemberPWRequestDTO dto) {
-		Optional<MemberEntity> member = memberRepository.findById(memberId);
+	public MemberDTO updateMemberPW(String memberID, UpdateMemberPWRequestDTO dto) {
+		Optional<MemberEntity> member = memberRepository.findById(memberID);
 		
 		if(!member.isPresent()||!member.get().isMemberStatusNormal()) {
 			throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
 		}
 		
-		member.get().updatePw(bCryptPasswordEncoder.encode(dto.getTemporaryMemberPW()));
+		member.get().updateMemberPW(bCryptPasswordEncoder.encode(dto.getTemporaryMemberPW()));
 		
 		return MemberDTO.builder()
 				.memberID(member.get().getMemberID())
@@ -132,6 +133,39 @@ public class MemberServiceImpl implements MemberService{
 				.memberID(member.get().getMemberID())
 				.memberEmail(member.get().getMemberEmail())
 				.build();
+	}
+	
+	@Override
+	public void updateMember(String memberID, UpdateMemberRequestDTO dto) {
+		Optional<MemberEntity> member = memberRepository.findById(memberID);
+			
+		if(!member.isPresent()||!member.get().isMemberStatusNormal()) {
+			throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
+		}
+		
+		if(dto.getMemberName()!=null) {
+			member.get().updateMemberName(dto.getMemberName());
+		}
+		
+		if(dto.getMemberEmail()!=null) {
+			if(redisUtil.getString(PREFIX_FOR_VERIFICATION_WITH_MEMBER_EMAIL+dto.getMemberEmail())==null) {
+				throw new CustomException(ErrorCode.MEMBER_EMAIL_NOT_VERIFIED);
+			}
+			
+			if(memberRepository.findByMemberEmail(dto.getMemberEmail()).isPresent()) {
+				throw new CustomException(ErrorCode.MEMBER_EMAIL_ALREADY_OCCUPIED);
+			}
+			
+			member.get().updateMemberEmail(dto.getMemberEmail());
+		}
+		
+		if(dto.getMemberPW()!=null) {
+			if(!dto.getMemberPW().equals(dto.getMemberPWCheck())) {
+				throw new CustomException(ErrorCode.MEMBER_PW_NOT_MATCHED_TO_EACH_OTHER);
+			}
+			
+			member.get().updateMemberPW(bCryptPasswordEncoder.encode(dto.getMemberPW()));
+		}
 	}
 
 }
