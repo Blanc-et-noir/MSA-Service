@@ -80,7 +80,6 @@ public class TokenAuthenticationFilter implements WebFilter {
 		}catch(JWTVerificationException e) {
 			return onError(exchange, response, ErrorCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(Exception e) {
-			e.printStackTrace();
 			return onError(exchange, response, ErrorCode.INTERNAL_SERVER_ERROR);
 		}
 		

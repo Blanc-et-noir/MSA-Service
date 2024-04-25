@@ -7,7 +7,6 @@ import java.io.PipedOutputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -15,7 +14,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
-import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -85,18 +83,15 @@ public class LogFilter implements WebFilter {
 	private CreateLogRequestDTO createLogDTO(ServerWebExchange ex) {
 		ServerHttpRequest request = ex.getRequest();
 		ServerHttpResponse response = ex.getResponse();
-		
-    	List<HttpCookie> cookies = request
-    		.getCookies()
-    		.getOrDefault(TokenType.MEMBER_ACCESS_TOKEN.getTokenType(), new LinkedList<HttpCookie>());
     	InetSocketAddress isa = request.getRemoteAddress();
     	MediaType contentType = request.getHeaders().getContentType();
     	HttpMethod logMethod = request.getMethod();
     	LocalDateTime logRequestTime = LocalDateTime.now();
+    	List<String> list = request.getHeaders().get(TokenType.MEMBER_ACCESS_TOKEN.getTokenType());
     	
     	String logMemberIP = isa!=null?isa.getAddress().toString():null;
     	String logMemberPort = isa!=null?isa.getPort()+"":null;
-    	String memberAccessToken = cookies.isEmpty()?null:cookies.getFirst().getValue();
+    	String memberAccessToken = !list.isEmpty()?list.getFirst():null;
     	String memberID = memberAccessToken!=null?tokenUtil.getMemberIDWithDecoding(memberAccessToken):null;
     	String logParameter = null;
     	
@@ -121,7 +116,7 @@ public class LogFilter implements WebFilter {
     			logParameter = null;
     		}
     	}
-        
+    	
         CreateLogRequestDTO dto = CreateLogRequestDTO.builder()
     			.logMethod(logMethod.name())
     			.logURI(request.getURI().getPath())

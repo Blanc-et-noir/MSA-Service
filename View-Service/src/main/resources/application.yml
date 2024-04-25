@@ -29,7 +29,10 @@ spring:
       host: localhost
       port: 6379
       password: privatekey
-      
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 50MB
 util:
   token:
     secret: Y2hvcHBhLWRvbnQtYml0ZS1tZS1zcHJpbmctYm9vdC1qd3QtdGVzdC1zZWNyZXQta2V5LWNob3BwYS1kb250LWJpdGUtbWUtc3ByaW5nLWJvb3Qtand0LXRlc3Qtc2VjcmV0LWtleQo=

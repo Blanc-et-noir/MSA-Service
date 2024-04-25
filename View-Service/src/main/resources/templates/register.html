@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/default.css">
+<link rel="stylesheet" href="/css/modal.css">
+<link rel="stylesheet" href="/css/side.css">
+<link rel="stylesheet" href="/css/register.css">
+
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/default.js"></script>
+<script type="text/javascript" src="/js/modal.js"></script>
+<script type="text/javascript" src="/js/jsrsasign.js"></script>
+<script type="text/javascript" src="/js/jwt.js"></script>
+<script type="text/javascript" src="/js/side.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="/js/register.js"></script>
+
+<title>등록하기</title>
+</head>
+<body>
+	<div class="container">
+		<div class="side" th:replace="~{./main-side.html :: fragment}"></div>
+		<div class="modal"></div>
+		<div class="header"></div>
+		<div class="body">
+			<div class="register-container">
+				<div class="register-container-header">
+				
+				</div>
+				<div class="register-container-body">
+					<div class="register-container-box" value="1">
+						<div class="register-container-body-input-field">
+							<div class="register-container-body-input-field-placeholder">도서명</div>
+							<input name="book-name" class="register-container-body-input-field-input" placeholder="도서명을 입력하세요.">
+						</div>
+						<div class="register-container-body-input-field">
+							<div class="register-container-body-input-field-placeholder">출판사명</div>
+							<input name="book-publisher-name" class="register-container-body-input-field-input" placeholder="출판사명을 입력하세요.">
+						</div>
+						<div class="register-container-body-input-field">
+							<div class="register-container-body-input-field-placeholder">카테고리</div>
+							<select name="book-category" class="register-container-body-input-field-input">
+								<option value="humanities">인문</option>
+								<option value="politics">정치/사회/법</option>
+								<option value="economics">경제/경영</option>
+								<option value="natural_science">자연과학</option>
+								<option value="technical_engineering">기술공학</option>
+								<option value="computer_engineering">컴퓨터</option>
+								<option value="arts_physical_education">예체능</option>
+								<option value="foreign_languages">외국어</option>
+								<option value="etc">기타</option>
+							</select>
+						</div>
+					</div>
+					<div class="register-container-box" value="2" style="display:none">
+						<div class="register-container-body-input-field">
+							<div class="register-container-body-input-field-placeholder">상품상태</div>
+							<select name="book-quality" class="register-container-body-input-field-input">
+								<option value="A">A급 : 한 번도 사용하지 않은 상태</option>
+								<option value="B">B급 : 사용감이 거의 없는 상태</option>
+								<option value="C">C급 : 사용감이 있으나 깨끗하여 공부할 수는 있는 상태</option>
+								<option value="D">D급 : 읽을 수는 있는 상태</option>
+							</select>
+						</div>
+						<div class="register-container-body-input-field">
+							<div class="register-container-body-input-field-placeholder">판매가격</div>
+							<input type="number" name="book-price" class="register-container-body-input-field-input" placeholder="가격을 입력하세요. (단위 : 원)">
+						</div>
+					</div>
+					<div class="register-container-box" value="3" style="display:none">
+						<div class="register-container-body-input-field">
+							<div class="register-container-body-input-field-placeholder">거래장소</div>
+							<input name="book-place" class="register-container-body-input-field-input" readonly placeholder="주소검색을 통해 거래장소를 등록하세요.">
+							<div id="wrap"></div>
+							<div id="address-modal-buttons" style="disply:flex">
+								<div id="open-address-modal-button">
+									<img class="register-container-body-input-field-input-svg" src="/svg/검색.svg">
+									<div class="register-container-body-input-field-placeholder">주소검색창 열기</div>
+								</div>
+								<div id="close-address-modal-button" style="display:none">
+									<img class="register-container-body-input-field-input-svg" src="/svg/취소.svg">
+									<div class="register-container-body-input-field-placeholder">주소검색창 닫기</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="register-container-box" value="4" style="display:none">
+						<div class="register-container-body-input-field">
+							<div class="register-container-body-input-field-placeholder">도서 설명</div>
+							<textarea name="book-description" class="register-container-body-input-field-input" placeholder="도서에 대한 설명(상태, 가격, 거래장소 포함)을 자세히 입력하세요."></textarea>
+						</div>
+					</div>
+					<div class="register-container-box" value="5" style="display:none">
+						<div class="register-container-body-input-field">
+							<div class="register-container-body-input-field-placeholder">도서 이미지</div>
+							<input name="book-image" class="register-container-body-input-field-input" readonly placeholder="도서 이미지를 업로드하세요.">
+						</div>
+						<div class="register-container-body-input-field">
+							<div class="book-image-upload-container">
+								<div class="book-image-upload-container-header">
+									<div id="book-image-add-button">
+										<img class="book-image-add-button-svg" src="/svg/이미지추가.svg">
+										<div class="book-image-add-button-placeholder">이미지 추가</div>
+									</div>
+								</div>
+								<div class="book-image-upload-container-body">
+								
+								</div>
+								<div class="book-image-upload-container-footer">
+								
+								</div>
+							</div>
+						</div>
+						<div id="register-button">
+							<img class="register-container-body-input-field-input-svg svg-purple" src="/svg/연필.svg">
+							<div class="register-button-title">도서 등록</div>
+						</div>
+					</div>
+				</div>
+				<div class="register-container-footer">
+					<div class="register-container-footer-button" name="prev">
+						<img class="register-container-footer-button-svg svg-red" src="/svg/이전.svg" style="margin-right:10px;">
+						<div class="register-container-footer-button-title">이전</div>
+					</div>
+					<div class="register-container-footer-phase" value="1">
+						1 / 5
+					</div>
+					<div class="register-container-footer-button" name="next">
+						<div class="register-container-footer-button-title">다음</div>
+						<img class="register-container-footer-button-svg svg-lime" src="/svg/다음.svg" style="margin-left:10px;">
+					</div>
+				</div>
+			</div>			
+		</div>
+		<div class="footer" th:replace="~{./footer.html :: fragment}"></div>
+	</div>
+</body>
+</html>
