@@ -72,4 +72,9 @@ public class ViewController {
 		return "/report";
 	}
 	
+	@GetMapping("/register")
+	public String register() {
+		return "/register";
+	}
+	
 }

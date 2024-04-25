@@ -27,3 +27,23 @@ function checkMemberEmail(memberEmail){
 	const exp = /^[a-z]+[a-z0-9]{5,15}$/g;
 	return exp.test(memberEmail);
 }
+
+function checkBookName(bookName){
+	const exp = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,40}$/g;
+	return exp.test(bookName);
+}
+
+function checkBookPublisherName(bookPublisherName){
+	const exp = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,40}$/g;
+	return exp.test(bookPublisherName);
+}
+
+function checkBookPlace(bookPlace){
+	const exp = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,40}$/g;
+	return exp.test(bookPlace);
+}
+
+function checkBookDescription(bookDescription){
+	const exp = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,1000}$/g;
+	return exp.test(bookDescription);
+}

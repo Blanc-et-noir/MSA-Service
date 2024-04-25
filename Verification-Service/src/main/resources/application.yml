@@ -37,7 +37,10 @@ spring:
       host: localhost
       port: 6379
       password: privatekey
-      
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 50MB      
 verification:
   duration: 1800
   code:
