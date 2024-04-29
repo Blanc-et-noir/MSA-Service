@@ -1,6 +1,8 @@
 package com.spring.api.enumeration;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.spring.api.code.TokenServiceCode;
+import com.spring.api.exception.CustomException;
 
 import lombok.Getter;
 
@@ -19,13 +21,11 @@ public enum TokenType {
 	}
 	
 	@JsonCreator
-    public static TokenType from(String s) {
-        if(MEMBER_ACCESS_TOKEN.getTokenType().equals(s)) {
-        	return MEMBER_ACCESS_TOKEN;
-        }else if(MEMBER_REFRESH_TOKEN.getTokenType().equals(s)) {
-        	return MEMBER_REFRESH_TOKEN;
-        }else {
-        	return null;
+    public static TokenType from(String tokenType) {
+		try {
+        	return TokenType.valueOf(tokenType.toUpperCase());
+        }catch(Exception e) {
+        	throw new CustomException(TokenServiceCode.TOKEN_TYPE_NOT_AVAILABLE);
         }
     }
 }

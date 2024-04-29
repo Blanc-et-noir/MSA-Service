@@ -10,7 +10,9 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.MissingClaimException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
-import com.spring.api.code.ErrorCode;
+import com.spring.api.code.DefaultServiceCode;
+import com.spring.api.code.MemberServiceCode;
+import com.spring.api.code.TokenServiceCode;
 import com.spring.api.dto.CreateMemberTokensRequestDTO;
 import com.spring.api.dto.CreateMemberTokensResponseDTO;
 import com.spring.api.dto.DeleteMemberTokensRequestDTO;
@@ -49,7 +51,7 @@ public class TokenServiceImpl implements TokenService{
 		
 		//정보 비교
 		if(!bCryptPasswordEncoder.matches(dto.getMemberPW(), other.getMemberPW())) {
-			throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
+			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
 		}
 		
 		//토큰 생성
@@ -83,15 +85,15 @@ public class TokenServiceImpl implements TokenService{
 		
 		try {			
 			if(oldMemberAccessToken==null) {
-				throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_NOT_FOUND);
+				throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_NOT_FOUND);
 			}
 			
 			if(!tokenUtil.isAccessTokenWithDecoding(oldMemberAccessToken)) {
-				throw new CustomException(ErrorCode.TOKEN_NOT_FOR_ACCESS);
+				throw new CustomException(TokenServiceCode.TOKEN_NOT_FOR_ACCESS);
 			}
 			
 			if(redisUtil.getString(oldMemberAccessToken)!=null) {
-				throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_INVALIDATED);
+				throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_INVALIDATED);
 			}
 			
 			tokenUtil.verify(oldMemberAccessToken);
@@ -99,36 +101,36 @@ public class TokenServiceImpl implements TokenService{
 		}catch(CustomException e) {
 			throw e;
 		}catch(AlgorithmMismatchException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(SignatureVerificationException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(TokenExpiredException e) {
 			
 		}catch(MissingClaimException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(IncorrectClaimException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(JWTVerificationException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(Exception e) {
-			throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
+			throw new CustomException(DefaultServiceCode.INTERNAL_SERVER_ERROR);
 		}
 		
 		try {
 			if(oldMemberRefreshToken==null) {
-				throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_NOT_FOUND);
+				throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_NOT_FOUND);
 			}
 			
 			if(tokenUtil.isExpiredWithDecoding(oldMemberRefreshToken)) {
-				throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_EXPIRED);
+				throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_EXPIRED);
 			}
 			
 			if(!tokenUtil.isRefreshTokenWithDecoding(oldMemberRefreshToken)) {
-				throw new CustomException(ErrorCode.TOKEN_NOT_FOR_REFRESH);
+				throw new CustomException(TokenServiceCode.TOKEN_NOT_FOR_REFRESH);
 			}
 			
 			if(redisUtil.getString(oldMemberRefreshToken)!=null) {
-				throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_INVALIDATED);
+				throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_INVALIDATED);
 			}
 			
 			tokenUtil.verify(oldMemberRefreshToken);
@@ -136,23 +138,23 @@ public class TokenServiceImpl implements TokenService{
 		}catch(CustomException e) {
 			throw e;
 		}catch(AlgorithmMismatchException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_FORGED);
 		}catch(SignatureVerificationException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_FORGED);
 		}catch(TokenExpiredException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_EXPIRED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_EXPIRED);
 		}catch(MissingClaimException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_FORGED);
 		}catch(IncorrectClaimException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_FORGED);
 		}catch(JWTVerificationException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_FORGED);
 		}catch(Exception e) {
-			throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
+			throw new CustomException(DefaultServiceCode.INTERNAL_SERVER_ERROR);
 		}
 		
 		if(!tokenUtil.getMemberIDWithDecoding(oldMemberAccessToken).equals(tokenUtil.getMemberIDWithDecoding(oldMemberRefreshToken))) {
-			throw new CustomException(ErrorCode.TOKEN_OWNER_NOT_MATCHED_TO_EACH_OTHER);
+			throw new CustomException(TokenServiceCode.TOKEN_OWNER_NOT_MATCHED_TO_EACH_OTHER);
 		}
 		
 		String memberID = tokenUtil.getMemberIDWithDecoding(oldMemberAccessToken);
@@ -186,55 +188,55 @@ public class TokenServiceImpl implements TokenService{
 		
 		try {
 			if(oldMemberAccessToken==null) {
-				throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_NOT_FOUND);
+				throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_NOT_FOUND);
 			}
 			
 			if(tokenUtil.isExpiredWithDecoding(oldMemberAccessToken)) {
-				throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_EXPIRED);
+				throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_EXPIRED);
 			}
 			
 			if(!tokenUtil.isAccessTokenWithDecoding(oldMemberAccessToken)) {
-				throw new CustomException(ErrorCode.TOKEN_NOT_FOR_ACCESS);
+				throw new CustomException(TokenServiceCode.TOKEN_NOT_FOR_ACCESS);
 			}
 			
 			if(redisUtil.getString(oldMemberAccessToken)!=null) {
-				throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_INVALIDATED);
+				throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_INVALIDATED);
 			}
 			
 			tokenUtil.verify(oldMemberAccessToken);
 		}catch(CustomException e) {
 			throw e;
 		}catch(AlgorithmMismatchException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(SignatureVerificationException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(TokenExpiredException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_EXPIRED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_EXPIRED);
 		}catch(MissingClaimException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(IncorrectClaimException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(JWTVerificationException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(Exception e) {
-			throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
+			throw new CustomException(DefaultServiceCode.INTERNAL_SERVER_ERROR);
 		}
 		
 		try {
 			if(oldMemberRefreshToken==null) {
-				throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_NOT_FOUND);
+				throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_NOT_FOUND);
 			}
 			
 			if(tokenUtil.isExpiredWithDecoding(oldMemberRefreshToken)) {
-				throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_EXPIRED);
+				throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_EXPIRED);
 			}
 			
 			if(!tokenUtil.isRefreshTokenWithDecoding(oldMemberRefreshToken)) {
-				throw new CustomException(ErrorCode.TOKEN_NOT_FOR_REFRESH);
+				throw new CustomException(TokenServiceCode.TOKEN_NOT_FOR_REFRESH);
 			}
 			
 			if(redisUtil.getString(oldMemberRefreshToken)!=null) {
-				throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_INVALIDATED);
+				throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_INVALIDATED);
 			}
 			
 			tokenUtil.verify(oldMemberRefreshToken);
@@ -242,23 +244,23 @@ public class TokenServiceImpl implements TokenService{
 		}catch(CustomException e) {
 			throw e;
 		}catch(AlgorithmMismatchException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_FORGED);
 		}catch(SignatureVerificationException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_FORGED);
 		}catch(TokenExpiredException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_EXPIRED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_EXPIRED);
 		}catch(MissingClaimException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_FORGED);
 		}catch(IncorrectClaimException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_FORGED);
 		}catch(JWTVerificationException e) {
-			throw new CustomException(ErrorCode.TOKEN_FOR_REFRESH_FORGED);
+			throw new CustomException(TokenServiceCode.TOKEN_FOR_REFRESH_FORGED);
 		}catch(Exception e) {
-			throw new CustomException(ErrorCode.INTERNAL_SERVER_ERROR);
+			throw new CustomException(DefaultServiceCode.INTERNAL_SERVER_ERROR);
 		}
 		
 		if(!tokenUtil.getMemberIDWithDecoding(oldMemberAccessToken).equals(tokenUtil.getMemberIDWithDecoding(oldMemberRefreshToken))) {
-			throw new CustomException(ErrorCode.TOKEN_OWNER_NOT_MATCHED_TO_EACH_OTHER);
+			throw new CustomException(TokenServiceCode.TOKEN_OWNER_NOT_MATCHED_TO_EACH_OTHER);
 		}
 		
 		requestUpdateMemberTokens(tokenUtil.getMemberIDWithDecoding(oldMemberAccessToken),UpdateMemberTokensRequestDTO.builder()
@@ -275,7 +277,7 @@ public class TokenServiceImpl implements TokenService{
 		MemberDTO dto = restTemplate.getForObject(MEMBER_SERVICE_BASE_URI+"/members/"+memberID, ReadMemberResponseDTO.class).getData();
 		
 		if(dto==null) {
-			throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
+			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
 		}
 		
 		return dto;

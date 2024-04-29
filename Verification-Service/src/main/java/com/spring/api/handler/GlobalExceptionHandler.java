@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.RestClientException;
 
 import com.spring.api.code.Code;
-import com.spring.api.code.ErrorCode;
+import com.spring.api.code.DefaultServiceCode;
 import com.spring.api.dto.ResponseDTO;
 import com.spring.api.exception.CustomException;
 
@@ -29,13 +29,12 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<ErrorResponse> handleRestClientException(RestClientException e) throws ParseException {
 		JSONParser parser = new JSONParser(e.getMessage().substring(7, e.getMessage().length()-1));
 		JSONObject obj = (JSONObject)parser.parse();
-		
 		return new ResponseEntity(obj, HttpStatus.valueOf(e.getMessage().substring(0,3)));
 	}
 	
 	@ExceptionHandler({Exception.class})
 	public ResponseEntity<ErrorResponse> handleException(Exception e) {
-		ResponseDTO dto = ResponseDTO.fail(ErrorCode.INTERNAL_SERVER_ERROR);
+		ResponseDTO dto = ResponseDTO.fail(DefaultServiceCode.INTERNAL_SERVER_ERROR);
 		return new ResponseEntity(dto, dto.getCode().getStatus());
 	}
 }
