@@ -1,6 +1,8 @@
 package com.spring.api.enumeration;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.spring.api.code.BookServiceCode;
+import com.spring.api.exception.CustomException;
 
 public enum BookCategory {
 	HUMANITIES,
@@ -14,7 +16,11 @@ public enum BookCategory {
 	ETC;
 	
 	@JsonCreator
-    public static BookCategory from(String memberRole) {
-        return BookCategory.valueOf(memberRole.toUpperCase());
+    public static BookCategory from(String bookCategory) {
+		try {
+			return BookCategory.valueOf(bookCategory.toUpperCase());
+		}catch(Exception e) {
+			throw new CustomException(BookServiceCode.BOOK_CATEGORY_NOT_AVAILABLE);
+		}
     }
 }

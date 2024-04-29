@@ -1,6 +1,8 @@
 package com.spring.api.enumeration;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.spring.api.code.BookServiceCode;
+import com.spring.api.exception.CustomException;
 
 public enum BookImageExtension {
 	JPG,
@@ -9,6 +11,10 @@ public enum BookImageExtension {
 	
 	@JsonCreator
     public static BookImageExtension from(String bookImageExtension) {
-        return BookImageExtension.valueOf(bookImageExtension.toUpperCase());
+		try {
+			return BookImageExtension.valueOf(bookImageExtension.toUpperCase());
+		}catch(Exception e) {
+			throw new CustomException(BookServiceCode.BOOK_IMAGE_EXTENSION_NOT_AVAILABLE);
+		}
     }
 }
