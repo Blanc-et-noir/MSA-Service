@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.spring.api.code.ErrorCode;
+import com.spring.api.code.MemberServiceCode;
 import com.spring.api.dto.CreateMemberRequestDTO;
 import com.spring.api.dto.MemberDTO;
 import com.spring.api.dto.SimpleMemberDTO;
@@ -44,19 +44,19 @@ public class MemberServiceImpl implements MemberService{
 		Optional<MemberEntity> oldMember = memberRepository.findById(dto.getMemberID());
 		
 		if(oldMember.isPresent()) {
-			throw new CustomException(ErrorCode.MEMBER_ID_ALREADY_OCCUPIED);
+			throw new CustomException(MemberServiceCode.MEMBER_ID_ALREADY_OCCUPIED);
 		}
 		
 		if(!dto.getMemberPW().equals(dto.getMemberPWCheck())) {
-			throw new CustomException(ErrorCode.MEMBER_PW_NOT_MATCHED_TO_EACH_OTHER);
+			throw new CustomException(MemberServiceCode.MEMBER_PW_NOT_MATCHED_TO_EACH_OTHER);
 		}
 		
 		if(redisUtil.getString(PREFIX_FOR_VERIFICATION_WITH_MEMBER_EMAIL+dto.getMemberEmail())==null) {
-			throw new CustomException(ErrorCode.MEMBER_EMAIL_NOT_VERIFIED);
+			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_NOT_VERIFIED);
 		}
 		
 		if(memberRepository.findByMemberEmail(dto.getMemberEmail()).isPresent()) {
-			throw new CustomException(ErrorCode.MEMBER_EMAIL_ALREADY_OCCUPIED);
+			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_ALREADY_OCCUPIED);
 		}
 		
 		MemberEntity member = MemberEntity.builder()
@@ -79,7 +79,7 @@ public class MemberServiceImpl implements MemberService{
 		Optional<MemberEntity> member = memberRepository.findById(memberID);
 		
 		if(!member.isPresent()||!member.get().isMemberStatusNormal()) {
-			throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
+			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
 		}
 		
 		member.get().updateTokens(dto.getMemberAccessToken(), dto.getMemberRefreshToken());
@@ -90,7 +90,7 @@ public class MemberServiceImpl implements MemberService{
 		Optional<MemberEntity> member = memberRepository.findById(memberID);
 		
 		if(!member.isPresent()||!member.get().isMemberStatusNormal()) {
-			throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
+			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
 		}
 		
 		return MemberDTO.builder()
@@ -108,7 +108,7 @@ public class MemberServiceImpl implements MemberService{
 		Optional<MemberEntity> member = memberRepository.findById(memberID);
 		
 		if(!member.isPresent()||!member.get().isMemberStatusNormal()) {
-			throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
+			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
 		}
 		
 		member.get().updateMemberPW(bCryptPasswordEncoder.encode(dto.getTemporaryMemberPW()));
@@ -126,7 +126,7 @@ public class MemberServiceImpl implements MemberService{
 		Optional<MemberEntity> member = memberRepository.findByMemberEmail(memberEmail);
 		
 		if(!member.isPresent()||!member.get().isMemberStatusNormal()) {
-			throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
+			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
 		}
 		
 		return SimpleMemberDTO.builder()
@@ -140,7 +140,7 @@ public class MemberServiceImpl implements MemberService{
 		Optional<MemberEntity> member = memberRepository.findById(memberID);
 			
 		if(!member.isPresent()||!member.get().isMemberStatusNormal()) {
-			throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
+			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
 		}
 		
 		if(dto.getMemberName()!=null) {
@@ -149,11 +149,11 @@ public class MemberServiceImpl implements MemberService{
 		
 		if(dto.getMemberEmail()!=null) {
 			if(redisUtil.getString(PREFIX_FOR_VERIFICATION_WITH_MEMBER_EMAIL+dto.getMemberEmail())==null) {
-				throw new CustomException(ErrorCode.MEMBER_EMAIL_NOT_VERIFIED);
+				throw new CustomException(MemberServiceCode.MEMBER_EMAIL_NOT_VERIFIED);
 			}
 			
 			if(memberRepository.findByMemberEmail(dto.getMemberEmail()).isPresent()) {
-				throw new CustomException(ErrorCode.MEMBER_EMAIL_ALREADY_OCCUPIED);
+				throw new CustomException(MemberServiceCode.MEMBER_EMAIL_ALREADY_OCCUPIED);
 			}
 			
 			member.get().updateMemberEmail(dto.getMemberEmail());
@@ -161,7 +161,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		if(dto.getMemberPW()!=null) {
 			if(!dto.getMemberPW().equals(dto.getMemberPWCheck())) {
-				throw new CustomException(ErrorCode.MEMBER_PW_NOT_MATCHED_TO_EACH_OTHER);
+				throw new CustomException(MemberServiceCode.MEMBER_PW_NOT_MATCHED_TO_EACH_OTHER);
 			}
 			
 			member.get().updateMemberPW(bCryptPasswordEncoder.encode(dto.getMemberPW()));

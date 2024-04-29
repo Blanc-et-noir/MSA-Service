@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.spring.api.code.ErrorCode;
+import com.spring.api.code.MemberServiceCode;
 import com.spring.api.dto.CreateVerificationCodeForMemberEmailRequestDTO;
 import com.spring.api.dto.CreateVerificationCodeForMemberPWRequestDTO;
 import com.spring.api.dto.DeleteVerificationCodeForMemberEmailRequestDTO;
@@ -70,7 +70,7 @@ public class VerificationServiceImpl implements VerificationService{
 		//ID와 이메일 연동여부 확인
 		MemberDTO member = requestMember(dto.getMemberID());
 		if(!dto.getMemberEmail().equals(member.getMemberEmail())) {
-			throw new CustomException(ErrorCode.MEMBER_EMAIL_NOT_BOUND_TO_MEMBER_ID);
+			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_NOT_BOUND_TO_MEMBER_ID);
 		}
 		
 		sendVerificationCodeForMemberPW(dto.getMemberEmail(),VERIFICATION_CODE);
@@ -82,12 +82,12 @@ public class VerificationServiceImpl implements VerificationService{
 		final String VERIFICATION_CODE = redisUtil.getString(PREFIX_FOR_VERIFICATION_CODE_WITH_MEMBER_EMAIL+dto.getMemberEmail());
 		
 		if(VERIFICATION_CODE==null) {
-			throw new CustomException(ErrorCode.MEMBER_EMAIL_VERIFICATION_CODE_NOT_FOUND);
+			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_VERIFICATION_CODE_NOT_FOUND);
 		}
 		
 		//인증코드 비교
 		if(!dto.getMemberEmailVerificationCode().equals(VERIFICATION_CODE)) {
-			throw new CustomException(ErrorCode.MEMBER_EMAIL_VERIFICATION_CODE_IS_WRONG);
+			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_VERIFICATION_CODE_IS_WRONG);
 		}
 		
 		//인증완료시, 인증코드 삭제 및 이메일 30분간 인증처리
@@ -101,18 +101,18 @@ public class VerificationServiceImpl implements VerificationService{
 		final String VERIFICATION_CODE = redisUtil.getString(PREFIX_FOR_VERIFICATION_CODE_WITH_MEMBER_PW+dto.getMemberEmail());
 				
 		if(VERIFICATION_CODE==null) {
-			throw new CustomException(ErrorCode.MEMBER_EMAIL_VERIFICATION_CODE_NOT_FOUND);
+			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_VERIFICATION_CODE_NOT_FOUND);
 		}
 				
 		//인증코드 비교
 		if(!dto.getMemberEmailVerificationCode().equals(VERIFICATION_CODE)) {
-			throw new CustomException(ErrorCode.MEMBER_EMAIL_VERIFICATION_CODE_IS_WRONG);
+			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_VERIFICATION_CODE_IS_WRONG);
 		}
 		
 		//ID와 이메일 연동여부 확인
 		MemberDTO member = requestMember(dto.getMemberID());
 		if(!dto.getMemberEmail().equals(member.getMemberEmail())) {
-			throw new CustomException(ErrorCode.MEMBER_EMAIL_NOT_BOUND_TO_MEMBER_ID);
+			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_NOT_BOUND_TO_MEMBER_ID);
 		}
 		
 		final String TEMPORARY_MEMBER_PW = createTemporaryMemberPW(TEMPORARY_MEMBER_PW_LENGTH);
@@ -141,7 +141,7 @@ public class VerificationServiceImpl implements VerificationService{
 	        javaMailSender.send(mimeMessage);
 	        redisUtil.setString(PREFIX_FOR_VERIFICATION_CODE_WITH_MEMBER_EMAIL+memberEmail, VERIFICATION_CODE, VERIFICATION_CODE_DURATION*1000);
 		} catch (MessagingException e) {
-			throw new CustomException(ErrorCode.MEMBER_EMAIL_VERIFICATION_CODE_NOT_SENT);
+			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_VERIFICATION_CODE_NOT_SENT);
 		}
 	}
 	
@@ -157,7 +157,7 @@ public class VerificationServiceImpl implements VerificationService{
 	        javaMailSender.send(mimeMessage);
 	        redisUtil.setString(PREFIX_FOR_VERIFICATION_CODE_WITH_MEMBER_PW+memberEmail, VERIFICATION_CODE, VERIFICATION_CODE_DURATION*1000);
 		} catch (MessagingException e) {
-			throw new CustomException(ErrorCode.MEMBER_EMAIL_VERIFICATION_CODE_NOT_SENT);
+			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_VERIFICATION_CODE_NOT_SENT);
 		}
 	}
 	
@@ -172,7 +172,7 @@ public class VerificationServiceImpl implements VerificationService{
 	        mimeMessageHelper.setText(memberID+"에 대한 임시 PW는 "+TEMPORARY_MEMBER_PW+" 입니다.\n임시 PW를 사용하여 로그인후, 반드시 PW를 변경해주시기 바랍니다.", false);
 	        javaMailSender.send(mimeMessage);
 		} catch (MessagingException e) {
-			throw new CustomException(ErrorCode.MEMBER_EMAIL_VERIFICATION_CODE_NOT_SENT);
+			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_VERIFICATION_CODE_NOT_SENT);
 		}
 	}
 	
@@ -210,7 +210,7 @@ public class VerificationServiceImpl implements VerificationService{
 		MemberDTO dto = restTemplate.getForObject(MEMBER_SERVICE_BASE_URI+"/members/"+memberID, ReadMemberResponseDTO.class).getData();
 		
 		if(dto==null) {
-			throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
+			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
 		}
 		
 		return dto;
@@ -220,7 +220,7 @@ public class VerificationServiceImpl implements VerificationService{
 		
 		MemberDTO member = restTemplate.patchForObject(MEMBER_SERVICE_BASE_URI+"/members/"+memberID+"/member-pws",dto,UpdateMemberPWResponseDTO.class).getData();
 		if(member==null) {
-			throw new CustomException(ErrorCode.MEMBER_NOT_FOUND);
+			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
 		}
 	}
 	

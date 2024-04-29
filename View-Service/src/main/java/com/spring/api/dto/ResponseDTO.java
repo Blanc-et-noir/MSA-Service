@@ -1,4 +1,4 @@
-package com.spring.api.dto.response;
+package com.spring.api.dto;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

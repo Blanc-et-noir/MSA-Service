@@ -24,7 +24,8 @@ import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.api.code.Code;
-import com.spring.api.code.ErrorCode;
+import com.spring.api.code.DefaultServiceCode;
+import com.spring.api.code.TokenServiceCode;
 import com.spring.api.dto.ResponseDTO;
 import com.spring.api.enumeration.TokenType;
 import com.spring.api.util.RedisUtil;
@@ -50,37 +51,37 @@ public class TokenAuthenticationFilter implements WebFilter {
 		
 		try {
 			if(memberAccessToken==null) {
-				return onError(exchange, response, ErrorCode.TOKEN_FOR_ACCESS_NOT_FOUND);
+				return onError(exchange, response, TokenServiceCode.TOKEN_FOR_ACCESS_NOT_FOUND);
 			}
 			
 			if(tokenUtil.isExpiredWithDecoding(memberAccessToken)) {
-				return onError(exchange, response, ErrorCode.TOKEN_FOR_ACCESS_EXPIRED);
+				return onError(exchange, response, TokenServiceCode.TOKEN_FOR_ACCESS_EXPIRED);
 			}
 			
 			if(!tokenUtil.isAccessTokenWithDecoding(memberAccessToken)) {
-				return onError(exchange, response, ErrorCode.TOKEN_NOT_FOR_ACCESS);
+				return onError(exchange, response, TokenServiceCode.TOKEN_NOT_FOR_ACCESS);
 			}
 			
 			if(redisUtil.getString(memberAccessToken)!=null) {
-				return onError(exchange, response, ErrorCode.TOKEN_FOR_ACCESS_INVALIDATED);
+				return onError(exchange, response, TokenServiceCode.TOKEN_FOR_ACCESS_INVALIDATED);
 			}
 			
 			tokenUtil.verify(memberAccessToken);
 
 		}catch(AlgorithmMismatchException e) {
-			return onError(exchange, response, ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			return onError(exchange, response, TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(SignatureVerificationException e) {
-			return onError(exchange, response, ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			return onError(exchange, response, TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(TokenExpiredException e) {
-			return onError(exchange, response, ErrorCode.TOKEN_FOR_ACCESS_EXPIRED);
+			return onError(exchange, response, TokenServiceCode.TOKEN_FOR_ACCESS_EXPIRED);
 		}catch(MissingClaimException e) {
-			return onError(exchange, response, ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			return onError(exchange, response, TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(IncorrectClaimException e) {
-			return onError(exchange, response, ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			return onError(exchange, response, TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(JWTVerificationException e) {
-			return onError(exchange, response, ErrorCode.TOKEN_FOR_ACCESS_FORGED);
+			return onError(exchange, response, TokenServiceCode.TOKEN_FOR_ACCESS_FORGED);
 		}catch(Exception e) {
-			return onError(exchange, response, ErrorCode.INTERNAL_SERVER_ERROR);
+			return onError(exchange, response, DefaultServiceCode.INTERNAL_SERVER_ERROR);
 		}
 		
 		exchange.getRequest().mutate().headers(h -> h.add("Member-id",tokenUtil.getMemberIDWithDecoding(memberAccessToken))).build();
@@ -104,7 +105,7 @@ public class TokenAuthenticationFilter implements WebFilter {
 		    DataBuffer buffer = response.bufferFactory().wrap(new ObjectMapper().writeValueAsString(dto).getBytes(StandardCharsets.UTF_8));
 		    return response.writeWith(Mono.just(buffer));
 		}catch(Exception e) {
-			DataBuffer buffer = response.bufferFactory().wrap(ErrorCode.INTERNAL_SERVER_ERROR.getCode().getBytes(StandardCharsets.UTF_8));
+			DataBuffer buffer = response.bufferFactory().wrap(DefaultServiceCode.INTERNAL_SERVER_ERROR.getCode().getBytes(StandardCharsets.UTF_8));
 		    return response.writeWith(Mono.just(buffer));
 		}
 	}

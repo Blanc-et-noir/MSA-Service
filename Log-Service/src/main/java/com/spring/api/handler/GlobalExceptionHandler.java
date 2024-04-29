@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.spring.api.code.Code;
-import com.spring.api.code.ErrorCode;
+import com.spring.api.code.DefaultServiceCode;
 import com.spring.api.dto.ResponseDTO;
 import com.spring.api.exception.CustomException;
 
@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler({Exception.class})
 	public ResponseEntity<ErrorResponse> handleException(Exception e) {
-		ResponseDTO dto = ResponseDTO.fail(ErrorCode.INTERNAL_SERVER_ERROR);
+		ResponseDTO dto = ResponseDTO.fail(DefaultServiceCode.INTERNAL_SERVER_ERROR);
 		return new ResponseEntity(dto, dto.getCode().getStatus());
 	}
 }
