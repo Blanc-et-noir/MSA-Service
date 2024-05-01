@@ -3,6 +3,7 @@ package com.spring.api.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import com.spring.api.enumeration.BookCategory;
 import com.spring.api.enumeration.BookImageStatus;
@@ -124,6 +125,16 @@ public class BookEntity {
 				bookImage.setBookImageStatus(BookImageStatus.DELETED);
 			}
 		}
+	}
+	
+	public Optional<BookImageEntity> getBookImage(Long bookImageID) {
+		for(BookImageEntity bookImage : this.bookImages) {
+			if(bookImage.equals(BookImageEntity.builder().bookImageID(bookImageID).build())) {
+				return Optional.of(bookImage);
+			}
+		}
+		
+		return Optional.empty();
 	}
 	
 	@Override
