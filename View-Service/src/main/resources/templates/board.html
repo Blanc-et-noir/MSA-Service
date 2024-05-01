@@ -5,7 +5,10 @@
 <link rel="stylesheet" href="/css/default.css">
 <link rel="stylesheet" href="/css/modal.css">
 <link rel="stylesheet" href="/css/side.css">
+<link rel="stylesheet" href="/css/main-side.css">
+<link rel="stylesheet" href="/css/search-side.css">
 <link rel="stylesheet" href="/css/board.css">
+
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.js"></script>
 <script type="text/javascript" src="/js/default.js"></script>
@@ -13,6 +16,8 @@
 <script type="text/javascript" src="/js/jsrsasign.js"></script>
 <script type="text/javascript" src="/js/jwt.js"></script>
 <script type="text/javascript" src="/js/side.js"></script>
+<script type="text/javascript" src="/js/main-side.js"></script>
+<script type="text/javascript" src="/js/search.js"></script>
 <script type="text/javascript" src="/js/board.js"></script>
 
 <title>직거래 게시판</title>
@@ -20,6 +25,7 @@
 <body>
 	<div class="container">
 		<div class="side" th:replace="~{./main-side.html :: fragment}"></div>
+		<div class="side" th:replace="~{./search-side.html :: fragment}"></div>
 		<div class="modal"></div>
 		<div class="header"></div>
 		<div class="body">

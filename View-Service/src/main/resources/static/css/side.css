@@ -34,11 +34,6 @@
 	height:20px;
 	display:block;
 	filter: invert(51%) sepia(5%) saturate(5%) hue-rotate(354deg) brightness(96%) contrast(86%);
-	
-}
-
-.side[name='main-side'] .side-container-button:hover .side-container-button-svg{
-	filter: invert(45%) sepia(77%) saturate(3014%) hue-rotate(327deg) brightness(101%) contrast(88%);
 }
 
 .side-container-header{
@@ -118,6 +113,10 @@
 	font-size:12px;
 	margin-left:10px;
 	color:gray;
+}
+
+.side[name='main-side'] .side-container-button:hover .side-container-button-svg{
+	filter: invert(45%) sepia(77%) saturate(3014%) hue-rotate(327deg) brightness(101%) contrast(88%);
 }
 
 #main-side-container-footer{
