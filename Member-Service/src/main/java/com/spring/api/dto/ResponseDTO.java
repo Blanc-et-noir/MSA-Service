@@ -1,8 +1,8 @@
 package com.spring.api.dto;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -26,25 +26,26 @@ public class ResponseDTO<T> {
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private T data;
 	
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	@JsonProperty("time")
-	private String time;
+	private LocalDateTime time;
 	
 	private ResponseDTO(String message){
 		this.message = message;
-		this.time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss:SSS"));
+		this.time = LocalDateTime.now();
 	}
 	
 	private ResponseDTO(String message, T data){
 		this.message = message;
 		this.data = data;
-		this.time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss:SSS"));
+		this.time = LocalDateTime.now();
 	}
 	
 	private ResponseDTO(Code code){
 		this.code = code;
 		this.errorCode = code.getCode();
 		this.message = code.getMessage();
-		this.time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss:SSS"));
+		this.time = LocalDateTime.now();
 	}
 	
 	public static <T> ResponseDTO<?> success(String message) {

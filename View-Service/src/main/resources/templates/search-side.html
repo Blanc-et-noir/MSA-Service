@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>사이드바</title>
+</head>
+<body>
+	<div name="search-side" class="side close" th:fragment="fragment">
+		<div class="side-container">
+			<div class="side-container-button" onclick="switchSideBar('search-side')">
+				<img class="side-container-button-svg" src="/svg/메뉴.svg">
+			</div>
+			<div class="side-container-header">서치 매니저</div>
+			<div class="side-container-body">
+				<div class="side-container-body-container">
+					<div class="side-container-body-container-title">카테고리</div>
+					<label class="book-category-label"><input class="book-category-label-input" type="checkbox" value="HUMANITIES"/>인문학</label>
+					<label class="book-category-label"><input class="book-category-label-input" type="checkbox" value="POLITICS"/>정치/사회/법</label>
+					<label class="book-category-label"><input class="book-category-label-input" type="checkbox" value="ECONOMICS" />경제/경영</label>
+					<label class="book-category-label"><input class="book-category-label-input" type="checkbox" value="NATURAL_SCIENCE" />자연과학</label>
+					<label class="book-category-label"><input class="book-category-label-input" type="checkbox" value="TECHNICAL_ENGINEERING" />기술공학</label>
+					<label class="book-category-label"><input class="book-category-label-input" type="checkbox" value="COMPUTER_ENGINEERING" />컴퓨터공학</label>
+					<label class="book-category-label"><input class="book-category-label-input" type="checkbox" value="ARTS_PHYSICAL_EDUCATION" />예체능</label>
+					<label class="book-category-label"><input class="book-category-label-input" type="checkbox" value="FOREIGN_LANGUAGES" />외국어</label>
+					<label class="book-category-label"><input class="book-category-label-input" type="checkbox" value="ETC" />기타</label>
+				</div>
+				<div class="side-container-body-container">
+					<div class="side-container-body-container-title">도서품질</div>
+					<label class="book-category-label"><input class="book-category-label-input" type="checkbox" value="A" />A급 : 사용감이 거의 없는 상태</label>
+					<label class="book-category-label"><input class="book-category-label-input" type="checkbox" value="B" />B급 : 사용감은 있으나 깨끗한 상태</label>
+					<label class="book-category-label"><input class="book-category-label-input" type="checkbox" value="C" />C급 : 사용감이 많아 지저분한 상태</label>
+					<label class="book-category-label"><input class="book-category-label-input" type="checkbox" value="D" />D급 : 겨우 읽을 수는 있는 상태</label>
+				</div>
+				<div class="side-container-body-container">
+					<div class="side-container-body-container-title">판매가격</div>
+					<input class="book-category-label-input" type="number" placeholder="최소가격을 입력하세요. (단위 : 원)" min="0"/>
+					<input class="book-category-label-input" type="number" placeholder="최대가격을 입력하세요. (단위 : 원)" min="0"/>
+				</div>
+				<div class="side-container-body-container">
+					<div class="side-container-body-container-title">도서명</div>
+					<input class="book-category-label-input" type="text" placeholder="도서명을 입력하세요."/>
+				</div>
+				<div class="side-container-body-container">
+					<div class="side-container-body-container-title">출판사명</div>
+					<input class="book-category-label-input" type="text" placeholder="출판사명을 입력하세요."/>
+				</div>
+				<div class="side-container-body-container">
+					<div class="side-container-body-container-title">판매지역</div>
+					<div class="side-container-body-container-box">
+				</div>
+			</div>
+			<div id="search-side-container-footer"class="side-container-footer">
+				<div name='search' class='search-side-container-footer-button'>
+					<img class="search-side-container-footer-button-svg svg-green" src="/svg/검색.svg">
+					<div class="search-side-container-footer-button-title">도서검색</div>
+				</div>
+				<div name='reset' class='search-side-container-footer-button'>
+					<img class="search-side-container-footer-button-svg svg-red" src="/svg/리셋.svg">
+					<div class="search-side-container-footer-button-title">초기화</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

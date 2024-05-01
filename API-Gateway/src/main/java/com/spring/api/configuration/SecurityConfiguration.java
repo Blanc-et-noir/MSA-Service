@@ -41,7 +41,8 @@ public class SecurityConfiguration {
 		"/font/**",
 		"/svg/**",
 		BASE_URI+"/members/member-emails/{member-emails}",
-		BASE_URI+"/tokens"
+		BASE_URI+"/tokens",
+		BASE_URI+"/books"
 	};
 	
 	private String[] PERMITTED_POST_REQUESTS={

@@ -5,6 +5,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.spring.api.dto.CreateBookImageResponseDTO;
 import com.spring.api.dto.CreateBookRequestDTO;
 import com.spring.api.dto.CreateBookResponseDTO;
+import com.spring.api.dto.ReadBooksRequestDTO;
+import com.spring.api.dto.ReadBooksResponseDTO;
 import com.spring.api.dto.UpdateBookRequestDTO;
 
 public interface BookService {
@@ -12,4 +14,5 @@ public interface BookService {
 	public void updateBook(String memberID, Long bookID, UpdateBookRequestDTO dto);
 	public CreateBookImageResponseDTO createBookImage(String memberID, Long bookID, MultipartFile bookImageFile);
 	public void deleteBookImage(String memberID, Long bookID, Long bookImageID);
+	public ReadBooksResponseDTO readBooks(ReadBooksRequestDTO dto);
 }

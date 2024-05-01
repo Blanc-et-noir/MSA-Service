@@ -17,7 +17,8 @@ public enum BookServiceCode implements Code{
 	BOOK_STATUS_NOT_AVAILABLE("BOOK_STATUS_NOT_AVAILABLE","해당 도서 상태는 사용하실 수 없습니다.",HttpStatus.BAD_REQUEST),
 	BOOK_QUALITY_NOT_AVAILABLE("BOOK_QUALITY_NOT_AVAILABLE","해당 도서 품질은 사용하실 수 없습니다.",HttpStatus.BAD_REQUEST),
 	BOOK_IMAGE_STATUS_NOT_AVAILABLE("BOOK_IMAGE_STATUS_NOT_AVAILABLE","해당 도서 이미지 상태는 사용하실 수 없습니다.",HttpStatus.BAD_REQUEST),
-	BOOK_CATEGORY_NOT_AVAILABLE("BOOK_CATEGORY_NOT_AVAILABLE","해당 도서 카테고리는 사용하실 수 없습니다.",HttpStatus.BAD_REQUEST);
+	BOOK_CATEGORY_NOT_AVAILABLE("BOOK_CATEGORY_NOT_AVAILABLE","해당 도서 카테고리는 사용하실 수 없습니다.",HttpStatus.BAD_REQUEST),
+	BOOK_MIN_PRICE_GREATER_THAN_BOOK_MAX_PRICE("BOOK_MIN_PRICE_GREATER_THAN_BOOK_MAX_PRICE","해당 도서 판매가격의 최소값이 해당 도서 판매가격의 최대값보다 큽니다. ",HttpStatus.BAD_REQUEST);
 	
 	private String code;
 	private String message;
