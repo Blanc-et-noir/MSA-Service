@@ -56,8 +56,8 @@ public class BookImageEntity {
 	@Column(name="book_image_status")
 	private BookImageStatus bookImageStatus;
 	
-	@Column(name="book_image_uri")
-	private String bookImageURI;
+	@Column(name="book_image_url")
+	private String bookImageURL;
 	
 	@Column(name="book_image_create_time")
 	private LocalDateTime bookImageCreateTime;

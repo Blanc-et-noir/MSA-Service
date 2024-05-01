@@ -25,6 +25,9 @@ public class BookImageDTO {
 	@JsonProperty("book-image-temporary-name")
 	private String bookImageTemporaryName;
 	
+	@JsonProperty("book-image-url")
+	private String bookImageURL;
+	
 	@JsonProperty("book-image-extension")
 	private BookImageExtension bookImageExtension;
 	

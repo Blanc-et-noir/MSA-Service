@@ -1,5 +1,6 @@
 package com.spring.api.service;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.api.dto.CreateBookImageResponseDTO;
@@ -15,4 +16,5 @@ public interface BookService {
 	public CreateBookImageResponseDTO createBookImage(String memberID, Long bookID, MultipartFile bookImageFile);
 	public void deleteBookImage(String memberID, Long bookID, Long bookImageID);
 	public ReadBooksResponseDTO readBooks(ReadBooksRequestDTO dto);
+	public ResponseEntity<byte[]> readBookImage(Long bookID, Long bookImageID);
 }

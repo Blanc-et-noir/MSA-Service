@@ -1,6 +1,8 @@
 package com.spring.api.service;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,6 +10,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -135,13 +143,15 @@ public class BookServiceImpl implements BookService{
 			.bookImageExtension(BookImageExtension.from(getExtension(bookImageFile)))
 			.bookImageStatus(BookImageStatus.NORMAL)
 			.bookImageTemporaryName(bookImageTemporaryName)
-			.bookImageURI(null)
+			.bookImageURL(null)
 			.bookImageCreateTime(LocalDateTime.now())
 		.build();
 		
 		bookImageRepository.save(bookImage);
 		
-		bookImage.setBookImageURI(storeBookImageFile(bookImage.getBook().getBookID(), bookImage.getBookImageID(),bookImageTemporaryName, bookImageFile));
+		storeBookImageFile(bookImage.getBook().getBookID(), bookImage.getBookImageID(),bookImageTemporaryName, bookImageFile);
+		
+		bookImage.setBookImageURL("http://localhost:3000/api/v1/books/"+bookID+"/book-images/"+bookImage.getBookImageID());
 		
 		return CreateBookImageResponseDTO.builder()
 				.bookImageID(bookImage.getBookImageID())
@@ -205,10 +215,12 @@ public class BookServiceImpl implements BookService{
 						.bookImageTemporaryName(bookImage.getBookImageTemporaryName())
 						.bookImageStatus(bookImage.getBookImageStatus())
 						.bookImageExtension(bookImage.getBookImageExtension())
+						.bookImageURL(bookImage.getBookImageURL())
 						.build();
 				
 				if(dto.getBookImageStatuses()!=null&&!dto.getBookImageStatuses().isEmpty()) {
 					for(BookImageStatus bookImageStatus : dto.getBookImageStatuses()) {
+						
 						if(bookImageStatus.equals(bookImage.getBookImageStatus())) {
 							list2.add(bookImageDTO);
 							break;
@@ -243,17 +255,58 @@ public class BookServiceImpl implements BookService{
 				.build();
 	}
 
+	@Override
+	public ResponseEntity<byte[]> readBookImage(Long bookID, Long bookImageID) {
+		Optional<BookEntity> book = bookRepository.findById(bookID);
+		
+		if(book.isEmpty()) {
+			throw new CustomException(BookServiceCode.BOOK_NOT_FOUND);
+		}
+		
+		Optional<BookImageEntity> bookImage = book.get().getBookImage(bookImageID);
+		
+		if(bookImage.isEmpty()) {
+			throw new CustomException(BookServiceCode.BOOK_IMAGE_NOT_FOUND);
+		}
+		
+		try {
+			InputStream inputStream = new FileInputStream(
+					BOOK_IMAGE_PATH_PREFIX+File.separator+
+					bookID+File.separator+
+					"book-images"+File.separator+
+					bookImageID+File.separator+
+					bookImage.get().getBookImageTemporaryName()+"."+bookImage.get().getBookImageExtension().toString().toLowerCase());
+			
+			byte[] bytes = IOUtils.toByteArray(inputStream);
+			inputStream.close();
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+			
+			if(bookImage.get().getBookImageExtension().equals(BookImageExtension.JPG)||bookImage.get().getBookImageExtension().equals(BookImageExtension.JPEG)) {
+				headers.setContentType(MediaType.IMAGE_JPEG);
+			}else if(bookImage.get().getBookImageExtension().equals(BookImageExtension.PNG)){
+				headers.setContentType(MediaType.IMAGE_PNG);
+			}
+			
+			ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(bytes, headers, HttpStatus.OK);
+			return responseEntity;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new CustomException(BookServiceCode.BOOK_IMAGE_NOT_DOWNLOADED_DUE_TO_ERROR);
+		}
+	}
+	
 	private String getExtension(MultipartFile multipartFile) {		
 	    return FilenameUtils.getExtension(multipartFile.getOriginalFilename());
 	}
 	
-	private String storeBookImageFile(Long bookID, Long bookImageID, String bookImageTemporaryName, MultipartFile bookImageFile) {
+	private void storeBookImageFile(Long bookID, Long bookImageID, String bookImageTemporaryName, MultipartFile bookImageFile) {
 		File dest = new File(BOOK_IMAGE_PATH_PREFIX+File.separator+bookID+File.separator+"book-images"+File.separator+bookImageID+File.separator+bookImageTemporaryName+"."+getExtension(bookImageFile));
 		
 		try {
 			dest.mkdirs();
 			bookImageFile.transferTo(dest);
-			return dest.getAbsolutePath();
 		}catch(Exception e) {
 			if(dest.exists()) {
 				dest.delete();

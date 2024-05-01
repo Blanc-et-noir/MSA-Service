@@ -42,7 +42,8 @@ public class SecurityConfiguration {
 		"/svg/**",
 		BASE_URI+"/members/member-emails/{member-emails}",
 		BASE_URI+"/tokens",
-		BASE_URI+"/books"
+		BASE_URI+"/books",
+		BASE_URI+"/books/{book-ids}/book-images/{book-image-ids}"
 	};
 	
 	private String[] PERMITTED_POST_REQUESTS={
