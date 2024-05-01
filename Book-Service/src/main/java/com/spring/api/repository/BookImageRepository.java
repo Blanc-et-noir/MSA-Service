@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.spring.api.entity.BookImageEntity;
 
 @Repository("bookImageRepository")
-public interface BookImageRepository extends JpaRepository<BookImageEntity, Long>{
+public interface BookImageRepository extends JpaRepository<BookImageEntity, Long>, CustomBookRepository{
 
 }

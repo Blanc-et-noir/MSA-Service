@@ -2,6 +2,8 @@ package com.spring.api.service;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -10,9 +12,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.api.code.BookServiceCode;
+import com.spring.api.dto.BookDTO;
+import com.spring.api.dto.BookImageDTO;
 import com.spring.api.dto.CreateBookImageResponseDTO;
 import com.spring.api.dto.CreateBookRequestDTO;
 import com.spring.api.dto.CreateBookResponseDTO;
+import com.spring.api.dto.ReadBooksRequestDTO;
+import com.spring.api.dto.ReadBooksResponseDTO;
 import com.spring.api.dto.UpdateBookRequestDTO;
 import com.spring.api.entity.BookEntity;
 import com.spring.api.entity.BookImageEntity;
@@ -173,6 +179,68 @@ public class BookServiceImpl implements BookService{
 		}
 		
 		book.get().deleteBookImage(bookImage.get());
+	}
+	
+	@Override
+	public ReadBooksResponseDTO readBooks(ReadBooksRequestDTO dto) {
+		if(dto.getBookMinPrice()!=null&&dto.getBookMaxPrice()!=null&&dto.getBookMinPrice()>dto.getBookMaxPrice()) {
+			throw new CustomException(BookServiceCode.BOOK_MIN_PRICE_GREATER_THAN_BOOK_MAX_PRICE);
+		}
+		
+		List<BookEntity> books = bookRepository.findByConditions(dto);
+		List<BookDTO> list1 = new LinkedList<BookDTO>();
+		
+		Long bookID = null;
+		
+		for(BookEntity book : books) {			
+			bookID = book.getBookID();
+			
+			List<BookImageDTO> list2 = new LinkedList<BookImageDTO>();
+			
+			for(BookImageEntity bookImage : book.getBookImages()) {
+				
+				BookImageDTO bookImageDTO = BookImageDTO.builder()
+						.bookImageID(bookImage.getBookImageID())
+						.bookImageCreateTime(bookImage.getBookImageCreateTime())
+						.bookImageTemporaryName(bookImage.getBookImageTemporaryName())
+						.bookImageStatus(bookImage.getBookImageStatus())
+						.bookImageExtension(bookImage.getBookImageExtension())
+						.build();
+				
+				if(dto.getBookImageStatuses()!=null&&!dto.getBookImageStatuses().isEmpty()) {
+					for(BookImageStatus bookImageStatus : dto.getBookImageStatuses()) {
+						if(bookImageStatus.equals(bookImage.getBookImageStatus())) {
+							list2.add(bookImageDTO);
+							break;
+						}
+					}
+				}else {
+					list2.add(bookImageDTO);
+				}
+			}
+			
+			list1.add(
+				BookDTO.builder()
+				.bookCategory(book.getBookCategory())
+				.bookCreateTime(book.getBookCreateTime())
+				.bookID(book.getBookID())
+				.bookImages(list2)
+				.bookName(book.getBookName())
+				.bookPlace(book.getBookPlace())
+				.bookPrice(book.getBookPrice())
+				.bookPublisherName(book.getBookPublisherName())
+				.bookQuality(book.getBookQuality())
+				.bookViewCount(book.getBookViewCount())
+				.bookWishCount(book.getBookWishCount())
+				.memberID(book.getMemberID())
+				.bookStatus(book.getBookStatus())
+				.build());
+		}
+		
+		return ReadBooksResponseDTO.builder()
+				.bookID(bookID)
+				.books(list1)
+				.build();
 	}
 
 	private String getExtension(MultipartFile multipartFile) {		
