@@ -1,23 +1,34 @@
 function switchSideBar(name){
 	var sideBar = $(".side[name='"+name+"']");
+	var sideBarButton = sideBar.find(".side-container-button");
 	
 	if(sideBar.hasClass("close")){
 		sideBar.removeClass("close");
 		sideBar.addClass("open");
 		
+		$(".side-container-button").css({
+			"display":"none"
+		})
+			
+		sideBarButton.css({
+			"display":"flex"
+		})
+		
 		sideBar.animate({
 			"left":"0px"
-		},1000,"easeInOutExpo",function(){
-			
+		},650,"easeInOutExpo",function(){
+
 		});
 	}else{
 		sideBar.removeClass("open");
 		sideBar.addClass("close");
 		
 		sideBar.animate({
-			"left":"-250px"
-		},1000,"easeInOutExpo",function(){
-			
+			"left":"-280px"
+		},650,"easeInOutExpo",function(){
+			$(".side-container-button").css({
+				"display":"flex"
+			})
 		});
 	}
 }
@@ -29,8 +40,8 @@ function closeAllSideBar(){
 	sideBars.addClass("close");
 		
 	sideBars.animate({
-		"left":"-250px"
-	},1000,"easeInOutExpo",function(){
+		"left":"-280px"
+	},650,"easeInOutExpo",function(){
 			
 	});
 }
