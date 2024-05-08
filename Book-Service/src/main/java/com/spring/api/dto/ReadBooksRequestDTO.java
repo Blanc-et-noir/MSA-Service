@@ -44,6 +44,9 @@ public class ReadBooksRequestDTO {
 	@JsonProperty("book-publisher-name")
 	private String bookPublisherName;
 	
+	@JsonProperty("book-detailed-place")
+	private String bookDetailedPlace;
+	
 	@JsonProperty("book-id")
 	private Long bookID;
 	

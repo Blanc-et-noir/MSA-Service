@@ -46,9 +46,11 @@ public class BookController {
 		@RequestParam(name="book-min-price", required=false) Long bookMinPrice,
 		@RequestParam(name="book-name", required=false) String bookName,
 		@RequestParam(name="book-publisher-name", required=false) String bookPublisherName,
+		@RequestParam(name="book-detailed-place", required=false) String bookDetailedPlace,
 		@RequestParam(name="limit", required=false) Integer limit
 	) {
 		ReadBooksRequestDTO dto = ReadBooksRequestDTO.builder()
+				.bookDetailedPlace(bookDetailedPlace)
 				.bookCategories(bookCategories)
 				.bookImageStatuses(bookImageStatuses)
 				.bookID(bookID)

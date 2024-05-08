@@ -69,6 +69,9 @@ public class BookEntity {
 	@Column(name="book_place")
 	private String bookPlace;
 	
+	@Column(name="book_detailed_place")
+	private String bookDetailedPlace;
+	
 	@Enumerated(EnumType.STRING)
 	@Column(name="book_category")
 	private BookCategory bookCategory;

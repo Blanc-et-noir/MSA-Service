@@ -38,6 +38,9 @@ public class UpdateBookRequestDTO {
 	@JsonProperty("book-place")
 	private String bookPlace;
 	
+	@JsonProperty("book-detailed-place")
+	private String bookDetailedPlace;
+	
 	@JsonProperty("book-description")
 	private String bookDescription;
 }
