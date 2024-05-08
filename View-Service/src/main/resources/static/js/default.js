@@ -43,6 +43,11 @@ function checkBookPlace(bookPlace){
 	return exp.test(bookPlace);
 }
 
+function checkBookDetailedPlace(bookPlace){
+	const exp = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,100}$/g;
+	return exp.test(bookPlace);
+}
+
 function checkBookDescription(bookDescription){
 	const exp = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,1000}$/g;
 	return exp.test(bookDescription);

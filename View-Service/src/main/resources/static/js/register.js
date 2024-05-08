@@ -172,9 +172,10 @@ jQuery(function(){
 				$("#open-address-modal-button").css({"display":"flex"});
 				$("#close-address-modal-button").css({"display":"none"});
 				$(".register-container-body-input-field-input[name='book-place']").val(address);
+				$(".register-container-body-input-field-input[name='book-detailed-place']").val(data.address);
         	},
 			"onsearch": function(data) {
-			//data는 검색결과에 대한 검색어와 갯수를 가지고 있는 데이터 객체입니다.
+				
         	},
         	"onresize" : function(size) {
 				wrap.style.height = "300px";
@@ -343,6 +344,7 @@ jQuery(function(){
 			})
 		}else if(phase==3){
 			var bookPlace = $(".register-container-body-input-field-input[name='book-place']").val();
+			var bookDetailedPlace = $(".register-container-body-input-field-input[name='book-detailed-place']").val();
 			
 			if(!isLoggedIn()){
 				location.href=API_GATEWAY+"/api/v1/views/login";
@@ -351,6 +353,12 @@ jQuery(function(){
 			if(!checkBookPlace(bookPlace)){
 				$(".register-container-body-input-field-input[name='book-place']").addClass("selected");
 				openFailModal("거래장소는 시/도, 시/군/구, 읍/면/동을 순서대로 입력해야합니다.");
+				return;
+			}
+			
+			if(!checkBookDetailedPlace(bookDetailedPlace)){
+				$(".register-container-body-input-field-input[name='book-detailed-place']").addClass("selected");
+				openFailModal("거래장소는 1 - 100자리 이하의 숫자, 영어, 한글 및 일부 특수문자로만 구성되어야 합니다.");
 				return;
 			}
 			
@@ -363,7 +371,8 @@ jQuery(function(){
 				"contentType":"application/json",
 				"dataType":"json",
 				"data":JSON.stringify({
-					"book-place":bookPlace
+					"book-place":bookPlace,
+					"book-detailed-place":bookDetailedPlace
 				})
 			}).done(function(response){
 				openInfoModal("해당 도서 정보를 임시로 저장했습니다.");

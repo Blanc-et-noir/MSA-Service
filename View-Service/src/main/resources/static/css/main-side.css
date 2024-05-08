@@ -1,6 +1,5 @@
 .side[name='main-side'] .side-container-button{
-	top:0px;
-	right:-40px;
+	top:10px;
 }
 
 .side[name='main-side'] .side-container-button:hover .side-container-button-svg{

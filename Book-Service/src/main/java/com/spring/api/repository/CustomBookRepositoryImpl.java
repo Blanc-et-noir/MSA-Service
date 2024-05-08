@@ -43,11 +43,15 @@ public class CustomBookRepositoryImpl implements CustomBookRepository{
 		}
 		
 		if(dto.getBookName()!=null) {
-			sb.append(" AND b.bookName LIKE :bookName");
+			sb.append(" AND b.bookName LIKE CONCAT('%', :bookName, '%')");
 		}
 		
 		if(dto.getBookPublisherName()!=null) {
-			sb.append(" AND b.bookPublisherName LIKE :bookPublisherName");
+			sb.append(" AND b.bookPublisherName LIKE CONCAT('%', :bookPublisherName, '%')");
+		}
+		
+		if(dto.getBookDetailedPlace()!=null) {
+			sb.append(" AND b.bookDetailedPlace LIKE CONCAT('%', :bookDetailedPlace, '%')");
 		}
 		
 		sb.append(" ORDER BY b.bookID DESC");
@@ -82,6 +86,10 @@ public class CustomBookRepositoryImpl implements CustomBookRepository{
 		
 		if(dto.getBookPublisherName()!=null) {
 			query.setParameter("bookPublisherName", dto.getBookPublisherName());
+		}
+		
+		if(dto.getBookDetailedPlace()!=null) {
+			query.setParameter("bookDetailedPlace", dto.getBookDetailedPlace());
 		}
 		
 		List<BookEntity> result = query.getResultList();

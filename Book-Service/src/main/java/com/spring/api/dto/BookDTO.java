@@ -48,6 +48,9 @@ public class BookDTO {
 	@JsonProperty("book-place")
 	private String bookPlace;
 	
+	@JsonProperty("book-detailed-place")
+	private String bookDetailedPlace;
+	
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	@JsonProperty("book-create-time")
 	private LocalDateTime bookCreateTime;

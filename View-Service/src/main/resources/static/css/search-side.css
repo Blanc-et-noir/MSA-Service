@@ -1,6 +1,5 @@
 .side[name='search-side'] .side-container-button{
-	top:40px;
-	right:-40px;
+	top:60px;
 }
 
 .side[name='search-side'] .side-container-button:hover .side-container-button-svg{
@@ -58,20 +57,33 @@
 
 
 
-
-
-.book-category-label{
+.book-category-label, .book-quality-label{
+	width:70px;
+	height:70px;
 	display:flex;
 	font-size:12px;
 	color:#808080;
-	margin-top:20px;
+	margin:5px;
+	border-radius:7px;
+	justify-content:center;
+	align-items:center;
+	flex-direction:column;
 }
 
-.book-category-label-input[type="checkbox"]{
+.book-category-label:hover, .book-quality-label:hover{
+	background-color:#f2f2f2;
+}
+
+.book-category-label.checked, .book-quality-label.checked{
+	background-color:rgba(240, 87, 95,0.1);
+}
+
+.book-category-label-input[type="checkbox"], .book-quality-label-input[type="checkbox"]{
 	margin-right:10px;
+	display:none;
 }
 
-.book-category-label-input[type="text"],.book-category-label-input[type="number"]{
+.book-category-label-input[type="text"], .book-category-label-input[type="number"]{
 	margin-top:10px;
 	display:block;
 	width:100%;
@@ -80,4 +92,46 @@
 	height:25px;
 	font-size:12px;
 	border-bottom:1px solid #2f2f2f;
+}
+
+.book-category-label-input-svg, .book-quality-label-input-svg{
+	display:block;
+	width:20px;
+	height:20px;
+	filter: invert(51%) sepia(5%) saturate(5%) hue-rotate(354deg) brightness(96%) contrast(86%);
+}
+
+.book-category-label.checked .book-category-label-input-svg, .book-quality-label.checked .book-quality-label-input-svg{
+	filter: invert(45%) sepia(77%) saturate(3014%) hue-rotate(327deg) brightness(101%) contrast(88%);
+}
+
+.book-category-label-input-title, .book-quality-label-input-title{
+	display:block;
+	margin-top:10px;
+	font-size:12px;
+}
+
+.book-category-label.checked .book-category-label-input-title, .book-quality-label.checked .book-quality-label-input-title{
+	color:#f0575f;
+}
+
+#book-price-value{
+	font-size:12px;
+	text-align:center;
+	color:#808080;
+	margin:30px 0px 10px 0px;
+}
+
+#book-price-slider{
+	margin:20px;
+}
+
+.book-name-label-input, .book-publisher-name-label-input, .book-detailed-place-label-input{
+	display:block;
+	font-size:12px;
+	border:none;
+	outline:none;
+	border-bottom:1px solid #2f2f2f;
+	margin:20px;
+	padding:10px 0px;
 }

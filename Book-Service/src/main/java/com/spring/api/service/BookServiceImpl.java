@@ -103,6 +103,10 @@ public class BookServiceImpl implements BookService{
 			book.get().setBookPlace(dto.getBookPlace());
 		}
 		
+		if(dto.getBookDetailedPlace()!=null) {
+			book.get().setBookDetailedPlace(dto.getBookDetailedPlace());
+		}
+		
 		if(dto.getBookPrice()!=null) {
 			book.get().setBookPrice(dto.getBookPrice());
 		}
@@ -239,6 +243,7 @@ public class BookServiceImpl implements BookService{
 				.bookImages(list2)
 				.bookName(book.getBookName())
 				.bookPlace(book.getBookPlace())
+				.bookDetailedPlace(book.getBookDetailedPlace())
 				.bookPrice(book.getBookPrice())
 				.bookPublisherName(book.getBookPublisherName())
 				.bookQuality(book.getBookQuality())
