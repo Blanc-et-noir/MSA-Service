@@ -58,9 +58,16 @@ body{
 	touch-action:none;
 }
 
+.container{
+	width:100%;
+}
 
-
-
+.body{
+	width:100%;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+}
 
 
 

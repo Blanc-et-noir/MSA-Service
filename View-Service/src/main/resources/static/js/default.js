@@ -29,26 +29,26 @@ function checkMemberEmail(memberEmail){
 }
 
 function checkBookName(bookName){
-	const exp = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,40}$/g;
+	const exp = /^[ㄱ-ㅎ가-힣ㅏ-ㅣa-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,40}$/g;
 	return exp.test(bookName);
 }
 
 function checkBookPublisherName(bookPublisherName){
-	const exp = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,40}$/g;
+	const exp = /^[ㄱ-ㅎ가-힣ㅏ-ㅣa-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,40}$/g;
 	return exp.test(bookPublisherName);
 }
 
 function checkBookPlace(bookPlace){
-	const exp = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,40}$/g;
+	const exp = /^[ㄱ-ㅎ가-힣ㅏ-ㅣa-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,40}$/g;
 	return exp.test(bookPlace);
 }
 
 function checkBookDetailedPlace(bookPlace){
-	const exp = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,100}$/g;
+	const exp = /^[ㄱ-ㅎ가-힣ㅏ-ㅣa-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,100}$/g;
 	return exp.test(bookPlace);
 }
 
 function checkBookDescription(bookDescription){
-	const exp = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,1000}$/g;
+	const exp = /^[ㄱ-ㅎ가-힣ㅏ-ㅣa-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,1000}$/g;
 	return exp.test(bookDescription);
 }

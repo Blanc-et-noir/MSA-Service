@@ -1,14 +1,42 @@
 jQuery(function(){
 	const MAX_BOOK_ID = 9007199254740991;
-	const LIMIT = 9;
+	const LIMIT = 12;
+	var bookID = MAX_BOOK_ID;
+	var parameters = "book-statuses=NORMAL&book-image-statuses=NORMAL&";
+	var wait = false;
 	
 	function resetParameters(){
 		bookID = MAX_BOOK_ID;
-		parameters = "limit="+LIMIT+"&book-id="+bookID+"&book-statuses=NORMAL&book-image-statuses=NORMAL&";
+		parameters = "book-statuses=NORMAL&book-image-statuses=NORMAL&";
 	}
 	
 	function renderBooks(books){
+		var flex = $(".board-container-body-flex");
 		
+		for(var i=0; i<books.length;i++){
+			var book = books[i];
+			
+			var cover = $("<div class='board-container-body-wrapper-cover'></div>")
+			var wrapper = $("<div class='board-container-body-wrapper' value='"+book["book-id"]+"'></div>");
+			var imageWrapper = $("<div class='board-container-body-image-wrapper'></div>");
+			var infoWrapper = $("<div class='board-container-body-info-wrapper'></div>");
+			
+			if(book["book-images"].length!=0){
+				var image = $("<img class='board-container-body-image' src='"+book["book-images"][0]["book-image-url"]+"'>");
+				imageWrapper.append(image);
+			}else{
+				var image = $("<img class='board-container-body-image' src='/svg/로딩.svg' style='width:10%; height:10%; top:50%; left:50%; transform:translate(-50%,-50%);'>");
+				imageWrapper.append(image);
+			}
+			
+			infoWrapper.append("<div class='book-name'>"+book["book-name"]+"</div><div class='book-quality'>"+book["book-quality"]+" 급</div><div class='book-price'>"+book["book-price"]+" 원"+"</div><div class='book-place'>"+book["book-place"]+"</div>")
+			
+			wrapper.append(imageWrapper);
+			wrapper.append(infoWrapper);
+			wrapper.append(cover);
+			
+			flex.append(wrapper);
+		}
 	}
 	
 	$("#book-price-slider").slider({
@@ -25,8 +53,14 @@ jQuery(function(){
 	});
 	
 	function readBooks(){
+		if(wait){
+			return;
+		}
+		
+		wait=true;
+		
 		$.ajax({
-			"url":API_GATEWAY+"/api/v1/books?"+parameters,
+			"url":API_GATEWAY+"/api/v1/books?"+"limit="+LIMIT+"&book-id="+bookID+"&"+parameters,
 			"type":"get",
 			"dataType":"json"
 		}).done(function(response){
@@ -34,7 +68,7 @@ jQuery(function(){
 			var books = data["books"];
 			
 			if(books.length==0||books==null||books==undefined){
-				
+				bookID = null;
 			}else{
 				bookID = data["book-id"];
 			}
@@ -45,16 +79,30 @@ jQuery(function(){
 			const code = data.code;
 			const message = data.message;
 			
-		});
+		}).always(function(){
+			wait=false;
+		})
 	}
+	
+	$(document).on("mousewheel",".board-container-body",function(e){
+		var delta = e.originalEvent.wheelDelta;
+		var height1 = $(".board-container-body-flex").css("height").replaceAll("px","");
+		var height2 = $(".board-container-body").css("height").replaceAll("px","");
+		var scroll = $(".board-container-body").scrollTop();
+		if(delta<0&&bookID!=null&&(height1-height2-scroll<1)){
+			readBooks();
+		}
+		
+	});
 		
 	resetParameters();
+	readBooks();
 	
 	$(document).on("click","#search-side-container-footer-reset-button",function(e){
-		resetParameters();
+		//resetParameters();
 		$("#book-price-slider").slider({
 			"values":[0,100000]
-		})
+		});
 		$("#book-price-value").text("0원 - 100000원");
 		$(".book-category-label-input").prop("checked", false);
 		$(".book-quality-label-input").prop("checked", false);
@@ -63,6 +111,11 @@ jQuery(function(){
 		$(".book-detailed-place-label-input").val("");
 		$(".book-category-label").removeClass("checked");
 		$(".book-quality-label").removeClass("checked");
+		$("#book-price-slider").attr("min",0);
+		$("#book-price-slider").attr("max",100000);
+		
+		//$(".board-container-body-wrapper").remove();
+		//readBooks();
 	})
 	
 	$(document).on("click","#search-side-container-footer-search-button",function(e){
@@ -116,6 +169,8 @@ jQuery(function(){
 			parameters += "book-detailed-place="+bookDetailedPlace+"&";
 		}
 		
+		$(".board-container-body-wrapper").remove();
+		switchSideBar("search-side");
 		readBooks();
 	})
 	
