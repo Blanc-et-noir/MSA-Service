@@ -91,7 +91,7 @@ public class LogFilter implements WebFilter {
     	
     	String logMemberIP = isa!=null?isa.getAddress().toString():null;
     	String logMemberPort = isa!=null?isa.getPort()+"":null;
-    	String memberAccessToken = !list.isEmpty()?list.getFirst():null;
+    	String memberAccessToken = list!=null&&!list.isEmpty()?list.getFirst():null;
     	String memberID = memberAccessToken!=null?tokenUtil.getMemberIDWithDecoding(memberAccessToken):null;
     	String logParameter = null;
     	
