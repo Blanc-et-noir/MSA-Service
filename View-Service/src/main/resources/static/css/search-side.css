@@ -75,7 +75,7 @@
 }
 
 .book-category-label.checked, .book-quality-label.checked{
-	background-color:rgba(240, 87, 95,0.1);
+	background-color:rgba(240,87, 95,0.1);
 }
 
 .book-category-label-input[type="checkbox"], .book-quality-label-input[type="checkbox"]{
