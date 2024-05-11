@@ -49,11 +49,17 @@
 .register-container-footer-phase{
 	font-size:12px;
 	margin:0px 30px;
+	height:35px;
+	line-height:35px;
 }
 
 .register-container-footer-button{
 	display:flex;
 	align-items:center;
+	background-color:rgba(128,128,128,0.1);
+	height:35px;
+	padding:10px;
+	border-radius:7px;
 }
 
 .register-container-footer-button-svg{
@@ -75,29 +81,20 @@
 	color:#f0575f;
 }
 
-.register-container-footer-button .register-container-footer-button-title{
-	transition:0.2s;
-}
-
-.register-container-footer-button .register-container-footer-button-svg{
-	transition:0.2s;
-	filter: invert(51%) sepia(5%) saturate(5%) hue-rotate(354deg) brightness(96%) contrast(86%);
-}
-
-.register-container-footer-button[name="prev"]:hover .register-container-footer-button-title{
-	color:#f05460;
-}
-
-.register-container-footer-button[name="next"]:hover .register-container-footer-button-title{
-	color:#8de23e;
-}
-
-.register-container-footer-button[name="prev"]:hover .register-container-footer-button-svg{
+.register-container-footer-button[name="prev"] .register-container-footer-button-svg{
 	filter: invert(45%) sepia(77%) saturate(3014%) hue-rotate(327deg) brightness(101%) contrast(88%);
 }
 
-.register-container-footer-button[name="next"]:hover .register-container-footer-button-svg{
-	filter: invert(80%) sepia(78%) saturate(429%) hue-rotate(33deg) brightness(91%) contrast(94%);
+.register-container-footer-button[name="next"] .register-container-footer-button-svg{
+	filter: invert(51%) sepia(12%) saturate(2082%) hue-rotate(48deg) brightness(97%) contrast(99%);
+}
+
+.register-container-footer-button[name="prev"]:hover{
+	background-color:rgba(240,87,95,0.1);
+}
+
+.register-container-footer-button[name="next"]:hover{
+	background-color:rgba(93,149,40,0.1);
 }
 
 #wrap{
