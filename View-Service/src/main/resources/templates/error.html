@@ -2,9 +2,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="/css/default.css">
+<link rel="stylesheet" href="/css/modal.css">
+<link rel="stylesheet" href="/css/side.css">
+<link rel="stylesheet" href="/css/main-side.css">
+<link rel="stylesheet" href="/css/error.css">
+
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/default.js"></script>
+<script type="text/javascript" src="/js/modal.js"></script>
+<script type="text/javascript" src="/js/jsrsasign.js"></script>
+<script type="text/javascript" src="/js/jwt.js"></script>
+<script type="text/javascript" src="/js/side.js"></script>
+<script type="text/javascript" src="/js/main-side.js"></script>
+<script type="text/javascript" src="/js/error.js"></script>
+
+<title>에러 화면</title>
 </head>
 <body>
-	에러화면
+	<div class="container">
+		<div class="side" th:replace="~{./main-side.html :: fragment}"></div>
+		<div class="modal"></div>
+		<div class="header"></div>
+		<div class="body">
+			<div class="error-container">
+				<div class="message" th:text="${code.message}"></div>
+				<div class="second"></div>
+			</div>
+			
+		</div>
+		<div class="footer" th:replace="~{./footer.html :: fragment}"></div>
+	</div>
 </body>
 </html>

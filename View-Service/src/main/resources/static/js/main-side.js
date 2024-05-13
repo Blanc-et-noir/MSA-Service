@@ -33,6 +33,14 @@ jQuery(function(){
 		}
 	});
 	
+	$(document).on("click",".side-container-body-container-box[name='register']",function(e){
+		if(isLoggedIn()){
+			location.href=API_GATEWAY+"/api/v1/views/register";
+		}else{
+			location.href=API_GATEWAY+"/api/v1/views/login";
+		}
+	});
+	
 	$(document).on("click",".side-container-body-container-box[name='account']",function(e){
 		if(isLoggedIn()){
 			location.href=API_GATEWAY+"/api/v1/views/account";

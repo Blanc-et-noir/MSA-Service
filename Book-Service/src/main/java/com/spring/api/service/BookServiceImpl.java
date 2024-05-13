@@ -302,6 +302,52 @@ public class BookServiceImpl implements BookService{
 		}
 	}
 	
+	@Override
+	public BookDTO readBook(Long bookID) {
+		Optional<BookEntity> book = bookRepository.findById(bookID);
+		
+		if(book.isEmpty()||!book.get().isBookStatusNormal()) {
+			throw new CustomException(BookServiceCode.BOOK_NOT_FOUND);
+		}
+		
+		book.get().increaseBookViewCount();
+		
+		List<BookImageDTO> list = new LinkedList<BookImageDTO>();
+		
+		for(BookImageEntity bookImage : book.get().getBookImages()) {
+			if(!bookImage.getBookImageStatus().equals(BookImageStatus.NORMAL)) {
+				continue;
+			}
+			
+			list.add(BookImageDTO.builder()
+				.bookImageCreateTime(bookImage.getBookImageCreateTime())
+				.bookImageExtension(bookImage.getBookImageExtension())
+				.bookImageID(bookImage.getBookImageID())
+				.bookImageStatus(bookImage.getBookImageStatus())
+				.bookImageTemporaryName(bookImage.getBookImageTemporaryName())
+				.bookImageURL(bookImage.getBookImageURL())
+				.build()
+			);
+		}
+		
+		return BookDTO.builder()
+				.bookCategory(book.get().getBookCategory())
+				.bookCreateTime(book.get().getBookCreateTime())
+				.bookDetailedPlace(book.get().getBookDetailedPlace())
+				.bookID(book.get().getBookID())
+				.bookImages(list)
+				.bookName(book.get().getBookName())
+				.bookDescription(book.get().getBookDescription())
+				.bookPlace(book.get().getBookPlace())
+				.bookPrice(book.get().getBookPrice())
+				.bookPublisherName(book.get().getBookPublisherName())
+				.bookQuality(book.get().getBookQuality())
+				.bookStatus(book.get().getBookStatus())
+				.bookViewCount(book.get().getBookViewCount())
+				.bookWishCount(book.get().getBookWishCount())
+				.build();
+	}
+	
 	private String getExtension(MultipartFile multipartFile) {		
 	    return FilenameUtils.getExtension(multipartFile.getOriginalFilename());
 	}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/default.css">
+<link rel="stylesheet" href="/css/modal.css">
+<link rel="stylesheet" href="/css/side.css">
+<link rel="stylesheet" href="/css/main-side.css">
+<link rel="stylesheet" href="/css/books.css">
+
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/default.js"></script>
+<script type="text/javascript" src="/js/modal.js"></script>
+<script type="text/javascript" src="/js/jsrsasign.js"></script>
+<script type="text/javascript" src="/js/jwt.js"></script>
+<script type="text/javascript" src="/js/side.js"></script>
+<script type="text/javascript" src="/js/main-side.js"></script>
+<script type="text/javascript" src="/js/books.js"></script>
+
+<title>도서 상세정보</title>
+</head>
+<body>
+	<div class="container">
+		<div class="side" th:replace="~{./main-side.html :: fragment}"></div>
+		<div class="modal"></div>
+		<div class="header"></div>
+		<div class="body">
+			<div class="books-container">
+				<div class="books-container-header">
+					
+				</div>
+				<div class="books-container-body">
+					<div style="display:flex; flex-direction:row; width:100%; justify-content:center;">
+						<div class="books-container-body-images-wrapper">
+							<div class="books-container-body-images-wrapper-header">
+								
+							</div>
+							<div class="books-container-body-images-wrapper-body">
+								<div class="book-image-wrappers">
+									<div th:class="${bookImageStat.index==0?'book-image-wrapper focused':'book-image-wrapper'}" class="book-image-wrapper" th:each="bookImage, bookImageStat : ${book.bookImages}" th:bookImageID="${bookImage.bookImageID}">
+										<img class="book-image" th:src="@{${bookImage.bookImageURL}}">
+									</div>
+									<div name="prev" class="books-container-body-images-wrapper-body-button">
+										<img class="books-container-body-images-wrapper-body-button-image" src="/svg/왼쪽화살표.svg">
+									</div>
+									<div name="next" class="books-container-body-images-wrapper-body-button">
+										<img class="books-container-body-images-wrapper-body-button-image" src="/svg/오른쪽화살표.svg">
+									</div>
+									<div name="magnify" class="books-container-body-images-wrapper-body-button">
+										<img class="books-container-body-images-wrapper-body-button-image" src="/svg/검색.svg">
+									</div>
+								</div>
+								<div class="book-info-wrappers">
+									<div class="book-info-wrappers-header">
+									
+									</div>
+									<div class="book-info-wrappers-body">
+										<div class="book-info-wrappers-body-wrapper">
+											<div class="book-info-wrappers-body-wrapper-header"></div>
+											<div  class="book-info-wrappers-body-wrapper-body"></div>
+											<div class="book-info-wrappers-body-wrapper-footer"></div>
+										</div>
+									</div>
+									<div class="book-info-wrappers-footer">
+									
+									</div>
+								</div>
+							</div>
+							<div class="books-container-body-images-wrapper-footer">
+								
+							</div>
+						</div>
+					</div>
+					<div class="books-container-body-input-field" style="margin-top:60px;">
+						<div class="books-container-body-input-field-placeholder">도서명</div>
+						<input readonly name="book-name" class="books-container-body-input-field-input" th:placeholder="${book.bookName}">
+					</div>
+					<div class="books-container-body-input-field">
+						<div class="books-container-body-input-field-placeholder">출판사명</div>
+						<input readonly name="book-publisher-name" class="books-container-body-input-field-input" th:placeholder="${book.bookPublisherName}">
+					</div>
+					<div class="books-container-body-input-field">
+						<div class="books-container-body-input-field-placeholder">카테고리</div>
+						<input readonly name="book-category" th:if="${book.bookCategory.toString().equals('HUMANITIES')}" class="books-container-body-input-field-input" th:placeholder="|인문학|"/>
+						<input readonly name="book-category" th:if="${book.bookCategory.toString().equals('POLITICS')}" class="books-container-body-input-field-input" th:placeholder="|정치 / 사회|"/>
+						<input readonly name="book-category" th:if="${book.bookCategory.toString().equals('ECONOMICS')}" class="books-container-body-input-field-input" th:placeholder="|경제 / 경영|"/>
+						<input readonly name="book-category" th:if="${book.bookCategory.toString().equals('NATURAL_SCIENCE')}" class="books-container-body-input-field-input" th:placeholder="|자연과학|"/>
+						<input readonly name="book-category" th:if="${book.bookCategory.toString().equals('TECHNICAL_ENGINEERING')}" class="books-container-body-input-field-input" th:placeholder="|기술공학|"/>
+						<input readonly name="book-category" th:if="${book.bookCategory.toString().equals('COMPUTER_ENGINEERING')}" class="books-container-body-input-field-input" th:placeholder="|컴퓨터공학|"/>
+						<input readonly name="book-category" th:if="${book.bookCategory.toString().equals('ARTS_PHYSICAL_EDUCATION')}" class="books-container-body-input-field-input" th:placeholder="|예체능|"/>
+						<input readonly name="book-category" th:if="${book.bookCategory.toString().equals('FOREIGN_LANGUAGES')}" class="books-container-body-input-field-input" th:placeholder="|외국어|"/>
+						<input readonly name="book-category" th:if="${book.bookCategory.toString().equals('ETC')}" class="books-container-body-input-field-input" th:placeholder="|기타|"/>
+					</div>
+					
+					<div class="books-container-body-input-field" style="margin-top:60px;">
+						<div class="books-container-body-input-field-placeholder">도서품질</div>
+						<input readonly name="book-quality" class="books-container-body-input-field-input" th:placeholder="|${book.bookQuality}급|">
+					</div>
+					<div class="books-container-body-input-field">
+						<div class="books-container-body-input-field-placeholder">판매가격</div>
+						<input readonly name="book-price" class="books-container-body-input-field-input" th:placeholder="|${book.bookPrice}원|">
+					</div>
+					<div class="books-container-body-input-field">
+						<div class="books-container-body-input-field-placeholder">거래지역</div>
+						<input readonly name="book-place" class="books-container-body-input-field-input" th:placeholder="|${book.bookPlace} ( ${book.bookDetailedPlace} )|">
+					</div>
+					<div class="books-container-body-input-field" style="margin-top:60px;">
+						<div class="books-container-body-input-field-placeholder">상세설명</div>
+						<textarea readonly name="book-description" th:text="${book.bookDescription}" class="books-container-body-input-field-input"></textarea>
+					</div>
+				</div>
+				<div class="books-container-footer" style="margin-top:40px;">
+					<div th:block th:switch="${#strings.toString(book.bookStatus)}">
+						<div th:case="NORMAL" class="books-container-footer-button" name="reserve">
+							<img class="books-container-footer-button-svg" src="/svg/예약.svg">
+							<div class="books-container-footer-button-title">직거래 예약 신청</div>
+						</div>
+						<div th:case="*" class="books-container-footer-button" name="not-able-to-reserve">
+							<img class="books-container-footer-button-svg" src="/svg/예약.svg">
+							<div class="books-container-footer-button-title">직거래 예약 불가</div>
+						</div>
+					</div>
+					<div class="books-container-footer-button" name="report">
+						<img class="books-container-footer-button-svg" src="/svg/신고.svg">
+						<div class="books-container-footer-button-title">상품 신고</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer" th:replace="~{./footer.html :: fragment}"></div>
+	</div>
+</body>
+</html>

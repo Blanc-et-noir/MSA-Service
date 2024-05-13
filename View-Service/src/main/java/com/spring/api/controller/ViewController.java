@@ -2,11 +2,21 @@ package com.spring.api.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.spring.api.service.ViewService;
 
 @Controller
 @RequestMapping("/api/v1/views")
 public class ViewController {
+	private ViewService viewService;
+	
+	ViewController(ViewService viewService){
+		this.viewService = viewService;
+	}
+	
 	@GetMapping("/home")
 	public String home() {
 		return "/home";
@@ -75,6 +85,15 @@ public class ViewController {
 	@GetMapping("/register")
 	public String register() {
 		return "/register";
+	}
+	
+	@GetMapping("/books/{book-ids}")
+	public ModelAndView books(@PathVariable("book-ids") Long bookID) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/books");
+		modelAndView.addObject("book", viewService.readBook(bookID));
+
+		return modelAndView;
 	}
 	
 }

@@ -140,6 +140,14 @@ public class BookEntity {
 		return Optional.empty();
 	}
 	
+	public void increaseBookViewCount() {
+		this.bookViewCount++;
+	}
+	
+	public void increaseBookWishCount() {
+		this.bookWishCount++;
+	}
+	
 	@Override
 	public boolean equals(final Object o) {
 	    if (this == o) {
