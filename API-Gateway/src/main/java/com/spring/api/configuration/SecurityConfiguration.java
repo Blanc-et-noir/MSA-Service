@@ -43,6 +43,7 @@ public class SecurityConfiguration {
 		BASE_URI+"/members/member-emails/{member-emails}",
 		BASE_URI+"/tokens",
 		BASE_URI+"/books",
+		BASE_URI+"/books/{book-ids}",
 		BASE_URI+"/books/{book-ids}/book-images/{book-image-ids}"
 	};
 	
@@ -65,7 +66,7 @@ public class SecurityConfiguration {
 		};
 	
 	private String[] PERMITTED_VIEWS={
-		BASE_URI+"/views/*"
+		BASE_URI+"/views/**",
 	};
 	
 	@Bean

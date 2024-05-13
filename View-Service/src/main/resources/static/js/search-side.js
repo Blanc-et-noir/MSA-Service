@@ -22,10 +22,10 @@ jQuery(function(){
 			var infoWrapper = $("<div class='board-container-body-info-wrapper'></div>");
 			
 			if(book["book-images"].length!=0){
-				var image = $("<img class='board-container-body-image' src='"+book["book-images"][0]["book-image-url"]+"'>");
+				var image = $("<img class='board-container-body-image' decoding='async' loading='lazy' src='"+book["book-images"][0]["book-image-url"]+"'>");
 				imageWrapper.append(image);
 			}else{
-				var image = $("<img class='board-container-body-image' src='/svg/로딩.svg' style='width:10%; height:10%; top:50%; left:50%; transform:translate(-50%,-50%);'>");
+				var image = $("<img class='board-container-body-image' decoding='async' loading='lazy' src='/svg/로딩.svg' style='width:10%; height:10%; top:50%; left:50%; transform:translate(-50%,-50%);'>");
 				imageWrapper.append(image);
 			}
 			
