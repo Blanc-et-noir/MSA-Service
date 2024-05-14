@@ -277,3 +277,49 @@
 .books-container-footer-button[name="report"]:hover .books-container-footer-button-title{
 	color:#f0575f;
 }
+
+
+
+
+
+
+
+
+
+
+
+.modal-cover{
+	width:100%;
+	height:100%;
+	background-color:rgba(0,0,0,0.75);
+	position:absolute;
+	z-index:200000;
+	top:0px;
+	left:0px;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+.modal-wrapper{
+	width:70%;
+	max-width:500px;
+	height:auto;
+	display:flex;
+	flex-direction:column;
+	border-radius:7px;
+	overflow:hidden;
+}
+
+.modal-wrapper-image{
+	width:100%;
+	height:100%;
+	border-radius:7px;
+}
+
+.modal-wrapper-title{
+	color:white;
+	font-size:12px;
+	text-align:center;
+	margin-top:20px;
+}

@@ -38,7 +38,7 @@
 							</div>
 							<div class="books-container-body-images-wrapper-body">
 								<div class="book-image-wrappers">
-									<div th:class="${bookImageStat.index==0?'book-image-wrapper focused':'book-image-wrapper'}" class="book-image-wrapper" th:each="bookImage, bookImageStat : ${book.bookImages}" th:bookImageID="${bookImage.bookImageID}">
+									<div th:class="${bookImageStat.index==0?'book-image-wrapper focused':'book-image-wrapper'}" class="book-image-wrapper" th:each="bookImage, bookImageStat : ${book.bookImages}" th:value="${bookImage.bookImageID}">
 										<img class="book-image" th:src="@{${bookImage.bookImageURL}}">
 									</div>
 									<div name="prev" class="books-container-body-images-wrapper-body-button">
