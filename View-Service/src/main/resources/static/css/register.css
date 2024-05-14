@@ -4,6 +4,14 @@
 	background-color:none;
 }
 
+.register-container-box{
+	display:none;
+}
+
+.register-container-box.focused{
+	display:block;
+}
+
 .register-container-body-input-field{
 	margin:30px 0px;
 }
@@ -55,7 +63,7 @@
 }
 
 .register-container-footer-button{
-	display:flex;
+	display:none;
 	align-items:center;
 	justify-content:center;
 	background-color:rgba(128,128,128,0.1);
@@ -63,6 +71,10 @@
 	width:35px;
 	padding:10px;
 	border-radius:7px;
+}
+
+.register-container-footer-button.focused{
+	display:flex;
 }
 
 .register-container-footer-button-svg{

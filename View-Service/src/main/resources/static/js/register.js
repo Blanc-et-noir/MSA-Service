@@ -7,6 +7,25 @@ jQuery(function(){
 	var bookImageCapacity = 4;
 	var bookImageMaxSize = 10*1024*1024;
 	
+	function setNavigationButton(){
+		if($(".register-container-box.focused").next(".register-container-box").length==0){
+			$(".register-container-footer-button[name='next']").removeClass("focused");
+		}else{
+			$(".register-container-footer-button[name='next']").addClass("focused");
+		}
+		
+		if($(".register-container-box.focused").prev(".register-container-box").length==0){
+			$(".register-container-footer-button[name='prev']").removeClass("focused");
+		}else{
+			$(".register-container-footer-button[name='prev']").addClass("focused");
+		}
+		
+		var phase = $(".register-container-box.focused").attr("value");
+		$(".register-container-footer-phase").text(phase+" / 5");
+	}
+	
+	setNavigationButton();
+	
 	$(document).on("click","#book-image-add-button",function(e){
 		if(!isLoggedIn()){
 			location.href=API_GATEWAY+"/api/v1/views/login";
@@ -190,24 +209,24 @@ jQuery(function(){
 	})
 	
 	$(document).on("click",".register-container-footer-button[name='prev']",function(e){
-		var phase = $(".register-container-footer-phase").attr("value");
+		var currentRegisterContainerBox = $(".register-container-box.focused");
+		var prevRegisterContainerBox = $(".register-container-box.focused").prev(".register-container-box");
 		
-		if(phase<=1){
+		if(prevRegisterContainerBox.length==0){
 			return;
 		}
 		
-		phase--;
-			
-		$(".register-container-box").css({"display":"none"});
-		$(".register-container-box[value='"+phase+"']").css({"display":"block"});		
-		$(".register-container-footer-phase").text(phase+" / "+5);
-		$(".register-container-footer-phase").attr({"value":phase});
+		currentRegisterContainerBox.removeClass("focused");
+		prevRegisterContainerBox.addClass("focused");
+		setNavigationButton();
 	});
 	
 	$(document).on("click",".register-container-footer-button[name='next']",function(e){
-		var phase = $(".register-container-footer-phase").attr("value");
+		var currentRegisterContainerBox = $(".register-container-box.focused");
+		var nextRegisterContainerBox = $(".register-container-box.focused").next(".register-container-box");
+		var phase = $(currentRegisterContainerBox).attr("value");
 		
-		if(phase>=5){
+		if(nextRegisterContainerBox.length==0){
 			return;
 		}
 		
@@ -247,16 +266,11 @@ jQuery(function(){
 						"book-category":bookCategory
 					})
 				}).done(function(response){
-					openInfoModal("해당 도서 정보를 임시로 저장했습니다.");
-					
 					bookID = response["data"]["book-id"];
-					
-					phase++;
-			
-					$(".register-container-box").css({"display":"none"});
-					$(".register-container-box[value='"+phase+"']").css({"display":"block"});
-					$(".register-container-footer-phase").text(phase+" / "+5);
-					$(".register-container-footer-phase").attr({"value":phase});
+					openInfoModal("해당 도서 정보를 임시로 저장했습니다.");
+					currentRegisterContainerBox.removeClass("focused");
+					nextRegisterContainerBox.addClass("focused");
+					setNavigationButton();
 				}).fail(function(xhr, status, error){
 					var data = JSON.parse(xhr.responseText);
 					const code = data.code;
@@ -285,12 +299,9 @@ jQuery(function(){
 				}).done(function(response){
 					openInfoModal("해당 도서 정보를 임시로 저장했습니다.");
 					
-					phase++;
-			
-					$(".register-container-box").css({"display":"none"});
-					$(".register-container-box[value='"+phase+"']").css({"display":"block"});
-					$(".register-container-footer-phase").text(phase+" / "+5);
-					$(".register-container-footer-phase").attr({"value":phase});
+					currentRegisterContainerBox.removeClass("focused");
+					nextRegisterContainerBox.addClass("focused");
+					setNavigationButton();
 				}).fail(function(xhr, status, error){
 					var data = JSON.parse(xhr.responseText);
 					const code = data.code;
@@ -308,9 +319,9 @@ jQuery(function(){
 				location.href=API_GATEWAY+"/api/v1/views/login";
 			}
 			
-			if(bookPrice<=0){
-				$(".register-container-body-input-field-input[name='book-publisher-name']").addClass("selected");
-				openFailModal("판매가격은 1원 이상이어야합니다.");
+			if(!(bookPrice>=1&&bookPrice<=100000)){
+				$(".register-container-body-input-field-input[name='book-price']").addClass("selected");
+				openFailModal("판매가격은 1원 - 100000원 범위내에 있어야합니다.");
 				return;
 			}
 			
@@ -328,13 +339,9 @@ jQuery(function(){
 				})
 			}).done(function(response){
 				openInfoModal("해당 도서 정보를 임시로 저장했습니다.");
-					
-				phase++;
-			
-				$(".register-container-box").css({"display":"none"});
-				$(".register-container-box[value='"+phase+"']").css({"display":"block"});
-				$(".register-container-footer-phase").text(phase+" / "+5);
-				$(".register-container-footer-phase").attr({"value":phase});
+				currentRegisterContainerBox.removeClass("focused");
+				nextRegisterContainerBox.addClass("focused");
+				setNavigationButton();
 			}).fail(function(xhr, status, error){
 				var data = JSON.parse(xhr.responseText);
 				const code = data.code;
@@ -376,13 +383,9 @@ jQuery(function(){
 				})
 			}).done(function(response){
 				openInfoModal("해당 도서 정보를 임시로 저장했습니다.");
-					
-				phase++;
-			
-				$(".register-container-box").css({"display":"none"});
-				$(".register-container-box[value='"+phase+"']").css({"display":"block"});
-				$(".register-container-footer-phase").text(phase+" / "+5);
-				$(".register-container-footer-phase").attr({"value":phase});
+				currentRegisterContainerBox.removeClass("focused");
+				nextRegisterContainerBox.addClass("focused");
+				setNavigationButton();
 			}).fail(function(xhr, status, error){
 				var data = JSON.parse(xhr.responseText);
 				const code = data.code;
@@ -416,13 +419,9 @@ jQuery(function(){
 				})
 			}).done(function(response){
 				openInfoModal("해당 도서 정보를 임시로 저장했습니다.");
-					
-				phase++;
-			
-				$(".register-container-box").css({"display":"none"});
-				$(".register-container-box[value='"+phase+"']").css({"display":"block"});
-				$(".register-container-footer-phase").text(phase+" / "+5);
-				$(".register-container-footer-phase").attr({"value":phase});
+				currentRegisterContainerBox.removeClass("focused");
+				nextRegisterContainerBox.addClass("focused");
+				setNavigationButton();
 			}).fail(function(xhr, status, error){
 				var data = JSON.parse(xhr.responseText);
 				const code = data.code;
