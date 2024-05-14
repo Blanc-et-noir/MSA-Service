@@ -48,8 +48,9 @@ jQuery(function(){
 		if(modalCover.length==0){
 			return;
 		}
-		
-		var imageURL = $(".book-image-wrappers").find(".book-image-wrapper.focused .book-image").attr("src");
+		var bookID =  $(".book-image-wrappers").attr("value");
+		var bookImageID = $(".book-image-wrappers").find(".book-image-wrapper.focused").attr("value");
+		var imageURL = API_GATEWAY+"/api/v1/books/"+bookID+"/book-images/"+bookImageID+"?book-image-type=ORIGINAL";
 		
 		var modalWrapperImage = $("<img class='modal-wrapper-image' src='"+imageURL+"' />");
 		var modalWrapperTitle = $("<div class='modal-wrapper-title'>아무곳이나 클릭하여 화면 닫기</div>");
