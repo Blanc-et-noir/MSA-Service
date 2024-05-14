@@ -1,7 +1,8 @@
 
 
 .login-container{
-	width:360px;
+	width:70%;
+	max-width:500px;
 	background-color:none;
 }
 
@@ -36,7 +37,7 @@
 	height:35px;
 	border:none;
 	outline:none;
-	border-bottom:1px solid #2f2f2f;
+	border-bottom:1px solid #f2f2f2;
 	font-size:12px;
 	transition:0.2s;
 }

@@ -1,5 +1,6 @@
 .register-container{
-	width:420px;
+	width:70%;
+	max-width:500px;
 	background-color:none;
 }
 
@@ -20,7 +21,7 @@
 	height:35px;
 	border:none;
 	outline:none;
-	border-bottom:1px solid #2f2f2f;
+	border-bottom:1px solid #f2f2f2;
 	font-size:12px;
 	transition:0.2s;
 }
@@ -56,8 +57,10 @@
 .register-container-footer-button{
 	display:flex;
 	align-items:center;
+	justify-content:center;
 	background-color:rgba(128,128,128,0.1);
 	height:35px;
+	width:35px;
 	padding:10px;
 	border-radius:7px;
 }

@@ -131,7 +131,14 @@
 	font-size:12px;
 	border:none;
 	outline:none;
-	border-bottom:1px solid #2f2f2f;
+	border-bottom:1px solid #f2f2f2;
 	margin:20px;
 	padding:10px 0px;
+	transition:0.2s;
+}
+
+.book-name-label-input:focus, .book-publisher-name-label-input:focus, .book-detailed-place-label-input:focus{
+	border-bottom:1px solid #2f2f2f;
+	text-indent:10px;
+	transition:0.2s;
 }
