@@ -1,13 +1,18 @@
 package com.spring.api.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
@@ -32,12 +37,14 @@ import com.spring.api.entity.BookEntity;
 import com.spring.api.entity.BookImageEntity;
 import com.spring.api.enumeration.BookImageExtension;
 import com.spring.api.enumeration.BookImageStatus;
+import com.spring.api.enumeration.BookImageType;
 import com.spring.api.enumeration.BookStatus;
 import com.spring.api.exception.CustomException;
 import com.spring.api.repository.BookImageRepository;
 import com.spring.api.repository.BookRepository;
 
 import jakarta.transaction.Transactional;
+import net.coobird.thumbnailator.Thumbnailator;
 
 @Transactional
 @Service("bookService")
@@ -261,7 +268,7 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public ResponseEntity<byte[]> readBookImage(Long bookID, Long bookImageID) {
+	public ResponseEntity<byte[]> readBookImage(Long bookID, Long bookImageID, BookImageType bookImageType) {
 		Optional<BookEntity> book = bookRepository.findById(bookID);
 		
 		if(book.isEmpty()) {
@@ -275,15 +282,23 @@ public class BookServiceImpl implements BookService{
 		}
 		
 		try {
-			InputStream inputStream = new FileInputStream(
-					BOOK_IMAGE_PATH_PREFIX+File.separator+
+			File file = new File(BOOK_IMAGE_PATH_PREFIX+File.separator+
 					bookID+File.separator+
 					"book-images"+File.separator+
 					bookImageID+File.separator+
 					bookImage.get().getBookImageTemporaryName()+"."+bookImage.get().getBookImageExtension().toString().toLowerCase());
 			
-			byte[] bytes = IOUtils.toByteArray(inputStream);
-			inputStream.close();
+			
+			byte[] bytes = null;
+			
+			if(bookImageType==null||bookImageType.equals(BookImageType.ORIGINAL)) {
+				InputStream inputStream = new FileInputStream(file);
+				bytes = IOUtils.toByteArray(inputStream);
+				inputStream.close();
+			}else {
+				BufferedImage bufferedImage = Thumbnailator.createThumbnail(file, 200, 200);
+				bytes = toByteArray(bufferedImage, bookImage.get().getBookImageExtension().toString().toLowerCase());
+			}
 			
 			HttpHeaders headers = new HttpHeaders();
 			headers.setCacheControl(CacheControl.noCache().getHeaderValue());
@@ -365,6 +380,14 @@ public class BookServiceImpl implements BookService{
 			
 			throw new CustomException(BookServiceCode.BOOK_IMAGE_NOT_UPLOADED_DUE_TO_ERROR);
 		}
+	}
+	
+	private byte[] toByteArray(BufferedImage bufferedImage, String format)throws IOException {
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		ImageIO.write(bufferedImage, format, outputStream);
+		byte[] bytes = outputStream.toByteArray();
+		outputStream.close();
+		return bytes;
 	}
 	
 }

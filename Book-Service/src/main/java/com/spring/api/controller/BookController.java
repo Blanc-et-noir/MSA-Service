@@ -22,6 +22,7 @@ import com.spring.api.dto.ResponseDTO;
 import com.spring.api.dto.UpdateBookRequestDTO;
 import com.spring.api.enumeration.BookCategory;
 import com.spring.api.enumeration.BookImageStatus;
+import com.spring.api.enumeration.BookImageType;
 import com.spring.api.enumeration.BookQuality;
 import com.spring.api.enumeration.BookStatus;
 import com.spring.api.service.BookService;
@@ -78,8 +79,8 @@ public class BookController {
 	}
 	
 	@GetMapping("/{book-ids}/book-images/{book-image-ids}")
-	public ResponseEntity<byte[]> readBookImage(@PathVariable("book-ids") Long bookID, @PathVariable("book-image-ids") Long bookImageID) {
-		return bookService.readBookImage(bookID, bookImageID);
+	public ResponseEntity<byte[]> readBookImage(@PathVariable("book-ids") Long bookID, @PathVariable("book-image-ids") Long bookImageID, @RequestParam(name="book-image-type",required=false) BookImageType bookImageType) {
+		return bookService.readBookImage(bookID, bookImageID, bookImageType);
 	}
 	
 	@PostMapping("/{book-ids}/book-images")

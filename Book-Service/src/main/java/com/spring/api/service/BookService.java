@@ -10,6 +10,7 @@ import com.spring.api.dto.CreateBookResponseDTO;
 import com.spring.api.dto.ReadBooksRequestDTO;
 import com.spring.api.dto.ReadBooksResponseDTO;
 import com.spring.api.dto.UpdateBookRequestDTO;
+import com.spring.api.enumeration.BookImageType;
 
 public interface BookService {
 	public CreateBookResponseDTO createBook(String memberID, CreateBookRequestDTO dto);
@@ -17,6 +18,6 @@ public interface BookService {
 	public CreateBookImageResponseDTO createBookImage(String memberID, Long bookID, MultipartFile bookImageFile);
 	public void deleteBookImage(String memberID, Long bookID, Long bookImageID);
 	public ReadBooksResponseDTO readBooks(ReadBooksRequestDTO dto);
-	public ResponseEntity<byte[]> readBookImage(Long bookID, Long bookImageID);
+	public ResponseEntity<byte[]> readBookImage(Long bookID, Long bookImageID, BookImageType bookImageType);
 	public BookDTO readBook(Long bookID);
 }
