@@ -111,15 +111,13 @@
 					</div>
 				</div>
 				<div class="books-container-footer" style="margin-top:40px;">
-					<div th:block th:switch="${#strings.toString(book.bookStatus)}">
-						<div th:case="NORMAL" class="books-container-footer-button" name="reserve">
-							<img class="books-container-footer-button-svg" src="/svg/예약.svg">
-							<div class="books-container-footer-button-title">직거래 예약 신청</div>
-						</div>
-						<div th:case="*" class="books-container-footer-button" name="not-able-to-reserve">
-							<img class="books-container-footer-button-svg" src="/svg/예약.svg">
-							<div class="books-container-footer-button-title">직거래 예약 불가</div>
-						</div>
+					<div th:if="${book.bookStatus.toString().equals('NORMAL')}" class="books-container-footer-button" name="reserve" style="margin-right:10px;">
+						<img class="books-container-footer-button-svg" src="/svg/예약.svg">
+						<div class="books-container-footer-button-title">직거래 예약 신청</div>
+					</div>
+					<div th:unless="${book.bookStatus.toString().equals('NORMAL')}" class="books-container-footer-button" name="not-able-to-reserve" style="margin-right:10px;">
+						<img class="books-container-footer-button-svg" src="/svg/예약.svg">
+						<div class="books-container-footer-button-title">직거래 예약 불가</div>
 					</div>
 					<div class="books-container-footer-button" name="report">
 						<img class="books-container-footer-button-svg" src="/svg/신고.svg">
