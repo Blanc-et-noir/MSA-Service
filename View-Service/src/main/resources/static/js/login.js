@@ -20,13 +20,19 @@ jQuery(function(){
 		var memberPW = $(".login-container-body-input-field-input[name='member-pw']").val();
 		
 		if(!checkMemberID(memberID)){
-			openFailModal("ID는 6자리 이상, 16자리 이하의 영어 및 숫자로 구성되어야 합니다.");
+			openToast({
+				"toast-type":"fail",
+				"toast-message":"ID는 6자리 이상, 16자리 이하의 영어 및 숫자로 구성되어야 합니다."
+			})
 			$(".login-container-body-input-field-input[name='member-id']").addClass("selected");
 			return;
 		}
 		
 		if(!checkMemberPW(memberPW)){
-			openFailModal("PW는 8자리 이상, 16자리 이하의 영어, 숫자 및 특수문자를 모두 포함하여 구성되어야 합니다.");
+			openToast({
+				"toast-type":"fail",
+				"toast-message":"PW는 8자리 이상, 16자리 이하의 영어, 숫자 및 특수문자를 모두 포함하여 구성되어야 합니다."
+			})
 			$(".login-container-body-input-field-input[name='member-pw']").addClass("selected");
 			return;
 		}
@@ -53,11 +59,10 @@ jQuery(function(){
 			var data = JSON.parse(xhr.responseText);
 			const code = data.code;
 			const message = data.message;
-			if(code=="MEMBER_NOT_FOUND"){
-				openFailModal("해당 회원 정보가 존재하지 않습니다.");
-			}else{
-				openFailModal(message);
-			}
+			openToast({
+				"toast-type":"fail",
+				"toast-message":message
+			})
 		});
 	});
 });

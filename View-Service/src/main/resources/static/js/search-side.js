@@ -99,7 +99,6 @@ jQuery(function(){
 	readBooks();
 	
 	$(document).on("click","#search-side-container-footer-reset-button",function(e){
-		//resetParameters();
 		$("#book-price-slider").slider({
 			"values":[0,100000]
 		});
@@ -113,15 +112,11 @@ jQuery(function(){
 		$(".book-quality-label").removeClass("checked");
 		$("#book-price-slider").attr("min",0);
 		$("#book-price-slider").attr("max",100000);
-		
-		//$(".board-container-body-wrapper").remove();
-		//readBooks();
 	})
 	
 	$(document).on("click","#search-side-container-footer-search-button",function(e){
 		resetParameters();
 		
-		//체크박스
 		var checkbox = $(".book-category-label-input,.book-quality-label-input");
 		
 		for(var i=0; i<checkbox.length; i++){
@@ -130,31 +125,36 @@ jQuery(function(){
 			}
 		}
 		
-		//도서명체크
 		var bookName = $(".book-name-label-input").val();
 		
 		if(bookName.length!=0&&!checkBookName(bookName)){
-			openFailModal("도서명은 1 - 40자리의 숫자, 영어, 한글 및 일부 특수문자로만 구성되어야 합니다.");
+			openToast({
+				"toast-type":"fail",
+				"toast-message":"도서명은 1 - 40자리의 숫자, 영어, 한글 및 일부 특수문자로만 구성되어야 합니다."
+			})
 			return;
 		}
 		
-		//출판사명체크
 		var bookPublisherName = $(".book-publisher-name-label-input").val();
 		
 		if(bookPublisherName.length!=0&&!checkBookName(bookPublisherName)){
-			openFailModal("출판사명은 1 - 40자리의 숫자, 영어, 한글 및 일부 특수문자로만 구성되어야 합니다.");
+			openToast({
+				"toast-type":"fail",
+				"toast-message":"출판사명은 1 - 40자리의 숫자, 영어, 한글 및 일부 특수문자로만 구성되어야 합니다."
+			})
 			return;
 		}
 		
-		//판매지역체크
 		var bookDetailedPlace = $(".book-detailed-place-label-input").val();
 		
 		if(bookDetailedPlace.length!=0&&!checkBookDetailedPlace(bookDetailedPlace)){
-			openFailModal("거래장소는 1 - 100자리의 숫자, 영어, 한글 및 일부 특수문자로만 구성되어야 합니다.");
+			openToast({
+				"toast-type":"fail",
+				"toast-message":"거래장소는 1 - 100자리의 숫자, 영어, 한글 및 일부 특수문자로만 구성되어야 합니다."
+			})
 			return;
 		}
 		
-		//파라미터 설정
 		parameters+="book-min-price="+$("#book-price-slider").attr("min")+"&book-max-price="+$("#book-price-slider").attr("max")+"&";
 		
 		if(bookName.length!=0){

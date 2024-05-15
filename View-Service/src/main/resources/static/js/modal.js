@@ -1,142 +1,101 @@
-function closeModal(modalCloseButton){
-	var modal = $(modalCloseButton).parents(".modal-container");
-	modal.animate({"opacity":"0"},150,"linear",function(){modal.remove();})
-}
-
-function openFailModal(message){
-	const delay = 5000;
-	var modal = $("<div name='fail' class='modal-container'></div>");
+function progress(per) {
+	var bar = $(".bar");
+	var RADIUS = 54;
+	var CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 	
-	var modalUpperContainer = $("<div class='modal-upper-container'></div>");
-	var modalLowerContainer = $("<div class='modal-lower-container'></div>");
+	bar.css({
+		"strokeDasharray":CIRCUMFERENCE
+	});
 	
-	var modalHeader = $("<div class='modal-upper-container-header'></div>");
-	modalHeader.append("<img class='modal-upper-container-header-svg svg-red' src='"+API_GATEWAY+"/svg/경고.svg'>")
-	
-	var modalBody = $("<div class='modal-upper-container-body'></div>");
-	modalBody.append("<div class='modal-upper-container-body-title'>ERROR</div>");
-	modalBody.append("<div class='modal-upper-container-body-subtitle'>"+message+"</div>");
-	
-	var modalFooter = $("<div class='modal-upper-container-footer'></div>");
-	modalFooter.append("<img onclick='closeModal(this)' class='svg-red modal-upper-container-footer-svg' src='"+API_GATEWAY+"/svg/취소.svg'>")
-	
-	modalUpperContainer.append(modalHeader);
-	modalUpperContainer.append(modalBody);
-	modalUpperContainer.append(modalFooter);
-	
-	var modalRemainingTimeCounter = $("<div class='fail-modal-remaining-time-counter'></div>");
-	
-	modalLowerContainer.append(modalRemainingTimeCounter);
-	
-	modal.append(modalUpperContainer);
-	modal.append(modalLowerContainer);
-	
-	$(".modal").append(modal);
-	
-	modal.animate({
-		"opacity":"1",
-	},200,"linear",function(){
-		modalRemainingTimeCounter.animate({
-			"width":"100%"
-		},delay,"linear",function(){
-			modal.animate({
-				"opacity":"0",
-				"margin-top":"-60px"
-			},200,"linear",function(){
-				modal.remove();
-			})
-		})
+	var progress = per / 100;
+  	var dashoffset = CIRCUMFERENCE * (1 - progress);
+  	
+  	bar.css({
+		"strokeDashoffset":dashoffset
 	});
 }
 
-function openSuccessModal(message){
-	const delay = 5000;
-	var modal = $("<div name='success' class='modal-container'></div>");
-	
-	var modalUpperContainer = $("<div class='modal-upper-container'></div>");
-	var modalLowerContainer = $("<div class='modal-lower-container'></div>");
-	
-	var modalHeader = $("<div class='modal-upper-container-header'></div>");
-	modalHeader.append("<img class='modal-upper-container-header-svg svg-lime' src='"+API_GATEWAY+"/svg/성공.svg'>")
-	
-	var modalBody = $("<div class='modal-upper-container-body'></div>");
-	modalBody.append("<div class='modal-upper-container-body-title'>SUCCESS</div>");
-	modalBody.append("<div class='modal-upper-container-body-subtitle'>"+message+"</div>");
-	
-	var modalFooter = $("<div class='modal-upper-container-footer'></div>");
-	modalFooter.append("<img onclick='closeModal(this)' class='svg-lime modal-upper-container-footer-svg' src='"+API_GATEWAY+"/svg/취소.svg'>")
-	
-	modalUpperContainer.append(modalHeader);
-	modalUpperContainer.append(modalBody);
-	modalUpperContainer.append(modalFooter);
-	
-	var modalRemainingTimeCounter = $("<div class='success-modal-remaining-time-counter'></div>");
-	
-	modalLowerContainer.append(modalRemainingTimeCounter);
-	
-	modal.append(modalUpperContainer);
-	modal.append(modalLowerContainer);
-	
-	$(".modal").append(modal);
-	
-	modal.animate({
-		"opacity":"1",
-	},200,"linear",function(){
-		modalRemainingTimeCounter.animate({
-			"width":"100%"
-		},delay,"linear",function(){
-			modal.animate({
-				"opacity":"0",
-				"margin-top":"-60px"
-			},200,"linear",function(){
-				modal.remove();
-			})
-		})
+function closeAllToast(){
+	var toastWrapper = $(".toast-wrapper");
+	toastWrapper.remove();
+}
+
+function closeToast(){
+	var toastWrapper = $(".toast-wrapper");
+	toastWrapper.animate({
+		"opacity":"0"
+	},300,"linear",function(){
+		toastWrapper.remove();
 	});
 }
 
-function openInfoModal(message){
-	const delay = 5000;
-	var modal = $("<div name='info' class='modal-container'></div>");
+function openToast(config){
+	closeAllToast();
 	
-	var modalUpperContainer = $("<div class='modal-upper-container'></div>");
-	var modalLowerContainer = $("<div class='modal-lower-container'></div>");
+	var toastType = config["toast-type"];
+	var toastMessage = config["toast-message"];
+	var toastTime = config["toast-time"];
+	var per = 0;
 	
-	var modalHeader = $("<div class='modal-upper-container-header'></div>");
-	modalHeader.append("<img class='modal-upper-container-header-svg svg-light-blue' src='"+API_GATEWAY+"/svg/알림.svg'>")
+	toastType=toastType!=undefined?toastType:"info";
+	toastTime=toastTime!=undefined?toastTime:5000;
 	
-	var modalBody = $("<div class='modal-upper-container-body'></div>");
-	modalBody.append("<div class='modal-upper-container-body-title'>INFO</div>");
-	modalBody.append("<div class='modal-upper-container-body-subtitle'>"+message+"</div>");
+	var toastWrapper = $("<div class='toast-wrapper "+toastType+"'></div>");
+	var toastHeader = $("<div class='toast-header'></div>");
+	var toastBody = $("<div class='toast-body'></div>");
+	var toastFooter = $("<div class='toast-footer'></div>");
 	
-	var modalFooter = $("<div class='modal-upper-container-footer'></div>");
-	modalFooter.append("<img onclick='closeModal(this)' class='svg-light-blue modal-upper-container-footer-svg' src='"+API_GATEWAY+"/svg/취소.svg'>")
+	var circleProgressWrap = $("<div class='circle-progress-wrap'><svg class='circle-progress' width='30' height='30' viewBox='0 0 120 120'><circle class='frame' cx='60' cy='60' r='54' stroke-width='12' /><circle class='bar' cx='60' cy='60' r='54' stroke-width='12' /></svg></div>");
 	
-	modalUpperContainer.append(modalHeader);
-	modalUpperContainer.append(modalBody);
-	modalUpperContainer.append(modalFooter);
+	toastHeader.append(circleProgressWrap);
 	
-	var modalRemainingTimeCounter = $("<div class='info-modal-remaining-time-counter'></div>");
+	var imageURL = null;
 	
-	modalLowerContainer.append(modalRemainingTimeCounter);
+	if(toastType=="info"){
+		imageURL = API_GATEWAY+"/svg/알림.svg";
+	}else if(toastType=="success"){
+		imageURL = API_GATEWAY+"/svg/성공.svg";
+	}else if(toastType=="fail"){
+		imageURL = API_GATEWAY+"/svg/경고.svg";
+	}else{
+		imageURL = API_GATEWAY+"/svg/경고.svg";
+	}
 	
-	modal.append(modalUpperContainer);
-	modal.append(modalLowerContainer);
+	toastHeader.append("<img class='toast-image' src='"+imageURL+"'>");
 	
-	$(".modal").append(modal);
+	toastBody.append("<div class='toast-message'>"+toastMessage+"</div>");
+	toastFooter.append("<div class='toast-close-button' onclick='closeToast()'><img class='toast-close-button-svg' src='"+API_GATEWAY+"/svg/엑스.svg'></div>");
 	
-	modal.animate({
-		"opacity":"1",
-	},200,"linear",function(){
-		modalRemainingTimeCounter.animate({
-			"width":"100%"
-		},delay,"linear",function(){
-			modal.animate({
-				"opacity":"0",
-				"margin-top":"-60px"
-			},200,"linear",function(){
-				modal.remove();
-			})
-		})
+	toastWrapper.append(toastHeader);
+	toastWrapper.append(toastBody);
+	toastWrapper.append(toastFooter);
+	
+	$("body").append(toastWrapper);
+		
+	progress(per);
+	
+	toastWrapper.css({
+		"display":"flex"
+	});
+	
+	toastWrapper.animate({
+		"opacity":"1"
+	},300,"linear",function(){
+		progress(per)
+		var interval = setInterval(function(){
+			progress(per)
+			per+=0.1;
+		
+			if(per>=100){
+				clearInterval(interval);
+				
+				toastWrapper.animate({
+					"opacity":"0"
+				},300,"linear",function(){
+					toastWrapper.remove();
+					clearInterval(interval);
+				});
+			}
+		}, toastTime/1000);
 	});
 }

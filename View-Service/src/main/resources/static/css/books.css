@@ -159,12 +159,9 @@
 .books-container-body-input-field-textarea:focus{
 	border-bottom:1px solid #0059a5;
 	text-indent:10px;
+	transition:0.2s;
+	color:#0059a5;
 }
-
-
-
-
-
 
 .books-container{
 	background-color:none;
@@ -192,6 +189,12 @@
 	border-bottom:1px solid #f2f2f2;
 	font-size:12px;
 	transition:0.2s;
+}
+
+.books-container-body-input-field-input:focus::placeholder{
+	text-indent:10px;
+	transition:0.2s;
+	color:#0059a5;
 }
 
 .books-container-body-input-field-input:focus{
