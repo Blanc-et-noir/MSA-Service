@@ -32,7 +32,10 @@ jQuery(function(){
 		}
 		
 		if($(".book-image-wrapper").length>=bookImageCapacity){
-			openFailModal("도서 이미지는 최대 "+bookImageCapacity+"개 까지 등록하실 수 있습니다.");
+			openToast({
+				"toast-type":"fail",
+				"toast-message":"도서 이미지는 최대 "+bookImageCapacity+"개까지 등록하실 수 있습니다."
+			});
 			return;
 		}
 		
@@ -76,7 +79,10 @@ jQuery(function(){
 				var data = JSON.parse(xhr.responseText);
 				const code = data.code;
 				const message = data.message;
-				openFailModal(message);
+				openToast({
+					"toast-type":"fail",
+					"toast-message":message
+				})
 			})
 			
 		}else{
@@ -90,7 +96,10 @@ jQuery(function(){
 		}
 		
 		if(e.target.files[0].size>bookImageMaxSize){
-			openFailModal("도서 이미지는 개당 최대 "+(bookImageMaxSize/(1024*1024))+"MB 크기까지 등록하실 수 있습니다.");
+			openToast({
+				"toast-type":"fail",
+				"toast-message":"도서 이미지는 개당 최대 "+(bookImageMaxSize/(1024*1024))+"MB 크기까지 등록하실 수 있습니다."
+			})
 			return;
 		}
 		
@@ -122,7 +131,10 @@ jQuery(function(){
 			const code = data.code;
 			const message = data.message;
 				
-			openFailModal(message);
+			openToast({
+				"toast-type":"fail",
+				"toast-message":message
+			})
 		})
 	});
 	
@@ -149,7 +161,10 @@ jQuery(function(){
 			const code = data.code;
 			const message = data.message;
 				
-			openFailModal(message);
+			openToast({
+				"toast-type":"fail",
+				"toast-message":message
+			})
 		})
 	});
 	
@@ -237,13 +252,21 @@ jQuery(function(){
 			
 			if(!checkBookName(bookName)){
 				$(".register-container-body-input-field-input[name='book-name']").addClass("selected");
-				openFailModal("도서명은 1자리 이상, 40자리 이하의 한글, 영어, 숫자 및 일부 특수문자로 구성되어야 합니다.");
+				openToast({
+					"toast-type":"fail",
+					"toast-time":10000,
+					"toast-message":"도서명은 1자리 이상, 40자리 이하의 한글, 영어, 숫자 및 일부 특수문자로 구성되어야 합니다."
+				})
+				
 				return;
 			}
 			
 			if(!checkBookPublisherName(bookPublisherName)){
 				$(".register-container-body-input-field-input[name='book-publisher-name']").addClass("selected");
-				openFailModal("출판사명은 1자리 이상, 40자리 이하의 한글, 영어, 숫자 및 일부 특수문자로 구성되어야 합니다.");
+				openToast({
+					"toast-type":"fail",
+					"toast-message":"출판사명은 1자리 이상, 40자리 이하의 한글, 영어, 숫자 및 일부 특수문자로 구성되어야 합니다."
+				})
 				return;
 			}
 			
@@ -267,7 +290,11 @@ jQuery(function(){
 					})
 				}).done(function(response){
 					bookID = response["data"]["book-id"];
-					openInfoModal("해당 도서 정보를 임시로 저장했습니다.");
+					openToast({
+						"toast-type":"info",
+						"toast-message":"해당 도서 정보를 임시로 저장했습니다."
+					})
+					
 					currentRegisterContainerBox.removeClass("focused");
 					nextRegisterContainerBox.addClass("focused");
 					setNavigationButton();
@@ -276,7 +303,10 @@ jQuery(function(){
 					const code = data.code;
 					const message = data.message;
 					
-					openFailModal(message);
+					openToast({
+						"toast-type":"fail",
+						"toast-message":message
+					})
 				})
 			}else{
 				if(!isLoggedIn()){
@@ -297,7 +327,10 @@ jQuery(function(){
 						"book-category":bookCategory
 					})
 				}).done(function(response){
-					openInfoModal("해당 도서 정보를 임시로 저장했습니다.");
+					openToast({
+						"toast-type":"info",
+						"toast-message":"해당 도서 정보를 임시로 저장했습니다."
+					})
 					
 					currentRegisterContainerBox.removeClass("focused");
 					nextRegisterContainerBox.addClass("focused");
@@ -307,7 +340,10 @@ jQuery(function(){
 					const code = data.code;
 					const message = data.message;
 					
-					openFailModal(message);
+					openToast({
+						"toast-type":"fail",
+						"toast-message":message
+					})
 				})
 			}
 			
@@ -321,7 +357,10 @@ jQuery(function(){
 			
 			if(!(bookPrice>=1&&bookPrice<=100000)){
 				$(".register-container-body-input-field-input[name='book-price']").addClass("selected");
-				openFailModal("판매가격은 1원 - 100000원 범위내에 있어야합니다.");
+				openToast({
+					"toast-type":"fail",
+					"toast-message":"판매가격은 1원 - 100000원 범위내에 있어야합니다."
+				});
 				return;
 			}
 			
@@ -338,7 +377,10 @@ jQuery(function(){
 					"book-price":bookPrice
 				})
 			}).done(function(response){
-				openInfoModal("해당 도서 정보를 임시로 저장했습니다.");
+				openToast({
+					"toast-type":"info",
+					"toast-message":"해당 도서 정보를 임시로 저장했습니다."
+				});
 				currentRegisterContainerBox.removeClass("focused");
 				nextRegisterContainerBox.addClass("focused");
 				setNavigationButton();
@@ -347,7 +389,10 @@ jQuery(function(){
 				const code = data.code;
 				const message = data.message;
 					
-				openFailModal(message);
+				openToast({
+					"toast-type":"fail",
+					"toast-message":message
+				});
 			})
 		}else if(phase==3){
 			var bookPlace = $(".register-container-body-input-field-input[name='book-place']").val();
@@ -359,13 +404,19 @@ jQuery(function(){
 			
 			if(!checkBookPlace(bookPlace)){
 				$(".register-container-body-input-field-input[name='book-place']").addClass("selected");
-				openFailModal("거래장소는 시/도, 시/군/구, 읍/면/동을 순서대로 입력해야합니다.");
+				openToast({
+					"toast-type":"fail",
+					"toast-message":"거래장소는 시/도, 시/군/구, 읍/면/동을 순서대로 입력해야합니다."
+				});
 				return;
 			}
 			
 			if(!checkBookDetailedPlace(bookDetailedPlace)){
 				$(".register-container-body-input-field-input[name='book-detailed-place']").addClass("selected");
-				openFailModal("거래장소는 1 - 100자리 이하의 숫자, 영어, 한글 및 일부 특수문자로만 구성되어야 합니다.");
+				openToast({
+					"toast-type":"fail",
+					"toast-message":"거래장소는 1 - 100자리 이하의 숫자, 영어, 한글 및 일부 특수문자로만 구성되어야 합니다."
+				});
 				return;
 			}
 			
@@ -382,7 +433,10 @@ jQuery(function(){
 					"book-detailed-place":bookDetailedPlace
 				})
 			}).done(function(response){
-				openInfoModal("해당 도서 정보를 임시로 저장했습니다.");
+				openToast({
+					"toast-type":"info",
+					"toast-message":"해당 도서 정보를 임시로 저장했습니다."
+				});
 				currentRegisterContainerBox.removeClass("focused");
 				nextRegisterContainerBox.addClass("focused");
 				setNavigationButton();
@@ -391,7 +445,10 @@ jQuery(function(){
 				const code = data.code;
 				const message = data.message;
 				
-				openFailModal(message);
+				openToast({
+					"toast-type":"fail",
+					"toast-message":message
+				});
 			})
 		}else if(phase==4){
 			var bookDescription = $(".register-container-body-input-field-input[name='book-description']").val();
@@ -402,7 +459,10 @@ jQuery(function(){
 			
 			if(!checkBookDescription(bookDescription)){
 				$(".register-container-body-input-field-input[name='book-description']").addClass("selected");
-				openFailModal("도서 설명은 1 - 1000자리로 구성되어야 합니다.");
+				openToast({
+					"toast-type":"fail",
+					"toast-message":"도서 설명은 1 - 1000자리로 구성되어야 합니다."
+				});
 				return;
 			}
 			
@@ -418,7 +478,10 @@ jQuery(function(){
 					"book-description":bookDescription
 				})
 			}).done(function(response){
-				openInfoModal("해당 도서 정보를 임시로 저장했습니다.");
+				openToast({
+					"toast-type":"info",
+					"toast-message":"해당 도서 정보를 임시로 저장했습니다."
+				});
 				currentRegisterContainerBox.removeClass("focused");
 				nextRegisterContainerBox.addClass("focused");
 				setNavigationButton();
@@ -427,7 +490,10 @@ jQuery(function(){
 				const code = data.code;
 				const message = data.message;
 				
-				openFailModal(message);
+				openToast({
+					"toast-type":"fail",
+					"toast-message":message
+				});
 			})
 		}
 	});
