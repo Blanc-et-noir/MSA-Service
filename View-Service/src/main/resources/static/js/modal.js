@@ -45,7 +45,7 @@ function openToast(config){
 	var toastBody = $("<div class='toast-body'></div>");
 	var toastFooter = $("<div class='toast-footer'></div>");
 	
-	var circleProgressWrap = $("<div class='circle-progress-wrap'><svg class='circle-progress' width='30' height='30' viewBox='0 0 120 120'><circle class='frame' cx='60' cy='60' r='54' stroke-width='12' /><circle class='bar' cx='60' cy='60' r='54' stroke-width='12' /></svg></div>");
+	var circleProgressWrap = $("<div class='circle-progress-wrap'><svg class='circle-progress' width='18' height='18' viewBox='0 0 120 120'><circle class='frame' cx='60' cy='60' r='54' stroke-width='12' /><circle class='bar' cx='60' cy='60' r='54' stroke-width='12' /></svg></div>");
 	
 	toastHeader.append(circleProgressWrap);
 	

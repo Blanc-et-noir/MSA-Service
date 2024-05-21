@@ -11,6 +11,15 @@ server:
       enabled: false
     
 spring:
+  jpa:
+    properties:
+      hibernate:
+#        format_sql: true
+#        highlight_sql: true
+#        use_sql_comments: true
+        default_batch_fetch_size: 100
+        jdbc:
+          batch_size: 100
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/member_service
@@ -33,3 +42,7 @@ spring:
 token:
   secret: Y2hvcHBhLWRvbnQtYml0ZS1tZS1zcHJpbmctYm9vdC1qd3QtdGVzdC1zZWNyZXQta2V5LWNob3BwYS1kb250LWJpdGUtbWUtc3ByaW5nLWJvb3Qtand0LXRlc3Qtc2VjcmV0LWtleQo=
   issuer: Blanc-et-Noir
+#logging:
+#  level:
+#    org.hibernate.SQL: debug # logger에 출력하려면
+#    org.hibernate.type.descriptor.sql: trace # 파라미터 값 출력

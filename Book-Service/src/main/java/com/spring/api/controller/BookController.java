@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.api.dto.CreateBookRequestDTO;
+import com.spring.api.dto.ReadBookRequestDTO;
 import com.spring.api.dto.ReadBooksRequestDTO;
 import com.spring.api.dto.ResponseDTO;
 import com.spring.api.dto.UpdateBookRequestDTO;
@@ -95,7 +96,16 @@ public class BookController {
 	}
 	
 	@GetMapping("/{book-ids}")
-	public ResponseDTO readBook(@PathVariable("book-ids") Long bookID) {
-		return ResponseDTO.success("도서 수정 성공", bookService.readBook(bookID));
+	public ResponseDTO readBook(
+		@PathVariable("book-ids") Long bookID,
+		@RequestParam(name="book-statuses", required=false) LinkedList<BookStatus> bookStatuses,
+		@RequestParam(name="book-image-statuses", required=false) LinkedList<BookImageStatus> bookImageStatuses
+	) {
+		return ResponseDTO.success("도서 조회 성공", bookService.readBook(
+				ReadBookRequestDTO.builder()
+				.bookID(bookID)
+				.bookImageStatuses(bookImageStatuses)
+				.bookStatuses(bookStatuses)
+				.build()));
 	}
 }

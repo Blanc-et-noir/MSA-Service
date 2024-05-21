@@ -47,7 +47,11 @@ public class TokenServiceImpl implements TokenService{
 	public CreateMemberTokensResponseDTO createTokens(CreateMemberTokensRequestDTO dto){
 		//멤버 서비스 조회
 		String memberID = dto.getMemberID();
-		MemberDTO other = requestMember(memberID);
+		MemberDTO other = requestMemberByMemberID(memberID);
+		
+		if(other==null) {
+			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
+		}
 		
 		//정보 비교
 		if(!bCryptPasswordEncoder.matches(dto.getMemberPW(), other.getMemberPW())) {
@@ -160,7 +164,11 @@ public class TokenServiceImpl implements TokenService{
 		String memberID = tokenUtil.getMemberIDWithDecoding(oldMemberAccessToken);
 		String memberRole = tokenUtil.getMemberRoleWithDecoding(oldMemberRefreshToken);
 		
-		requestMember(memberID);
+		MemberDTO member = requestMemberByMemberID(memberID);
+		
+		if(member==null) {
+			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
+		}
 		
 		String newMemberAccessToken = tokenUtil.createMemberAccessToken(memberID, MemberRole.from(memberRole));
 		String newMemberRefreshToken = tokenUtil.createMemberRefreshToken(memberID, MemberRole.from(memberRole));
@@ -273,14 +281,12 @@ public class TokenServiceImpl implements TokenService{
 		redisUtil.setString(oldMemberRefreshToken, "invalidated", tokenUtil.getRemainingTimeWithDecoding(oldMemberRefreshToken));
 	}
 	
-	private MemberDTO requestMember(String memberID) {
-		MemberDTO dto = restTemplate.getForObject(MEMBER_SERVICE_BASE_URI+"/members/"+memberID, ReadMemberResponseDTO.class).getData();
-		
-		if(dto==null) {
-			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
+	private MemberDTO requestMemberByMemberID(String memberID) {
+		try {
+			return  restTemplate.getForObject(MEMBER_SERVICE_BASE_URI+"/members/"+memberID+"?member-statuses=NORMAL", ReadMemberResponseDTO.class).getData();
+		}catch(Exception e) {
+			return null;
 		}
-		
-		return dto;
 	}
 	
 	private void requestUpdateMemberTokens(String memberID, UpdateMemberTokensRequestDTO dto) {

@@ -1,11 +1,17 @@
 package com.spring.api.controller;
 
+import java.util.LinkedList;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.api.dto.ReadBookRequestDTO;
+import com.spring.api.enumeration.BookImageStatus;
+import com.spring.api.enumeration.BookStatus;
 import com.spring.api.service.ViewService;
 
 @Controller
@@ -88,10 +94,18 @@ public class ViewController {
 	}
 	
 	@GetMapping("/books/{book-ids}")
-	public ModelAndView books(@PathVariable("book-ids") Long bookID) {
+	public ModelAndView books(
+		@PathVariable("book-ids") Long bookID,
+		@RequestParam(name="book-statuses", required=false) LinkedList<BookStatus> bookStatuses,
+		@RequestParam(name="book-image-statuses", required=false) LinkedList<BookImageStatus> bookImageStatuses) {
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("/books");
-		modelAndView.addObject("book", viewService.readBook(bookID));
+		modelAndView.addObject("book", viewService.readBook(ReadBookRequestDTO.builder()
+				.bookID(bookID)
+				.bookImageStatuses(bookImageStatuses)
+				.bookStatuses(bookStatuses)
+				.build()));
 
 		return modelAndView;
 	}
