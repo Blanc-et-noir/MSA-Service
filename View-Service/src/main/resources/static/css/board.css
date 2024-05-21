@@ -94,7 +94,7 @@
 }
 
 .book-name, .book-price, .book-place, .book-quality{
-	font-size:11px;
+	font-size:9px;
 	color:white;
 	text-overflow:ellipsis;
 	white-space:nowrap;
