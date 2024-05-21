@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.spring.api.code.MemberServiceCode;
 import com.spring.api.dto.CreateMemberRequestDTO;
 import com.spring.api.dto.MemberDTO;
+import com.spring.api.dto.ReadMemberRequestByMemberEmailDTO;
+import com.spring.api.dto.ReadMemberRequestByMemberIDDTO;
 import com.spring.api.dto.SimpleMemberDTO;
 import com.spring.api.dto.UpdateMemberPWRequestDTO;
 import com.spring.api.dto.UpdateMemberRequestDTO;
@@ -86,15 +88,21 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberDTO readMemberByMemberID(String memberID) {
-		Optional<MemberEntity> member = memberRepository.findById(memberID);
+	public MemberDTO readMemberByMemberID(ReadMemberRequestByMemberIDDTO dto) {
+		Optional<MemberEntity> member = memberRepository.findById(dto.getMemberID());
 		
-		if(!member.isPresent()||!member.get().isMemberStatusNormal()) {
+		if(!member.isPresent()) {
 			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
 		}
 		
+		if(dto.getMemberStatuses()!=null&&!dto.getMemberStatuses().isEmpty()) {
+			if(!dto.getMemberStatuses().contains(member.get().getMemberStatus())) {
+				throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
+			}
+		}
+		
 		return MemberDTO.builder()
-				.memberID(memberID)
+				.memberID(member.get().getMemberID())
 				.memberRole(member.get().getMemberRole())
 				.memberPW(member.get().getMemberPW())
 				.memberEmail(member.get().getMemberEmail())
@@ -122,11 +130,17 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public SimpleMemberDTO readMemberByMemberEmail(String memberEmail) {
-		Optional<MemberEntity> member = memberRepository.findByMemberEmail(memberEmail);
+	public SimpleMemberDTO readMemberByMemberEmail(ReadMemberRequestByMemberEmailDTO dto) {
+		Optional<MemberEntity> member = memberRepository.findByMemberEmail(dto.getMemberEmail());
 		
-		if(!member.isPresent()||!member.get().isMemberStatusNormal()) {
+		if(!member.isPresent()) {
 			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
+		}
+		
+		if(dto.getMemberStatuses()!=null&&!dto.getMemberStatuses().isEmpty()) {
+			if(!dto.getMemberStatuses().contains(member.get().getMemberStatus())) {
+				throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
+			}
 		}
 		
 		return SimpleMemberDTO.builder()

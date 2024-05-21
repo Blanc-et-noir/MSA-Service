@@ -30,6 +30,7 @@ import com.spring.api.dto.BookImageDTO;
 import com.spring.api.dto.CreateBookImageResponseDTO;
 import com.spring.api.dto.CreateBookRequestDTO;
 import com.spring.api.dto.CreateBookResponseDTO;
+import com.spring.api.dto.ReadBookRequestDTO;
 import com.spring.api.dto.ReadBooksRequestDTO;
 import com.spring.api.dto.ReadBooksResponseDTO;
 import com.spring.api.dto.UpdateBookRequestDTO;
@@ -312,17 +313,22 @@ public class BookServiceImpl implements BookService{
 			ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(bytes, headers, HttpStatus.OK);
 			return responseEntity;
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new CustomException(BookServiceCode.BOOK_IMAGE_NOT_DOWNLOADED_DUE_TO_ERROR);
 		}
 	}
 	
 	@Override
-	public BookDTO readBook(Long bookID) {
-		Optional<BookEntity> book = bookRepository.findById(bookID);
+	public BookDTO readBook(ReadBookRequestDTO dto) {
+		Optional<BookEntity> book = bookRepository.findById(dto.getBookID());
 		
-		if(book.isEmpty()||!book.get().isBookStatusNormal()) {
+		if(book.isEmpty()) {
 			throw new CustomException(BookServiceCode.BOOK_NOT_FOUND);
+		}
+		
+		if(dto.getBookStatuses()!=null&&!dto.getBookImageStatuses().isEmpty()) {
+			if(!dto.getBookImageStatuses().contains(book.get().getBookStatus())) {
+				throw new CustomException(BookServiceCode.BOOK_NOT_FOUND);
+			}
 		}
 		
 		book.get().increaseBookViewCount();
@@ -330,8 +336,10 @@ public class BookServiceImpl implements BookService{
 		List<BookImageDTO> list = new LinkedList<BookImageDTO>();
 		
 		for(BookImageEntity bookImage : book.get().getBookImages()) {
-			if(!bookImage.getBookImageStatus().equals(BookImageStatus.NORMAL)) {
-				continue;
+			if(dto.getBookImageStatuses()!=null&&!dto.getBookImageStatuses().isEmpty()) {
+				if(!dto.getBookImageStatuses().contains(bookImage.getBookImageStatus())){
+					continue;
+				}
 			}
 			
 			list.add(BookImageDTO.builder()

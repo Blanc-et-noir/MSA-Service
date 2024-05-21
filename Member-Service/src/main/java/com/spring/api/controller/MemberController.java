@@ -1,5 +1,7 @@
 package com.spring.api.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,15 +9,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.api.dto.CreateMemberRequestDTO;
 import com.spring.api.dto.MemberDTO;
+import com.spring.api.dto.ReadMemberRequestByMemberEmailDTO;
+import com.spring.api.dto.ReadMemberRequestByMemberIDDTO;
 import com.spring.api.dto.ResponseDTO;
 import com.spring.api.dto.SimpleMemberDTO;
 import com.spring.api.dto.UpdateMemberPWRequestDTO;
 import com.spring.api.dto.UpdateMemberRequestDTO;
 import com.spring.api.dto.UpdateMemberTokensRequestDTO;
+import com.spring.api.enumeration.MemberStatus;
 import com.spring.api.service.MemberService;
 
 @RestController
@@ -28,13 +34,21 @@ public class MemberController {
 	}
 	
 	@GetMapping("/{member-ids}")
-	public ResponseDTO<MemberDTO> readMemberByMemberID(@PathVariable("member-ids") String memberID) {
-		return ResponseDTO.success("회원정보 조회 성공", memberService.readMemberByMemberID(memberID));
+	public ResponseDTO<MemberDTO> readMemberByMemberID(@PathVariable("member-ids") String memberID, @RequestParam(name="member-statuses",required=false) List<MemberStatus> memberStatuses) {
+		return ResponseDTO.success("회원정보 조회 성공", memberService.readMemberByMemberID(
+				ReadMemberRequestByMemberIDDTO.builder()
+				.memberID(memberID)
+				.memberStatuses(memberStatuses)
+				.build()));
 	}
 	
 	@GetMapping("/member-emails/{member-emails}")
-	public ResponseDTO<SimpleMemberDTO> readMemberByMemberEmail(@PathVariable("member-emails") String memberEmail) {
-		return ResponseDTO.success("회원정보 조회 성공", memberService.readMemberByMemberEmail(memberEmail));
+	public ResponseDTO<SimpleMemberDTO> readMemberByMemberEmail(@PathVariable("member-emails") String memberEmail, @RequestParam(name="member-statuses",required=false) List<MemberStatus> memberStatuses) {
+		return ResponseDTO.success("회원정보 조회 성공", memberService.readMemberByMemberEmail(
+				ReadMemberRequestByMemberEmailDTO.builder()
+				.memberEmail(memberEmail)
+				.memberStatuses(memberStatuses)
+				.build()));
 	}
 	
 	@PutMapping("/{member-ids}/tokens")

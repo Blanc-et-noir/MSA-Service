@@ -60,6 +60,14 @@ public class VerificationServiceImpl implements VerificationService{
 	@Override
 	public void createVerificationCodeForMemberEmail(CreateVerificationCodeForMemberEmailRequestDTO dto) {
 		final String VERIFICATION_CODE = createVerificationCode(VERIFICATION_CODE_LENGTH);
+		
+		//이메일 중복 확인
+		MemberDTO member = requestMemberByMemberEmail(dto.getMemberEmail());
+		
+		if(member!=null) {
+			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_ALREADY_OCCUPIED);
+		}
+		
 		sendVerificationCodeForMemberEmail(dto.getMemberEmail(),VERIFICATION_CODE);
 	}
 	
@@ -68,7 +76,12 @@ public class VerificationServiceImpl implements VerificationService{
 		final String VERIFICATION_CODE = createVerificationCode(VERIFICATION_CODE_LENGTH);
 		
 		//ID와 이메일 연동여부 확인
-		MemberDTO member = requestMember(dto.getMemberID());
+		MemberDTO member = requestMemberByMemberID(dto.getMemberID());
+		
+		if(member==null) {
+			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
+		}
+		
 		if(!dto.getMemberEmail().equals(member.getMemberEmail())) {
 			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_NOT_BOUND_TO_MEMBER_ID);
 		}
@@ -110,7 +123,7 @@ public class VerificationServiceImpl implements VerificationService{
 		}
 		
 		//ID와 이메일 연동여부 확인
-		MemberDTO member = requestMember(dto.getMemberID());
+		MemberDTO member = requestMemberByMemberID(dto.getMemberID());
 		if(!dto.getMemberEmail().equals(member.getMemberEmail())) {
 			throw new CustomException(MemberServiceCode.MEMBER_EMAIL_NOT_BOUND_TO_MEMBER_ID);
 		}
@@ -206,22 +219,24 @@ public class VerificationServiceImpl implements VerificationService{
 	    return sb.toString();
 	}
 
-	private MemberDTO requestMember(String memberID) {
-		MemberDTO dto = restTemplate.getForObject(MEMBER_SERVICE_BASE_URI+"/members/"+memberID, ReadMemberResponseDTO.class).getData();
-		
-		if(dto==null) {
-			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
+	private MemberDTO requestMemberByMemberID(String memberID) {		
+		try {
+			return  restTemplate.getForObject(MEMBER_SERVICE_BASE_URI+"/members/"+memberID+"?member-statuses=NORMAL", ReadMemberResponseDTO.class).getData();
+		}catch(Exception e) {
+			return null;
 		}
-		
-		return dto;
+	}
+	
+	private MemberDTO requestMemberByMemberEmail(String memberEmail) {
+		try {
+			return restTemplate.getForObject(MEMBER_SERVICE_BASE_URI+"/members/member-emails/"+memberEmail, ReadMemberResponseDTO.class).getData();
+		}catch(Exception e) {
+			return null;
+		}
 	}
 	
 	private void updateMemberPW(String memberID, UpdateMemberPWRequestDTO dto) {
-		
-		MemberDTO member = restTemplate.patchForObject(MEMBER_SERVICE_BASE_URI+"/members/"+memberID+"/member-pws",dto,UpdateMemberPWResponseDTO.class).getData();
-		if(member==null) {
-			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
-		}
+		restTemplate.patchForObject(MEMBER_SERVICE_BASE_URI+"/members/"+memberID+"/member-pws",dto,UpdateMemberPWResponseDTO.class).getData();
 	}
 	
 }

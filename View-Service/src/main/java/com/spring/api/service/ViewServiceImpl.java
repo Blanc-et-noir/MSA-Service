@@ -5,8 +5,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.spring.api.code.BookServiceCode;
 import com.spring.api.dto.BookDTO;
+import com.spring.api.dto.ReadBookRequestDTO;
 import com.spring.api.dto.ReadBookResponseDTO;
-import com.spring.api.enumeration.BookStatus;
 import com.spring.api.exception.CustomException;
 
 @Service("viewService")
@@ -19,20 +19,19 @@ public class ViewServiceImpl implements ViewService{
 	}
 	
 	@Override
-	public BookDTO readBook(Long bookID) {
-		BookDTO dto = requestBook(bookID);
+	public BookDTO readBook(ReadBookRequestDTO dto) {
+		BookDTO book = requestBook(dto);
 		
-		return dto;
+		return book;
 	}
 	
-	private BookDTO requestBook(Long bookID) {
-		BookDTO dto = restTemplate.getForObject(BOOK_SERVICE_BASE_URI+"/books/"+bookID, ReadBookResponseDTO.class).getData();
+	private BookDTO requestBook(ReadBookRequestDTO dto) {
+		BookDTO book = restTemplate.getForObject(BOOK_SERVICE_BASE_URI+"/books/"+dto.getBookID(), ReadBookResponseDTO.class).getData();
 		
-		if(dto==null||!dto.getBookStatus().equals(BookStatus.NORMAL)) {
+		if(book==null) {
 			throw new CustomException(BookServiceCode.BOOK_NOT_FOUND);
 		}
 		
-		return dto;
+		return book;
 	}
-
 }
