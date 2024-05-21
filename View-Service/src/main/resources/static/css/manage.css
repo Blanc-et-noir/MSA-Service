@@ -1,0 +1,29 @@
+.manage-container{
+	width:80%;
+	max-width:800px;
+}
+
+.book-id, .book-status, .book-name, .book-quality, .book-price, .book-place, .book-create-time{
+	padding:15px;
+	color:#2f2f2f;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.book-name{
+	flex:1;
+}
+
+.manage-container-body-wrapper{
+	margin:20px 0px;
+	border-radius:7px;
+}
+
+.manage-container-body-wrapper:hover{
+	background-color:rgba(128,128,128,0.1);
+}
+
+.manage-container-body-info-wrapper{
+	display:flex;
+}

@@ -10,7 +10,6 @@
 
 .account-container-header-button{
 	text-align:center;
-	font-size:12px;
 	color:#808080;
 	flex:1;
 	padding:12px 10px;
@@ -37,9 +36,7 @@
 
 .account-container-body-input-field-placeholder{
 	font-family:Pretendard-Regular;
-	color:#2f2f2f;
-	font-size:12px;
-	
+	color:#2f2f2f;	
 }
 
 .account-container-body-input-field-placeholder[name="find"],
@@ -69,7 +66,6 @@
 	border:none;
 	outline:none;
 	border-bottom:1px solid #f2f2f2;
-	font-size:12px;
 	transition:0.2s;
 }
 
@@ -79,7 +75,6 @@
 	border:none;
 	outline:none;
 	border-bottom:1px solid #0059a5;
-	font-size:12px;
 	text-indent:10px;
 }
 
@@ -112,7 +107,6 @@
 }
 
 .account-container-body-input-field-input-button-placeholder{
-	font-size:12px;
 	line-height:35px;
 	margin-left:5px;
 	font-family:Pretendard-Regular;
@@ -149,7 +143,6 @@
 .account-container-button{
 	display:flex;
 	background-color:rgba(128,128,128,0.1);
-	font-size:12px;
 	border-radius:7px;
 	padding:10px;
 	color:#808080;

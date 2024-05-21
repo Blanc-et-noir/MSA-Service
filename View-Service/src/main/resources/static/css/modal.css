@@ -44,12 +44,10 @@
 
 .modal-upper-container-body-title{
 	font-family:Pretendard-Regular;
-	font-size:12px;
 }
 
 .modal-upper-container-body-subtitle{
 	font-family:Pretendard-Regular;
-	font-size:10px;
 }
 
 .modal-upper-container-footer{
@@ -251,7 +249,6 @@
 
 .toast-message{
 	color:white;
-	font-size:9px;
 }
 
 .toast-footer{
@@ -259,7 +256,6 @@
 	display:flex;
 	justify-content:center;
 	align-items:center;
-	font-size:12px;
 }
 
 .toast-close-button{

@@ -44,7 +44,6 @@
 	background-color:white;
 	text-align:center;
 	line-height:40px;
-	font-size:12px;
 	color:#2f2f2f;
 }
 
@@ -76,12 +75,10 @@
 	background-color:white;
 	text-align:center;
 	line-height:40px;
-	font-size:12px;
 	color:#2f2f2f;
 }
 
 .side-container-body-container-title{
-	font-size:12px;
 	padding:0px 20px;
 	color:#2f2f2f;
 	margin:15px 0px;
@@ -116,7 +113,6 @@
 }
 
 .side-container-body-container-box-subtitle{
-	font-size:12px;
 	margin-left:10px;
 	color:gray;
 }
@@ -151,7 +147,6 @@
 }
 
 .main-side-container-footer-button-title{
-	font-size:12px;
 	color:#808080;
 	margin-left:5px;
 }

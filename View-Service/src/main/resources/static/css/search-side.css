@@ -32,7 +32,6 @@
 }
 
 .search-side-container-footer-button-title{
-	font-size:12px;
 	color:#808080;
 	margin-left:5px;
 }
@@ -61,7 +60,6 @@
 	width:70px;
 	height:70px;
 	display:flex;
-	font-size:12px;
 	color:#808080;
 	margin:5px;
 	border-radius:7px;
@@ -90,7 +88,6 @@
 	border:none;
 	outline:none;
 	height:25px;
-	font-size:12px;
 	border-bottom:1px solid #2f2f2f;
 }
 
@@ -108,7 +105,6 @@
 .book-category-label-input-title, .book-quality-label-input-title{
 	display:block;
 	margin-top:10px;
-	font-size:12px;
 }
 
 .book-category-label.checked .book-category-label-input-title, .book-quality-label.checked .book-quality-label-input-title{
@@ -116,7 +112,6 @@
 }
 
 #book-price-value{
-	font-size:12px;
 	text-align:center;
 	color:#808080;
 	margin:30px 0px 10px 0px;
@@ -128,7 +123,6 @@
 
 .book-name-label-input, .book-publisher-name-label-input, .book-detailed-place-label-input{
 	display:block;
-	font-size:12px;
 	border:none;
 	outline:none;
 	border-bottom:1px solid #f2f2f2;
