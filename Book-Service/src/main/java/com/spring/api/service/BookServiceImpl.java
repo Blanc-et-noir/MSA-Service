@@ -368,6 +368,7 @@ public class BookServiceImpl implements BookService{
 				.bookStatus(book.get().getBookStatus())
 				.bookViewCount(book.get().getBookViewCount())
 				.bookWishCount(book.get().getBookWishCount())
+				.memberID(book.get().getMemberID())
 				.build();
 	}
 	
