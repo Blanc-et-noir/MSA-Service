@@ -38,7 +38,7 @@ function openToast(config){
 	var per = 0;
 	
 	toastType=toastType!=undefined?toastType:"info";
-	toastTime=toastTime!=undefined?toastTime:5000;
+	toastTime=toastTime!=undefined?toastTime:3000;
 	
 	var toastWrapper = $("<div class='toast-wrapper "+toastType+"'></div>");
 	var toastHeader = $("<div class='toast-header'></div>");

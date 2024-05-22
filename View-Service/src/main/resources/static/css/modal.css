@@ -155,6 +155,7 @@
 	bottom:30px;
 	opacity:0;
 	background-color:rgba(0,0,0,0.75);
+	z-index:200000;
 }
 
 
