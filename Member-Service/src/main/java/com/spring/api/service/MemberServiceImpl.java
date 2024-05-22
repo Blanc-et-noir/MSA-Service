@@ -150,11 +150,15 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public void updateMember(String memberID, UpdateMemberRequestDTO dto) {
-		Optional<MemberEntity> member = memberRepository.findById(memberID);
+	public void updateMember(String memberID1, String memberID2, UpdateMemberRequestDTO dto) {
+		Optional<MemberEntity> member = memberRepository.findById(memberID2);
 			
 		if(!member.isPresent()||!member.get().isMemberStatusNormal()) {
 			throw new CustomException(MemberServiceCode.MEMBER_NOT_FOUND);
+		}
+		
+		if(!memberID1.equals(memberID2)) {
+			throw new CustomException(MemberServiceCode.OTHER_MEMBER_NOT_EDITABLE);
 		}
 		
 		if(dto.getMemberName()!=null) {
