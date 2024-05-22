@@ -88,10 +88,21 @@ jQuery(function(){
 		var delta = e.originalEvent.wheelDelta;
 		var height1 = $(".board-container-body-flex").css("height").replaceAll("px","");
 		var height2 = $(".board-container-body").css("height").replaceAll("px","");
-		var scroll = $(".board-container-body").scrollTop();
-		if(delta<0&&bookID!=null&&(height1-height2-scroll<1)){
-			readBooks();
+		var scroll = $(".board-container-body-flex").scrollTop();
+		
+		console.log(scroll);
+		
+		if(bookID==null){
+			return;
 		}
+		
+		if(wait){
+			return;
+		}
+		
+		if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+			readBooks();
+    	}
 		
 	});
 		

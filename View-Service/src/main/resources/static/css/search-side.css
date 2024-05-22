@@ -93,8 +93,8 @@
 
 .book-category-label-input-svg, .book-quality-label-input-svg{
 	display:block;
-	width:20px;
-	height:20px;
+	width:12px;
+	height:12px;
 	filter: invert(51%) sepia(5%) saturate(5%) hue-rotate(354deg) brightness(96%) contrast(86%);
 }
 
