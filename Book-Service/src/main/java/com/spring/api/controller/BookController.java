@@ -49,6 +49,7 @@ public class BookController {
 		@RequestParam(name="book-name", required=false) String bookName,
 		@RequestParam(name="book-publisher-name", required=false) String bookPublisherName,
 		@RequestParam(name="book-detailed-place", required=false) String bookDetailedPlace,
+		@RequestParam(name="member-id", required=false) String memberID,
 		@RequestParam(name="limit", required=false) Integer limit
 	) {
 		ReadBooksRequestDTO dto = ReadBooksRequestDTO.builder()
@@ -62,6 +63,7 @@ public class BookController {
 				.bookPublisherName(bookPublisherName)
 				.bookQualities(bookQualities)
 				.bookStatuses(bookStatuses)
+				.memberID(memberID)
 				.limit(limit)
 				.build();
 		

@@ -50,6 +50,9 @@ public class ReadBooksRequestDTO {
 	@JsonProperty("book-id")
 	private Long bookID;
 	
+	@JsonProperty("member-id")
+	private String memberID;
+	
 	@JsonProperty("limit")
 	private Integer limit;
 }

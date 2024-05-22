@@ -54,6 +54,10 @@ public class CustomBookRepositoryImpl implements CustomBookRepository{
 			sb.append(" AND b.bookDetailedPlace LIKE CONCAT('%', :bookDetailedPlace, '%')");
 		}
 		
+		if(dto.getMemberID()!=null) {
+			sb.append(" AND b.memberID = :memberID");
+		}
+		
 		sb.append(" ORDER BY b.bookID DESC");
 		
 		TypedQuery<BookEntity> query = em.createQuery(sb.toString(), BookEntity.class);
@@ -90,6 +94,10 @@ public class CustomBookRepositoryImpl implements CustomBookRepository{
 		
 		if(dto.getBookDetailedPlace()!=null) {
 			query.setParameter("bookDetailedPlace", dto.getBookDetailedPlace());
+		}
+		
+		if(dto.getMemberID()!=null) {
+			query.setParameter("memberID", dto.getMemberID());
 		}
 		
 		List<BookEntity> result = query.getResultList();
