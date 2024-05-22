@@ -214,7 +214,7 @@ public class BookServiceImpl implements BookService{
 		
 		Long bookID = null;
 		
-		for(BookEntity book : books) {			
+		for(BookEntity book : books) {
 			bookID = book.getBookID();
 			
 			List<BookImageDTO> list2 = new LinkedList<BookImageDTO>();
@@ -325,8 +325,8 @@ public class BookServiceImpl implements BookService{
 			throw new CustomException(BookServiceCode.BOOK_NOT_FOUND);
 		}
 		
-		if(dto.getBookStatuses()!=null&&!dto.getBookImageStatuses().isEmpty()) {
-			if(!dto.getBookImageStatuses().contains(book.get().getBookStatus())) {
+		if(dto.getBookStatuses()!=null&&!dto.getBookStatuses().isEmpty()) {
+			if(!dto.getBookStatuses().contains(book.get().getBookStatus())) {
 				throw new CustomException(BookServiceCode.BOOK_NOT_FOUND);
 			}
 		}
