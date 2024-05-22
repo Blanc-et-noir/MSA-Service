@@ -163,7 +163,7 @@ jQuery(function(){
 		}).done(function(response){
 			openToast({
 				"toast-type":"success",
-				"toast-message":"해당 이메일에 대한 소유권 인증에 성공했습니다. memberID 에 대한 임시 PW가 "+memberEmail+"로 전송되었습니다."
+				"toast-message":"해당 이메일에 대한 소유권 인증에 성공했습니다. "+memberID+" 에 대한 임시 PW가 "+memberEmail+"로 전송되었습니다."
 			})
 		}).fail(function(xhr, status, error){
 			var data = JSON.parse(xhr.responseText);
