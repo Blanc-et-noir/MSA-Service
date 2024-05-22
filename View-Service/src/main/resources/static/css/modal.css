@@ -145,6 +145,7 @@
 	fill: none;
 	stroke:white;
 	stroke-linecap: round;
+	display:none;
 }
 
 .toast-wrapper{

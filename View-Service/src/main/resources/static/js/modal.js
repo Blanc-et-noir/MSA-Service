@@ -1,5 +1,5 @@
-function progress(per) {
-	var bar = $(".bar");
+function progress(interval, per) {
+	var bar = $(".bar[interval='"+interval+"']");
 	var RADIUS = 54;
 	var CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 	
@@ -71,19 +71,18 @@ function openToast(config){
 	toastWrapper.append(toastFooter);
 	
 	$("body").append(toastWrapper);
-		
-	progress(per);
+	
+	var bar = circleProgressWrap.find(".bar");
 	
 	toastWrapper.css({
 		"display":"flex"
 	});
-	
+		
 	toastWrapper.animate({
 		"opacity":"1"
 	},300,"linear",function(){
-		progress(per)
 		var interval = setInterval(function(){
-			progress(per)
+			progress(interval, per)
 			per+=0.1;
 		
 			if(per>=100){
@@ -97,5 +96,11 @@ function openToast(config){
 				});
 			}
 		}, toastTime/1000);
+		
+		bar.attr("interval",interval);
+		progress(interval, 0);
+		bar.css({
+			"display":"block"
+		});
 	});
 }
