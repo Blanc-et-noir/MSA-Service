@@ -14,6 +14,7 @@ import org.springframework.security.web.server.context.NoOpServerSecurityContext
 import org.springframework.security.web.server.util.matcher.AndServerWebExchangeMatcher;
 import org.springframework.security.web.server.util.matcher.NegatedServerWebExchangeMatcher;
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
@@ -118,6 +119,8 @@ public class SecurityConfiguration {
 				//.pathMatchers(HttpMethod.PATCH, PERMITTED_PATCH_REQUESTS).permitAll()
 				.pathMatchers(HttpMethod.DELETE, PERMITTED_DELETE_REQUESTS).permitAll()
 				.pathMatchers(HttpMethod.GET, PERMITTED_VIEWS).permitAll()
+				.pathMatchers(HttpMethod.PUT,"/{member-ids}/tokens").denyAll()
+				.pathMatchers(HttpMethod.PATCH,"/{member-ids}/member-pws").denyAll()
 				.anyExchange().authenticated();
 		})
 		.securityContextRepository(NoOpServerSecurityContextRepository.getInstance())
