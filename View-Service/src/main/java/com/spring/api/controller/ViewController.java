@@ -79,9 +79,9 @@ public class ViewController {
 		return "/manage-reservations";
 	}
 	
-	@GetMapping("/account")
-	public String account() {
-		return "/account";
+	@GetMapping("/manage/accounts")
+	public String manageAccounts() {
+		return "/manage-accounts";
 	}
 	
 	@GetMapping("/report")

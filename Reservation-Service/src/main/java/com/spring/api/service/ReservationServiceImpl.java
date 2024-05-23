@@ -69,7 +69,6 @@ public class ReservationServiceImpl implements ReservationService{
 		try {
 			return restTemplate.getForObject(BOOK_SERVICE_BASE_URI+"/books/"+bookID+"?book-statuses=TRANSACTING&book-statuses=TRANSACTED&book-statuses=NORMAL", ReadBookResponseDTO.class).getData();
 		}catch(Exception e) {
-			e.printStackTrace();
 			return null;
 		}
 	}
