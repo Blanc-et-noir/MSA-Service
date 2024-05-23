@@ -41,9 +41,9 @@ jQuery(function(){
 		}
 	});
 	
-	$(document).on("click",".side-container-body-container-box[name='account']",function(e){
+	$(document).on("click",".side-container-body-container-box[name='manage-accounts']",function(e){
 		if(isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/account";
+			location.href=API_GATEWAY+"/api/v1/views/manage/accounts";
 		}else{
 			location.href=API_GATEWAY+"/api/v1/views/login";
 		}
