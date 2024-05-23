@@ -372,6 +372,26 @@ public class BookServiceImpl implements BookService{
 				.build();
 	}
 	
+	@Override
+	public void deleteBook(String memberID, Long bookID) {
+		Optional<BookEntity> book = bookRepository.findById(bookID);
+		
+		if(book.isEmpty()) {
+			throw new CustomException(BookServiceCode.BOOK_NOT_FOUND);
+		}
+		
+		if(!book.get().isBookStatusDeletable()) {
+			throw new CustomException(BookServiceCode.BOOK_NOT_DELETABLE_DUE_TO_BOOK_STATUS);
+		}
+		
+		if(!book.get().getMemberID().equals(memberID)) {
+			throw new CustomException(BookServiceCode.BOOK_NOT_DELETABLE_DUE_TO_MEMBER_ID);
+		}
+		
+		book.get().setBookDeleteTime(LocalDateTime.now());
+		book.get().setBookStatus(BookStatus.DELETED);
+	}
+	
 	private String getExtension(MultipartFile multipartFile) {		
 	    return FilenameUtils.getExtension(multipartFile.getOriginalFilename());
 	}

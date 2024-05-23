@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.api.dto.BookDTO;
 import com.spring.api.dto.ReadBookRequestDTO;
 import com.spring.api.enumeration.BookImageStatus;
 import com.spring.api.enumeration.BookStatus;
@@ -68,6 +69,11 @@ public class ViewController {
 		return "/board";
 	}
 	
+	@GetMapping("/manage/books/{book-ids}")
+	public String manageBook(@PathVariable("book-ids") Long bookID) {
+		return "/manage/books";
+	}
+	
 	@GetMapping("/manage")
 	public String manage() {
 		return "/manage";
@@ -99,13 +105,15 @@ public class ViewController {
 		@RequestParam(name="book-statuses", required=false) LinkedList<BookStatus> bookStatuses,
 		@RequestParam(name="book-image-statuses", required=false) LinkedList<BookImageStatus> bookImageStatuses) {
 		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/books");
-		modelAndView.addObject("book", viewService.readBook(ReadBookRequestDTO.builder()
+		BookDTO book = viewService.readBook(ReadBookRequestDTO.builder()
 				.bookID(bookID)
 				.bookImageStatuses(bookImageStatuses)
 				.bookStatuses(bookStatuses)
-				.build()));
+				.build());
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/books");
+		modelAndView.addObject("book", book);	
 
 		return modelAndView;
 	}

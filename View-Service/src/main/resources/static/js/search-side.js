@@ -84,14 +84,7 @@ jQuery(function(){
 		})
 	}
 	
-	$(document).on("mousewheel",".board-container-body",function(e){
-		var delta = e.originalEvent.wheelDelta;
-		var height1 = $(".board-container-body-flex").css("height").replaceAll("px","");
-		var height2 = $(".board-container-body").css("height").replaceAll("px","");
-		var scroll = $(".board-container-body-flex").scrollTop();
-		
-		console.log(scroll);
-		
+	$(document).on("mousewheel",".board-container-body",function(e){		
 		if(bookID==null){
 			return;
 		}

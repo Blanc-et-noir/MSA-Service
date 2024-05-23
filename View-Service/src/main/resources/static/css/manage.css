@@ -18,6 +18,11 @@
 .manage-container-body-wrapper{
 	margin:20px 0px;
 	border-radius:7px;
+	position:relative;
+}
+
+.manage-container-body-info-wrapper.hide{
+	
 }
 
 .manage-container-body-wrapper:hover{
@@ -26,4 +31,56 @@
 
 .manage-container-body-info-wrapper{
 	display:flex;
+}
+
+.menu-wrapper{
+	width:100%;
+	height:100%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	border-radius:7px;
+	background-color:rgba(0,0,0,0.75);
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+
+.book-id{
+	color:2f2f2f;
+}
+
+.menu-wrapper-body{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	border-radius:7px;
+	overflow:hidden;
+}
+
+.menu-wrapper-body-button{
+	border-radius:7px;
+	padding:10px;
+	margin:0px 10px;
+	color:white;
+}
+
+.menu-wrapper-body-button:hover{
+	color:#f05460;
+}
+
+.unregistered{
+	color:#f05460;
+}
+
+.normal{
+	color:#5d9528;
+}
+
+.transacting{
+	color:#f29100;
+}
+
+.transacted{
+	color:#0059a5;
 }

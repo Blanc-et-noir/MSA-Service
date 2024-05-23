@@ -103,6 +103,12 @@ public class BookEntity {
 		return bookStatus.equals(BookStatus.NORMAL);
 	}
 	
+	public boolean isBookStatusDeletable() {
+		return bookStatus.equals(BookStatus.UNREGISTERED)||
+				bookStatus.equals(BookStatus.NORMAL)||
+				bookStatus.equals(BookStatus.TRANSACTED);
+	}
+	
 	public boolean isBookStatusEditable() {
 		return bookStatus.equals(BookStatus.NORMAL) || bookStatus.equals(BookStatus.UNREGISTERED);
 	}

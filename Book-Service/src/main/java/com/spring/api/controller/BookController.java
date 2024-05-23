@@ -97,6 +97,12 @@ public class BookController {
 		return ResponseDTO.success("도서 이미지 삭제 성공");
 	}
 	
+	@DeleteMapping("/{book-ids}")
+	public ResponseDTO deleteBook(@RequestHeader("Member-id") String memberID, @PathVariable("book-ids") Long bookID) {
+		bookService.deleteBook(memberID,bookID);
+		return ResponseDTO.success("도서 삭제 성공");
+	}
+	
 	@GetMapping("/{book-ids}")
 	public ResponseDTO readBook(
 		@PathVariable("book-ids") Long bookID,
