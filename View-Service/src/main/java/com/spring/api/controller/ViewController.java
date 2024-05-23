@@ -69,24 +69,19 @@ public class ViewController {
 		return "/board";
 	}
 	
-	@GetMapping("/manage/books/{book-ids}")
-	public String manageBook(@PathVariable("book-ids") Long bookID) {
-		return "/manage/books";
+	@GetMapping("/manage/books")
+	public String manageBooks() {
+		return "/manage-books";
 	}
 	
-	@GetMapping("/manage")
-	public String manage() {
-		return "/manage";
+	@GetMapping("/manage/reservations")
+	public String manageReservations() {
+		return "/manage-reservations";
 	}
 	
 	@GetMapping("/account")
 	public String account() {
 		return "/account";
-	}
-	
-	@GetMapping("/reservation")
-	public String reservation() {
-		return "/reservation";
 	}
 	
 	@GetMapping("/report")
