@@ -1,0 +1,44 @@
+server:
+  port: 3005
+  address: localhost
+#  ssl:
+#    key-store: fullchain.pfx
+#    key-store-password: privatekey
+#    key-store-type: privatekey
+#    key-password: PKCS12
+  error:
+    whitelabel:
+      enabled: false
+spring:
+  jpa:
+    properties:
+      hibernate:
+#        format_sql: true
+#        highlight_sql: true
+#        use_sql_comments: true
+        default_batch_fetch_size: 100
+        jdbc:
+          batch_size: 100
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/reservation_service
+    username: root
+    password: privatekey
+    hikari:
+      idle-timeout: 300000
+      max-lifetime: 297000
+  application:
+    name: Reservation-Service
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: privatekey
+  servlet:
+    multipart:
+      maxFileSize: 10MB
+      maxRequestSize: 50MB
+#logging:
+#  level:
+#    org.hibernate.SQL: debug # logger에 출력하려면
+#    org.hibernate.type.descriptor.sql: trace # 파라미터 값 출력
