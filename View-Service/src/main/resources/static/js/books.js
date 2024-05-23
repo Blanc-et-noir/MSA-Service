@@ -65,4 +65,38 @@ jQuery(function(){
 	$(document).on("click",".modal-cover",function(e){
 		$(".modal-cover").remove();
 	});
+	
+	$(document).on("click",".books-container-footer-button[name='reserve']",function(e){
+		if(!isLoggedIn()){
+			location.href=API_GATEWAY+"/api/v1/views/login";
+		}
+		
+		$.ajax({
+			"url":API_GATEWAY+"/api/v1/reservations",
+			"headers":{
+				"member-access-token":loadMemberAccessToken()
+			},
+			"type":"post",
+			"dataType":"json",
+			"contentType":"application/json",
+			"dataType":"json",
+			"data":JSON.stringify({
+				"book-id":$(".books-container").attr("value")
+			})
+		}).done(function(response){
+			openToast({
+				"toast-type":"success",
+				"toast-message":"해당 도서에 대한 직거래를 요청했습니다."
+			})
+		}).fail(function(xhr, status, error){
+			var data = JSON.parse(xhr.responseText);
+			const code = data.code;
+			const message = data.message;
+				
+			openToast({
+				"toast-type":"fail",
+				"toast-message":message
+			})
+		})
+	});
 });

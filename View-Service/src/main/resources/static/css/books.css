@@ -146,14 +146,12 @@
 	height:100%;
 	outline:none;
 	border:none;
-	font-size:12px;
 	color:#808080;
 	resize: none;
 	field-sizing: content;
 	border-bottom:1px solid #f2f2f2;
 	padding:10px 0px;
 	display:block;
-	font-size:12px;
 	transition:0.2s;
 }
 .books-container-body-input-field-textarea:focus{
@@ -161,10 +159,6 @@
 	text-indent:10px;
 	transition:0.2s;
 	color:#0059a5;
-}
-
-.books-container{
-	background-color:none;
 }
 
 .books-container-body-input-field{
@@ -175,7 +169,6 @@
 .books-container-body-input-field-placeholder{
 	font-family:Pretendard-Regular;
 	color:#2f2f2f;
-	font-size:12px;
 }
 
 
@@ -187,7 +180,6 @@
 	border:none;
 	outline:none;
 	border-bottom:1px solid #f2f2f2;
-	font-size:12px;
 	transition:0.2s;
 }
 
@@ -203,7 +195,6 @@
 	border:none;
 	outline:none;
 	border-bottom:1px solid #0059a5;
-	font-size:12px;
 	text-indent:10px;
 }
 
@@ -255,7 +246,6 @@
 }
 
 .books-container-footer-button-title{
-	font-size:12px;
 	color:#808080;
 }
 
@@ -324,7 +314,6 @@
 
 .modal-wrapper-title{
 	color:white;
-	font-size:12px;
 	text-align:center;
 	margin-top:20px;
 }

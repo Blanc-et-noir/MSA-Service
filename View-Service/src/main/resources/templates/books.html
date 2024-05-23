@@ -26,7 +26,7 @@
 		<div class="modal"></div>
 		<div class="header"></div>
 		<div class="body">
-			<div class="books-container">
+			<div class="books-container" th:value="${book.bookID}">
 				<div class="books-container-header">
 					
 				</div>
@@ -111,13 +111,17 @@
 					</div>
 				</div>
 				<div class="books-container-footer" style="margin-top:40px;">
-					<div th:if="${book.bookStatus.toString().equals('NORMAL')}" class="books-container-footer-button" name="reserve" style="margin-right:10px;">
+					<div th:if="${#strings.equals(book.bookStatus.toString(),'TRANSACTING')}" class="books-container-footer-button" name="transacting" style="margin-right:10px;">
+						<img class="books-container-footer-button-svg" src="/svg/예약.svg">
+						<div class="books-container-footer-button-title">거래진행중</div>
+					</div>
+					<div th:if="${#strings.equals(book.bookStatus.toString(),'TRANSACTED')}" class="books-container-footer-button" name="transacted" style="margin-right:10px;">
+						<img class="books-container-footer-button-svg" src="/svg/예약.svg">
+						<div class="books-container-footer-button-title">거래완료</div>
+					</div>
+					<div th:if="${#strings.equals(book.bookStatus.toString(),'NORMAL')}" class="books-container-footer-button" name="reserve" style="margin-right:10px;">
 						<img class="books-container-footer-button-svg" src="/svg/예약.svg">
 						<div class="books-container-footer-button-title">직거래 예약 신청</div>
-					</div>
-					<div th:unless="${book.bookStatus.toString().equals('NORMAL')}" class="books-container-footer-button" name="not-able-to-reserve" style="margin-right:10px;">
-						<img class="books-container-footer-button-svg" src="/svg/예약.svg">
-						<div class="books-container-footer-button-title">직거래 예약 불가</div>
 					</div>
 					<div class="books-container-footer-button" name="report">
 						<img class="books-container-footer-button-svg" src="/svg/신고.svg">

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,20 +52,22 @@ public class MemberController {
 				.build()));
 	}
 	
+	//내부 서버용, 외부접근 차단
 	@PutMapping("/{member-ids}/tokens")
 	public ResponseDTO<?> updateMemberTokens(@PathVariable("member-ids") String memberID, @RequestBody UpdateMemberTokensRequestDTO dto) {
 		memberService.updateMemberTokens(memberID,dto);
 		return ResponseDTO.success("회원 토큰정보 변경 성공");
 	}
 	
+	//내부 서버용, 외부접근 차단
 	@PatchMapping("/{member-ids}/member-pws")
 	public ResponseDTO<?> updateMemberPW(@PathVariable("member-ids") String memberID, @RequestBody UpdateMemberPWRequestDTO dto) {
 		return ResponseDTO.success("회원 PW 변경 성공",memberService.updateMemberPW(memberID, dto));
 	}
 	
 	@PatchMapping("/{member-ids}")
-	public ResponseDTO<?> updateMember(@PathVariable("member-ids") String memberID, @RequestBody UpdateMemberRequestDTO dto) {
-		memberService.updateMember(memberID, dto);
+	public ResponseDTO<?> updateMember(@RequestHeader("Member-id") String memberID1, @PathVariable("member-ids") String memberID2, @RequestBody UpdateMemberRequestDTO dto) {
+		memberService.updateMember(memberID1, memberID2, dto);
 		return ResponseDTO.success("회원 PW 변경 성공");
 	}
 	

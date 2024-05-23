@@ -12,7 +12,7 @@ jQuery(function(){
 			bookID = $(e.target).parents(".board-container-body-wrapper").attr("value");
 		}
 		
-		location.href=API_GATEWAY+"/api/v1/views/books/"+bookID+"?book-statuses=NORMAL";
+		location.href=API_GATEWAY+"/api/v1/views/books/"+bookID+"?book-statuses=NORMAL&book-image-statuses=NORMAL";
 	});
 })
 

@@ -14,6 +14,6 @@ public interface MemberService {
 	public void updateMemberTokens(String memberID, UpdateMemberTokensRequestDTO dto);
 	public MemberDTO readMemberByMemberID(ReadMemberRequestByMemberIDDTO dto);
 	public MemberDTO updateMemberPW(String memberID, UpdateMemberPWRequestDTO dto);
-	public void updateMember(String memberID, UpdateMemberRequestDTO dto);
+	public void updateMember(String memberID1, String memberID2, UpdateMemberRequestDTO dto);
 	public SimpleMemberDTO readMemberByMemberEmail(ReadMemberRequestByMemberEmailDTO dto);
 }

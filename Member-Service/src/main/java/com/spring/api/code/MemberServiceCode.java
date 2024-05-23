@@ -16,7 +16,8 @@ public enum MemberServiceCode implements Code{
 	MEMBER_PW_NOT_MATCHED_TO_EACH_OTHER("MEMBER_PW_NOT_MATCHED_TO_EACH_OTHER","회원 PW와 PW CHECK가 서로 일치하지 않습니다.",HttpStatus.BAD_REQUEST),
 	MEMBER_EMAIL_NOT_BOUND_TO_MEMBER_ID("MEMBER_EMAIL_NOT_BOUND_TO_MEMBER_ID","해당 이메일은 해당 ID와 연동된 상태가 아닙니다.",HttpStatus.BAD_REQUEST),
 	MEMBER_ROLE_NOT_AVAILABLE("MEMBER_ROLE_NOT_AVAILABLE","해당 회원 역할은 사용하실 수 없습니다.",HttpStatus.BAD_REQUEST),
-	MEMBER_STATUS_NOT_AVAILABLE("MEMBER_STATUS_NOT_AVAILABLE","해당 회원 상태는 사용하실 수 없습니다.",HttpStatus.BAD_REQUEST);
+	MEMBER_STATUS_NOT_AVAILABLE("MEMBER_STATUS_NOT_AVAILABLE","해당 회원 상태는 사용하실 수 없습니다.",HttpStatus.BAD_REQUEST),
+	OTHER_MEMBER_NOT_EDITABLE("OTHER_MEMBER_NOT_EDITABLE","다른 회원의 정보는 수정하실 수 없습니다.",HttpStatus.BAD_REQUEST);
 	
 	private String code;
 	private String message;

@@ -11,6 +11,8 @@ public enum BookStatus {
 	UNREGISTERED,
 	DELETED,
 	SUSPENDED,
+	TRANSACTING,
+	TRANSACTED,
 	NORMAL;
 	
 	@JsonCreator

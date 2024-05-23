@@ -27,10 +27,9 @@
 		<div class="header"></div>
 		<div class="body">
 			<div class="error-container">
-				<div class="message" th:text="${code.message}"></div>
+				<div class="message" th:text="${message}"></div>
 				<div class="second"></div>
 			</div>
-			
 		</div>
 		<div class="footer" th:replace="~{./footer.html :: fragment}"></div>
 	</div>

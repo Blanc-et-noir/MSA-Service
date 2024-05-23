@@ -254,7 +254,6 @@ jQuery(function(){
 				$(".register-container-body-input-field-input[name='book-name']").addClass("selected");
 				openToast({
 					"toast-type":"fail",
-					"toast-time":10000,
 					"toast-message":"도서명은 1자리 이상, 40자리 이하의 한글, 영어, 숫자 및 일부 특수문자로 구성되어야 합니다."
 				})
 				

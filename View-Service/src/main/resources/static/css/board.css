@@ -11,7 +11,7 @@
 	width:90%;
 	max-width:1000px;
 	overflow-y:auto;
-	height:500px;
+
 }
 
 .board-container-footer{
@@ -80,7 +80,6 @@
 	position: absolute;
 	top:0px;
 	left:0px;
-	font-size:12px;
 }
 
 .board-container-body-info-wrapper{
@@ -94,7 +93,6 @@
 }
 
 .book-name, .book-price, .book-place, .book-quality{
-	font-size:9px;
 	color:white;
 	text-overflow:ellipsis;
 	white-space:nowrap;
@@ -149,7 +147,6 @@
 }
 
 .board-container-footer-container-button-title{
-	font-size:12px;
 	color:#808080;
 }
 

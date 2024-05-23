@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 public enum BookServiceCode implements Code{
-	BOOK_NOT_FOUND("BOOK_NOT_FOUND","해당 도서 정보가 존재하지 않습니다.",HttpStatus.BAD_REQUEST),
+	BOOK_NOT_FOUND("BOOK_NOT_FOUND","해당 도서 정보가 존재하지 않습니다.",HttpStatus.NOT_FOUND),
 	BOOK_NOT_EDITABLE_DUE_TO_BOOK_STATUS("BOOK_NOT_EDITABLE_DUE_TO_BOOK_STATUS","해당 도서는 현재 수정할 수 있는 상태가 아닙니다.",HttpStatus.BAD_REQUEST),
 	BOOK_NOT_EDITABLE_DUE_TO_MEMBER_ID("BOOK_NOT_EDITABLE_DUE_TO_MEMBER_ID","해당 도서는 자신이 등록한 도서가 아니므로 수정할 수 없습니다.",HttpStatus.BAD_REQUEST),
 	BOOK_IMAGE_NOT_FOUND("BOOK_IMAGE_NOT_FOUND","해당 도서 이미지 정보가 존재하지 않습니다.",HttpStatus.BAD_REQUEST),
@@ -20,7 +20,9 @@ public enum BookServiceCode implements Code{
 	BOOK_CATEGORY_NOT_AVAILABLE("BOOK_CATEGORY_NOT_AVAILABLE","해당 도서 카테고리는 사용하실 수 없습니다.",HttpStatus.BAD_REQUEST),
 	BOOK_MIN_PRICE_GREATER_THAN_BOOK_MAX_PRICE("BOOK_MIN_PRICE_GREATER_THAN_BOOK_MAX_PRICE","해당 도서 판매가격의 최소값이 해당 도서 판매가격의 최대값보다 큽니다. ",HttpStatus.BAD_REQUEST),
 	BOOK_IMAGE_NOT_DOWNLOADED_DUE_TO_ERROR("BOOK_IMAGE_NOT_DOWNLOADED_DUE_TO_ERROR","해당 도서 이미지를 다운로드 하는 과정에서 에러가 발생했습니다.",HttpStatus.BAD_REQUEST),
-	BOOK_IMAGE_TYPE_NOT_AVAILABLE("BOOK_IMAGE_TYPE_NOT_AVAILABLE","해당 도서 이미지 타입은 사용하실 수 없습니다.",HttpStatus.BAD_REQUEST);
+	BOOK_IMAGE_TYPE_NOT_AVAILABLE("BOOK_IMAGE_TYPE_NOT_AVAILABLE","해당 도서 이미지 타입은 사용하실 수 없습니다.",HttpStatus.BAD_REQUEST),
+	BOOK_NOT_DELETABLE_DUE_TO_BOOK_STATUS("BOOK_NOT_DELETABLE_DUE_TO_BOOK_STATUS","해당 도서는 삭제할 수 있는 상태가 아닙니다.",HttpStatus.BAD_REQUEST),
+	BOOK_NOT_DELETABLE_DUE_TO_MEMBER_ID("BOOK_NOT_DELETABLE_DUE_TO_MEMBER_ID","해당 도서는 자신이 등록한 도서가 아니므로 삭제할 수 없습니다.",HttpStatus.BAD_REQUEST);
 	
 	private String code;
 	private String message;

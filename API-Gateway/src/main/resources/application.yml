@@ -42,18 +42,8 @@ spring:
             - Path=/api/v1/verifications/**
           filters:
             - RewritePath=/verification-service/(?<segment>.*), /$\{segment}
-  
-  
-        # View Service
-              
-        - id: view-service
-          uri: http://localhost:3007
-          predicates:
-            - Path=/api/v1/views/**,/css/**,/js/**,/font/**,/svg/**,/favicon.ico
-          filters:
-            - RewritePath=/view-service/(?<segment>.*), /$\{segment}
-            
-            
+
+
         # Book Service
               
         - id: book-service
@@ -62,6 +52,26 @@ spring:
             - Path=/api/v1/books/**
           filters:
             - RewritePath=/book-service/(?<segment>.*), /$\{segment}
+
+
+        # Reservation Service
+              
+        - id: reservation-service
+          uri: http://localhost:3005
+          predicates:
+            - Path=/api/v1/reservations/**
+          filters:
+            - RewritePath=/reservation-service/(?<segment>.*), /$\{segment}
+
+
+        # View Service
+              
+        - id: view-service
+          uri: http://localhost:3007
+          predicates:
+            - Path=/api/v1/views/**,/css/**,/js/**,/font/**,/svg/**,/favicon.ico
+          filters:
+            - RewritePath=/view-service/(?<segment>.*), /$\{segment}
           
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver

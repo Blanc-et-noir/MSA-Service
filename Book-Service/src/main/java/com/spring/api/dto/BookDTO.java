@@ -33,7 +33,7 @@ public class BookDTO {
 	@JsonProperty("book-category")
 	private BookCategory bookCategory;
 	
-	@JsonProperty("book-Status")
+	@JsonProperty("book-status")
 	private BookStatus bookStatus;
 	
 	@JsonProperty("book-price")

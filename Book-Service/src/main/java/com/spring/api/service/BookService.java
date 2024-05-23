@@ -21,4 +21,5 @@ public interface BookService {
 	public ReadBooksResponseDTO readBooks(ReadBooksRequestDTO dto);
 	public ResponseEntity<byte[]> readBookImage(Long bookID, Long bookImageID, BookImageType bookImageType);
 	public BookDTO readBook(ReadBookRequestDTO readBookRequestDTO);
+	public void deleteBook(String memberID, Long bookID);
 }

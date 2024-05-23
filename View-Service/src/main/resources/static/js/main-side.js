@@ -25,9 +25,9 @@ jQuery(function(){
 		location.href=API_GATEWAY+"/api/v1/views/board";
 	});
 	
-	$(document).on("click",".side-container-body-container-box[name='manage']",function(e){
+	$(document).on("click",".side-container-body-container-box[name='manage-books']",function(e){
 		if(isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/manage";
+			location.href=API_GATEWAY+"/api/v1/views/manage/books";
 		}else{
 			location.href=API_GATEWAY+"/api/v1/views/login";
 		}
@@ -49,9 +49,9 @@ jQuery(function(){
 		}
 	});
 	
-	$(document).on("click",".side-container-body-container-box[name='reservation']",function(e){
+	$(document).on("click",".side-container-body-container-box[name='manage-reservations']",function(e){
 		if(isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/reservation";
+			location.href=API_GATEWAY+"/api/v1/views/manage/reservations";
 		}else{
 			location.href=API_GATEWAY+"/api/v1/views/login";
 		}
