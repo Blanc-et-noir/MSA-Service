@@ -2,11 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/jquery-ui.css">
 <link rel="stylesheet" href="/css/default.css">
 <link rel="stylesheet" href="/css/modal.css">
 <link rel="stylesheet" href="/css/side.css">
 <link rel="stylesheet" href="/css/main-side.css">
-<link rel="stylesheet" href="/css/intro.css">
+<link rel="stylesheet" href="/css/search-side.css">
+<link rel="stylesheet" href="/css/read-books.css">
 
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.js"></script>
@@ -16,17 +18,36 @@
 <script type="text/javascript" src="/js/jwt.js"></script>
 <script type="text/javascript" src="/js/side.js"></script>
 <script type="text/javascript" src="/js/main-side.js"></script>
-<script type="text/javascript" src="/js/intro.js"></script>
+<script type="text/javascript" src="/js/search-side.js"></script>
+<script type="text/javascript" src="/js/read-books.js"></script>
 
-<title>서비스 소개</title>
+<title>직거래 게시판</title>
 </head>
 <body>
 	<div class="container">
 		<div class="side" th:replace="~{./main-side.html :: fragment}"></div>
+		<div class="side" th:replace="~{./search-side.html :: fragment}"></div>
 		<div class="modal"></div>
 		<div class="header"></div>
 		<div class="body">
-		
+			<div class="board-container">
+				<div class="board-container-header">
+					
+				</div>
+				<div class="board-container-body">
+					<div class="board-container-body-flex">
+					
+					</div>
+				</div>
+				<div class="board-container-footer">
+					<div class="board-container-footer-container">
+						<div name="register" class="board-container-footer-container-button">
+							<img class="board-container-footer-container-button-svg" src="/svg/연필.svg">
+							<div class="board-container-footer-container-button-title">도서 등록</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="footer" th:replace="~{./footer.html :: fragment}"></div>
 	</div>

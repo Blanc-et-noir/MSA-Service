@@ -1,6 +1,6 @@
 jQuery(function(){
 	if(!isLoggedIn()){
-		location.href=API_GATEWAY+"/api/v1/views/login";
+		location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 	}
 	
 	$(document).on("click",".account-container-body-input-field-input",function(e){
@@ -137,7 +137,7 @@ jQuery(function(){
 		var name = $(".account-container-header-button.focused").attr("name");
 		
 		if(!isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 		
 		var memberID = readMemberID(loadMemberAccessToken());

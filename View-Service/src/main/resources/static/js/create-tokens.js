@@ -8,11 +8,11 @@ jQuery(function(){
 	})
 	
 	$(document).on("click","#find-button",function(e){
-		location.href="http://localhost:3000/api/v1/views/find";
+		location.href="http://localhost:3000/api/v1/views/find/members";
 	});
 	
 	$(document).on("click","#join-button",function(e){
-		location.href="http://localhost:3000/api/v1/views/join";
+		location.href="http://localhost:3000/api/v1/views/create/members";
 	});
 	
 	$(document).on("click","#login-button",function(e){

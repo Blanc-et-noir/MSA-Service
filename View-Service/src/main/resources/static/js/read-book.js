@@ -68,7 +68,7 @@ jQuery(function(){
 	
 	$(document).on("click",".books-container-footer-button[name='reserve']",function(e){
 		if(!isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 		
 		$.ajax({

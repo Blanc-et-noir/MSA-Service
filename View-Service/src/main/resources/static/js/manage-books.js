@@ -1,6 +1,6 @@
 jQuery(function(){
 	if(!isLoggedIn()){
-		location.href=API_GATEWAY+"/api/v1/views/login";
+		location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 	}
 	
 	const MAX_BOOK_ID = 9007199254740991;
@@ -93,7 +93,7 @@ jQuery(function(){
 	
 	function readBooks(){
 		if(!isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 		
 		if(wait){
@@ -177,7 +177,7 @@ jQuery(function(){
 	
 	$(document).on("click",".menu-wrapper-body-button[name='delete']",function(e){
 		if(!isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 		
 		var wrapper = $(e.target).parents(".manage-container-body-wrapper");
@@ -212,6 +212,13 @@ jQuery(function(){
 		var wrapper = $(e.target).parents(".manage-container-body-wrapper");
 		var bookID = wrapper.attr("value");
 		
-		location.href=API_GATEWAY+"/api/v1/views/books/"+bookID+"?book-statuses=NORMAL&book-statuses=TRANSACTING&book-statuses=TRANSACTED&book-image-statuses=NORMAL";
+		location.href=API_GATEWAY+"/api/v1/views/read/books/"+bookID+"?book-statuses=NORMAL&book-statuses=TRANSACTING&book-statuses=TRANSACTED&book-image-statuses=NORMAL";
+	})
+	
+	$(document).on("click",".menu-wrapper-body-button[name='update']",function(e){
+		var wrapper = $(e.target).parents(".manage-container-body-wrapper");
+		var bookID = wrapper.attr("value");
+		
+		location.href=API_GATEWAY+"/api/v1/views/update/books/"+bookID+"?book-statuses=NORMAL&book-statuses=UNREGISTERED&book-image-statuses=NORMAL";
 	})
 });

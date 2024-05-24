@@ -4,11 +4,11 @@ jQuery(function(){
 	}
 	
 	$(document).on("click","#login-button",function(e){
-		location.href=API_GATEWAY+"/api/v1/views/login";
+		location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 	});
 	
 	$(document).on("click","#find-button",function(e){
-		location.href=API_GATEWAY+"/api/v1/views/find";
+		location.href=API_GATEWAY+"/api/v1/views/find/members";
 	});
 	
 	$(document).on("click",".join-container-body-input-field-input",function(e){
