@@ -1,108 +1,4 @@
-/* 모달창 디자인 */
-
-.modal{
-	background-color:none;
-	right:30px;
-	top:30px;
-	position:absolute;
-	width:300px;
-	flex-direction:column;
-}
-
-.modal-container{
-	display:flex;
-	margin-bottom:10px;
-	flex-direction:column;
-	border-radius:5px;
-	overflow:hidden;
-	opacity:0;
-}
-
-.modal-upper-container{
-	display:flex;
-	padding:5px;
-}
-
-.modal-upper-container-header{
-	width:30px;
-	height:30px;
-	display:flex;
-	justify-content:center;
-	align-items: center;
-	margin-right:10px;
-}
-
-.modal-upper-container-header-svg{
-	height:70%;
-	height:70%;
-	display:block;
-}
-
-.modal-upper-container-body{
-	flex:1;
-}
-
-.modal-upper-container-body-title{
-	font-family:Pretendard-Regular;
-}
-
-.modal-upper-container-body-subtitle{
-	font-family:Pretendard-Regular;
-}
-
-.modal-upper-container-footer{
-	width:30px;
-	height:30px;
-	display:flex;
-	justify-content:center;
-	align-items: center;
-	margin-left:10px;
-}
-
-.modal-upper-container-footer-svg{
-	height:50%;
-	height:50%;
-	display:block;
-}
-
-.fail-modal-remaining-time-counter{
-	width:0%;
-	height:2px;
-	background-color:#a43c41;
-}
-
-.success-modal-remaining-time-counter{
-	width:0%;
-	height:2px;
-	background-color:#5d9528;
-}
-
-.info-modal-remaining-time-counter{
-	width:0%;
-	height:2px;
-	background-color:#0059a5;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* 토스트 디자인 */
 
 .circle-progress-wrap{
 	position: relative;
@@ -119,31 +15,11 @@
 
 .frame{
 	fill: none;
-	stroke: #ffffff;
 	opacity:0;
 }
 
-/*
-.toast-wrapper.fail .frame{
-	stroke: #fdeeef;
-}
-
-.toast-wrapper.info .frame{
-	stroke: #d9e7fd;
-}
-
-.toast-wrapper.success .frame{
-	stroke: #eef4e9;
-}
-
-.toast-wrapper.alert .frame{
-	stroke: #fef4e5;
-}
-*/
-
 .bar{
 	fill: none;
-	stroke:white;
 	stroke-linecap: round;
 	display:none;
 }
@@ -155,49 +31,80 @@
 	position:fixed;
 	bottom:30px;
 	opacity:0;
-	background-color:rgba(0,0,0,0.75);
 	z-index:200000;
 }
 
+/* 실패 */
 
-
-/*
 .toast-wrapper.fail{
-	
+	background-color:rgba(240, 87, 95,0.15);
 }
 
-.toast-wrapper.info{
-	
+.toast-wrapper.fail .bar{
+	stroke:rgba(240, 87, 95, 1);
 }
+
+.toast-wrapper.fail .toast-image, .toast-wrapper.fail .toast-close-button-svg{
+	filter: invert(34%) sepia(99%) saturate(1034%) hue-rotate(326deg) brightness(113%) contrast(88%);
+}
+
+
+
+
+
+/* 성공 */
 
 .toast-wrapper.success{
-	
+	background-color:rgba(93,149,40,0.15);
 }
+
+.toast-wrapper.success .bar{
+	stroke:rgba(93,149,40,1);
+}
+
+.toast-wrapper.success .toast-image, .toast-wrapper.success .toast-close-button-svg{
+	filter: invert(44%) sepia(83%) saturate(413%) hue-rotate(48deg) brightness(98%) contrast(82%);
+}
+
+
+
+
+
+/* 알림 */
+
+.toast-wrapper.info{
+	background-color:rgba(0,89,165,0.15);
+}
+
+.toast-wrapper.info .bar{
+	stroke:rgba(0,89,165, 1);
+}
+
+.toast-wrapper.info .toast-image, .toast-wrapper.info .toast-close-button-svg{
+	filter: invert(19%) sepia(99%) saturate(2167%) hue-rotate(193deg) brightness(93%) contrast(101%);
+}
+
+
+
+
+/* 경고 */
 
 .toast-wrapper.alert{
-	
-}
-*/
-
-
-
-/*
-.toast-wrapper.fail .toast-header{
-	background-color:#fcdddf;
+	background-color:rgba(242,145,0,0.15);
 }
 
-.toast-wrapper.info .toast-header{
-	background-color:#bbd4fb;
+.toast-wrapper.alert .bar{
+	stroke:rgba(242,145,0, 1);
 }
 
-.toast-wrapper.success .toast-header{
-	background-color:#dfead4;
+.toast-wrapper.alert .toast-image, .toast-wrapper.alert .toast-close-button-svg{
+	filter: invert(72%) sepia(29%) saturate(6473%) hue-rotate(1deg) brightness(94%) contrast(103%);
 }
 
-.toast-wrapper.alert .toast-header{
-	background-color:#fce9cc;
-}
-*/
+
+
+
+
 
 .toast-wrapper .toast-image{
 	width:8px;
@@ -207,28 +114,7 @@
 	top:50%;
 	left:50%;
 	transform:translate(-50%,-50%);
-	filter: invert(100%) sepia(3%) saturate(7333%) hue-rotate(102deg) brightness(113%) contrast(99%);
 }
-
-
-/*
-.toast-wrapper.fail .toast-image{
-	
-}
-
-.toast-wrapper.info .toast-image{
-	
-}
-
-.toast-wrapper.success .toast-image{
-	
-}
-
-.toast-wrapper.alert .toast-image{
-	
-}
-
-*/
 
 .toast-header{
 	position: relative;
@@ -249,8 +135,8 @@
 	flex:1;
 }
 
-.toast-message{
-	color:white;
+.toast-wrapper .toast-message{
+	color:#2f2f2f;
 }
 
 .toast-footer{
@@ -272,5 +158,4 @@
 	width:8px;
 	height:8px;
 	display:block;
-	filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(115deg) brightness(117%) contrast(106%);
 }
