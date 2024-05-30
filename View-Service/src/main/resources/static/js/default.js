@@ -52,3 +52,8 @@ function checkBookDescription(bookDescription){
 	const exp = /^[ㄱ-ㅎ가-힣ㅏ-ㅣa-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,1000}$/g;
 	return exp.test(bookDescription);
 }
+
+function checkReservationDescription(reservationDescription){
+	const exp = /^[ㄱ-ㅎ가-힣ㅏ-ㅣa-zA-Z0-9\`\~\!\@\#\$\%\^\&\*\(\)\-\_\=\+\,\.\?\*\s\:\;]{1,300}$/g;
+	return exp.test(reservationDescription);
+}

@@ -50,7 +50,7 @@ public class ReservationServiceImpl implements ReservationService{
 		}
 		
 		//이미 예약정보 있는지 확인
-		Optional<ReservationEntity> reservation = reservationRepository.findByBookIDAndMemberID(dto.getBookID(), memberID);
+		Optional<ReservationEntity> reservation = reservationRepository.findByBookIDAndBuyerMemberID(dto.getBookID(), memberID);
 		
 		if(reservation.isPresent()) {
 			throw new CustomException(ReservationServiceCode.RESERVATION_ALREADY_EXISTS);
@@ -61,7 +61,10 @@ public class ReservationServiceImpl implements ReservationService{
 				.bookID(dto.getBookID())
 				.reservationStatus(ReservationStatus.REQUESTED)
 				.reservationRequestTime(LocalDateTime.now())
-				.memberID(memberID)
+				.reservationDescription(dto.getReservationDescription())
+				.reservationWishTime(dto.getReservationWishTime())
+				.sellerMemberID(book.getMemberID())
+				.buyerMemberID(memberID)
 				.build());
 	}
 	

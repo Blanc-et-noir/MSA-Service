@@ -73,6 +73,10 @@
 						</div>
 					</div>
 					<div class="books-container-body-input-field" style="margin-top:60px;">
+						<div class="books-container-body-input-field-placeholder">도서번호</div>
+						<input readonly name="book-id" class="books-container-body-input-field-input" th:placeholder="${book.bookID}" th:value="${book.bookID}">
+					</div>
+					<div class="books-container-body-input-field">
 						<div class="books-container-body-input-field-placeholder">도서명</div>
 						<input readonly name="book-name" class="books-container-body-input-field-input" th:placeholder="${book.bookName}">
 					</div>
