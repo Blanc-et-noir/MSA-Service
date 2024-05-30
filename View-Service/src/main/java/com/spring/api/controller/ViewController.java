@@ -29,44 +29,34 @@ public class ViewController {
 		return "/home";
 	}
 	
-	@GetMapping("/join")
-	public String join() {
-		return "/join";
-	}
-	
-	@GetMapping("/login")
-	public String login() {
-		return "/login";
-	}
-	
-	@GetMapping("/logout")
-	public String logout() {
-		return "/logout";
-	}
-	
 	@GetMapping("/error")
 	public String error() {
 		return "/error";
 	}
 	
-	@GetMapping("/withdraw")
-	public String withdraw() {
-		return "/withdraw";
+	@GetMapping("/create/tokens")
+	public String createTokens() {
+		return "/create-tokens";
 	}
 	
-	@GetMapping("/find")
-	public String find() {
-		return "/find";
+	@GetMapping("/create/members")
+	public String createMembers() {
+		return "/create-members";
+	}	
+	
+	@GetMapping("/delete/members")
+	public String deleteMembers() {
+		return "/delete-members";
 	}
 	
-	@GetMapping("/intro")
-	public String intro() {
-		return "/intro";
+	@GetMapping("/find/members")
+	public String findMembers() {
+		return "/find-members";
 	}
 	
-	@GetMapping("/board")
-	public String board() {
-		return "/board";
+	@GetMapping("/read/books")
+	public String readBooks() {
+		return "/read-books";
 	}
 	
 	@GetMapping("/manage/books")
@@ -79,23 +69,42 @@ public class ViewController {
 		return "/manage-reservations";
 	}
 	
-	@GetMapping("/manage/accounts")
-	public String manageAccounts() {
-		return "/manage-accounts";
+	@GetMapping("/manage/members")
+	public String manageMembers() {
+		return "/manage-members";
 	}
 	
-	@GetMapping("/report")
-	public String report() {
-		return "/report";
+	@GetMapping("/create/reports")
+	public String createReports() {
+		return "/create-reports";
 	}
 	
-	@GetMapping("/register")
-	public String register() {
-		return "/register";
+	@GetMapping("/create/books")
+	public String createBooks() {
+		return "/create-books";
 	}
 	
-	@GetMapping("/books/{book-ids}")
-	public ModelAndView books(
+	@GetMapping("/update/books/{book-ids}")
+	public ModelAndView updateBooks(
+			@PathVariable("book-ids") Long bookID,
+			@RequestParam(name="book-statuses", required=false) LinkedList<BookStatus> bookStatuses,
+			@RequestParam(name="book-image-statuses", required=false) LinkedList<BookImageStatus> bookImageStatuses) {
+		
+		BookDTO book = viewService.readBook(ReadBookRequestDTO.builder()
+				.bookID(bookID)
+				.bookImageStatuses(bookImageStatuses)
+				.bookStatuses(bookStatuses)
+				.build());
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/create-books");
+		modelAndView.addObject("book", book);
+		
+		return modelAndView;
+	}
+	
+	@GetMapping("/read/books/{book-ids}")
+	public ModelAndView readBooks(
 		@PathVariable("book-ids") Long bookID,
 		@RequestParam(name="book-statuses", required=false) LinkedList<BookStatus> bookStatuses,
 		@RequestParam(name="book-image-statuses", required=false) LinkedList<BookImageStatus> bookImageStatuses) {
@@ -107,7 +116,7 @@ public class ViewController {
 				.build());
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("/books");
+		modelAndView.setViewName("/read-book");
 		modelAndView.addObject("book", book);	
 
 		return modelAndView;

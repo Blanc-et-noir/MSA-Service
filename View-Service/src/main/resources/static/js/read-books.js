@@ -1,6 +1,6 @@
 jQuery(function(){
 	$(document).on("click",".board-container-footer-container-button[name='register']",function(){
-		location.href=API_GATEWAY+"/api/v1/views/register";
+		location.href=API_GATEWAY+"/api/v1/views/create/books";
 	});
 	
 	$(document).on("click",".board-container-body-wrapper", function(e){
@@ -12,7 +12,7 @@ jQuery(function(){
 			bookID = $(e.target).parents(".board-container-body-wrapper").attr("value");
 		}
 		
-		location.href=API_GATEWAY+"/api/v1/views/books/"+bookID+"?book-statuses=NORMAL&book-image-statuses=NORMAL";
+		location.href=API_GATEWAY+"/api/v1/views/read/books/"+bookID+"?book-statuses=NORMAL&book-image-statuses=NORMAL";
 	});
 })
 

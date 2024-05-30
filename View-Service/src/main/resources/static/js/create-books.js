@@ -1,11 +1,15 @@
 jQuery(function(){
 	if(!isLoggedIn()){
-		location.href=API_GATEWAY+"/api/v1/views/login";
+		location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 	}
 	
 	var bookID = null;
 	var bookImageCapacity = 4;
 	var bookImageMaxSize = 10*1024*1024;
+	
+	if($(".register-container-body").attr("value").length!=0){
+		bookID = $(".register-container-body").attr("value");
+	}
 	
 	function setNavigationButton(){
 		if($(".register-container-box.focused").next(".register-container-box").length==0){
@@ -28,7 +32,7 @@ jQuery(function(){
 	
 	$(document).on("click","#book-image-add-button",function(e){
 		if(!isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 		
 		if($(".book-image-wrapper").length>=bookImageCapacity){
@@ -64,7 +68,7 @@ jQuery(function(){
 			var bookImageID = wrapper.attr("value");
 			
 			if(!isLoggedIn()){
-				location.href=API_GATEWAY+"/api/v1/views/login";
+				location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 			}
 
 			$.ajax({
@@ -92,7 +96,7 @@ jQuery(function(){
 	
 	$(document).on("change",".book-image-input",function(e) {
 		if(!isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 		
 		if(e.target.files[0].size>bookImageMaxSize){
@@ -140,7 +144,7 @@ jQuery(function(){
 	
 	$(document).on("click","#register-button",function(e){
 		if(!isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 				
 		$.ajax({
@@ -271,7 +275,7 @@ jQuery(function(){
 			
 			if(bookID==null){
 				if(!isLoggedIn()){
-					location.href=API_GATEWAY+"/api/v1/views/login";
+					location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 				}
 				
 				$.ajax({
@@ -309,7 +313,7 @@ jQuery(function(){
 				})
 			}else{
 				if(!isLoggedIn()){
-					location.href=API_GATEWAY+"/api/v1/views/login";
+					location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 				}
 				
 				$.ajax({
@@ -351,7 +355,7 @@ jQuery(function(){
 			var bookQuality = $(".register-container-body-input-field-input[name='book-quality']").val();
 			
 			if(!isLoggedIn()){
-				location.href=API_GATEWAY+"/api/v1/views/login";
+				location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 			}
 			
 			if(!(bookPrice>=1&&bookPrice<=100000)){
@@ -398,7 +402,7 @@ jQuery(function(){
 			var bookDetailedPlace = $(".register-container-body-input-field-input[name='book-detailed-place']").val();
 			
 			if(!isLoggedIn()){
-				location.href=API_GATEWAY+"/api/v1/views/login";
+				location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 			}
 			
 			if(!checkBookPlace(bookPlace)){
@@ -453,7 +457,7 @@ jQuery(function(){
 			var bookDescription = $(".register-container-body-input-field-input[name='book-description']").val();
 			
 			if(!isLoggedIn()){
-				location.href=API_GATEWAY+"/api/v1/views/login";
+				location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 			}
 			
 			if(!checkBookDescription(bookDescription)){

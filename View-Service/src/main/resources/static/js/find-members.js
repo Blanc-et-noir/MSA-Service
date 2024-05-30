@@ -4,11 +4,11 @@ jQuery(function(){
 	}
 	
 	$(document).on("click","#join-button",function(e){
-		location.href=API_GATEWAY+"/api/v1/views/join";
+		location.href=API_GATEWAY+"/api/v1/views/create/members";
 	});
 	
 	$(document).on("click","#login-button",function(e){
-		location.href=API_GATEWAY+"/api/v1/views/login";
+		location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 	});
 	
 	$(document).on("click",".find-container-header-button",function(e){
@@ -90,6 +90,11 @@ jQuery(function(){
 			$("#member-email-input-for-find-member-pw").addClass("selected");
 			return;
 		}
+		
+		openToast({
+			"toast-type":"info",
+			"toast-message":"해당 이메일에 대한 인증코드를 발송하는 중입니다."
+		})
 		
 		$.ajax({
 			"url":API_GATEWAY+"/api/v1/verifications/member-pws",

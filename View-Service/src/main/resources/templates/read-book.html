@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/css/modal.css">
 <link rel="stylesheet" href="/css/side.css">
 <link rel="stylesheet" href="/css/main-side.css">
-<link rel="stylesheet" href="/css/books.css">
+<link rel="stylesheet" href="/css/read-book.css">
 
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.js"></script>
@@ -16,7 +16,7 @@
 <script type="text/javascript" src="/js/jwt.js"></script>
 <script type="text/javascript" src="/js/side.js"></script>
 <script type="text/javascript" src="/js/main-side.js"></script>
-<script type="text/javascript" src="/js/books.js"></script>
+<script type="text/javascript" src="/js/read-book.js"></script>
 
 <title>도서 상세정보</title>
 </head>
@@ -73,6 +73,10 @@
 						</div>
 					</div>
 					<div class="books-container-body-input-field" style="margin-top:60px;">
+						<div class="books-container-body-input-field-placeholder">도서번호</div>
+						<input readonly name="book-id" class="books-container-body-input-field-input" th:placeholder="${book.bookID}" th:value="${book.bookID}">
+					</div>
+					<div class="books-container-body-input-field">
 						<div class="books-container-body-input-field-placeholder">도서명</div>
 						<input readonly name="book-name" class="books-container-body-input-field-input" th:placeholder="${book.bookName}">
 					</div>

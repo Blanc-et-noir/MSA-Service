@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/css/modal.css">
 <link rel="stylesheet" href="/css/side.css">
 <link rel="stylesheet" href="/css/main-side.css">
-<link rel="stylesheet" href="/css/register.css">
+<link rel="stylesheet" href="/css/create-books.css">
 
 <script type="text/javascript" src="/js/jquery.js"></script>
 <script type="text/javascript" src="/js/jquery-ui.js"></script>
@@ -17,7 +17,7 @@
 <script type="text/javascript" src="/js/side.js"></script>
 <script type="text/javascript" src="/js/main-side.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script type="text/javascript" src="/js/register.js"></script>
+<script type="text/javascript" src="/js/create-books.js"></script>
 
 <title>등록하기</title>
 </head>
@@ -31,28 +31,28 @@
 				<div class="register-container-header">
 				
 				</div>
-				<div class="register-container-body">
+				<div class="register-container-body" th:value="${book!=null?book.bookID:''}">
 					<div class="register-container-box focused" value="1">
 						<div class="register-container-body-input-field">
 							<div class="register-container-body-input-field-placeholder">도서명</div>
-							<input name="book-name" class="register-container-body-input-field-input" placeholder="도서명을 입력하세요.">
+							<input th:value="${book!=null?book.bookName:''}" name="book-name" class="register-container-body-input-field-input" placeholder="도서명을 입력하세요.">
 						</div>
 						<div class="register-container-body-input-field">
 							<div class="register-container-body-input-field-placeholder">출판사명</div>
-							<input name="book-publisher-name" class="register-container-body-input-field-input" placeholder="출판사명을 입력하세요.">
+							<input th:value="${book!=null?book.bookPublisherName:''}" name="book-publisher-name" class="register-container-body-input-field-input" placeholder="출판사명을 입력하세요.">
 						</div>
 						<div class="register-container-body-input-field">
 							<div class="register-container-body-input-field-placeholder">카테고리</div>
 							<select name="book-category" class="register-container-body-input-field-input">
-								<option value="humanities">인문</option>
-								<option value="politics">정치/사회</option>
-								<option value="economics">경제/경영</option>
-								<option value="natural_science">자연과학</option>
-								<option value="technical_engineering">기술공학</option>
-								<option value="computer_engineering">컴퓨터공학</option>
-								<option value="arts_physical_education">예체능</option>
-								<option value="foreign_languages">외국어</option>
-								<option value="etc">기타</option>
+								<option th:selected="${book!=null and book.bookCategory!=null?book.bookCategory.toString():''}=='HUMANITIES'" value="humanities">인문</option>
+								<option th:selected="${book!=null and book.bookCategory!=null?book.bookCategory.toString():''}=='POLITICS'" value="politics">정치/사회</option>
+								<option th:selected="${book!=null and book.bookCategory!=null?book.bookCategory.toString():''}=='ECONOMICS'" value="economics">경제/경영</option>
+								<option th:selected="${book!=null and book.bookCategory!=null?book.bookCategory.toString():''}=='NATURAL_SCIENCE'" value="natural_science">자연과학</option>
+								<option th:selected="${book!=null and book.bookCategory!=null?book.bookCategory.toString():''}=='TECHNICAL_ENGINEERING'" value="technical_engineering">기술공학</option>
+								<option th:selected="${book!=null and book.bookCategory!=null?book.bookCategory.toString():''}=='COMPUTER_ENGINEERING'" value="computer_engineering">컴퓨터공학</option>
+								<option th:selected="${book!=null and book.bookCategory!=null?book.bookCategory.toString():''}=='ARTS_PHYSICAL_EDUCATION'" value="arts_physical_education">예체능</option>
+								<option th:selected="${book!=null and book.bookCategory!=null?book.bookCategory.toString():''}=='FORREIGN_LANGUAGES'" value="foreign_languages">외국어</option>
+								<option th:selected="${book!=null and book.bookCategory!=null?book.bookCategory.toString():''}=='ETC'" value="etc">기타</option>
 							</select>
 						</div>
 					</div>
@@ -60,22 +60,22 @@
 						<div class="register-container-body-input-field">
 							<div class="register-container-body-input-field-placeholder">상품상태</div>
 							<select name="book-quality" class="register-container-body-input-field-input">
-								<option value="A">A급 : 사용감이 거의 없는 상태</option>
-								<option value="B">B급 : 사용감은 있으나 깨끗한 상태</option>
-								<option value="C">C급 : 사용감이 많아 지저분한 상태</option>
-								<option value="D">D급 : 겨우 읽을 수는 있는 상태</option>
+								<option th:selected="${book!=null and book.bookQuality!=null?book.bookQuality.toString():''}=='A'" value="A">A급 : 사용감이 거의 없는 상태</option>
+								<option th:selected="${book!=null and book.bookQuality!=null?book.bookQuality.toString():''}=='B'" value="B">B급 : 사용감은 있으나 깨끗한 상태</option>
+								<option th:selected="${book!=null and book.bookQuality!=null?book.bookQuality.toString():''}=='C'" value="C">C급 : 사용감이 많아 지저분한 상태</option>
+								<option th:selected="${book!=null and book.bookQuality!=null?book.bookQuality.toString():''}=='D'" value="D">D급 : 겨우 읽을 수는 있는 상태</option>
 							</select>
 						</div>
 						<div class="register-container-body-input-field">
 							<div class="register-container-body-input-field-placeholder">판매가격</div>
-							<input type="number" name="book-price" class="register-container-body-input-field-input" placeholder="가격을 입력하세요. (단위 : 원)">
+							<input th:value="${book!=null?book.bookPrice:''}" type="number" name="book-price" class="register-container-body-input-field-input" placeholder="가격을 입력하세요. (단위 : 원)">
 						</div>
 					</div>
 					<div class="register-container-box" value="3">
 						<div class="register-container-body-input-field">
 							<div class="register-container-body-input-field-placeholder">거래장소</div>
-							<input name="book-place" class="register-container-body-input-field-input" readonly placeholder="주소검색을 통해 거래장소를 등록하세요.">
-							<input name="book-detailed-place" class="register-container-body-input-field-input" readonly style="display:none;">
+							<input th:value="${book!=null?book.bookPlace:''}" name="book-place" class="register-container-body-input-field-input" readonly placeholder="주소검색을 통해 거래장소를 등록하세요.">
+							<input th:value="${book!=null?book.bookDetailedPlace:''}" name="book-detailed-place" class="register-container-body-input-field-input" readonly style="display:none;">
 							<div id="wrap"></div>
 							<div id="address-modal-buttons" style="disply:flex">
 								<div id="open-address-modal-button">
@@ -92,7 +92,7 @@
 					<div class="register-container-box" value="4">
 						<div class="register-container-body-input-field">
 							<div class="register-container-body-input-field-placeholder">도서 설명</div>
-							<textarea name="book-description" class="register-container-body-input-field-input" placeholder="도서에 대한 설명(상태, 가격, 거래장소 포함)을 자세히 입력하세요."></textarea>
+							<textarea th:text="${book!=null?book.bookDescription:''}" name="book-description" class="register-container-body-input-field-input" placeholder="도서에 대한 설명(상태, 가격, 거래장소 포함)을 자세히 입력하세요."></textarea>
 						</div>
 					</div>
 					<div class="register-container-box" value="5">
@@ -109,7 +109,17 @@
 									</div>
 								</div>
 								<div class="book-image-upload-container-body">
-								
+									<div th:if="${book!=null and book.bookImages!=null}">
+										<div th:each="bookImage : ${book.bookImages}" class='book-image-wrapper book-image-added' value="${bookImage.bookImageID}">
+											<label class='book-image-label'>
+												<img src='/svg/이미지추가.svg' class='book-image-thumbnail' th:src="${bookImage.bookImageURL}"/>
+												<input class='book-image-input' type='file' accept='image/png, image/jpeg, image/jpg'/ disabled>
+											</label>
+											<div class='book-image-delete-button'>
+												<img class='book-image-delete-button-svg' src='/svg/모퉁이엑스.svg' />
+											</div>
+										</div>
+									</div>
 								</div>
 								<div class="book-image-upload-container-footer">
 								

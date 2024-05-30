@@ -1,5 +1,7 @@
 package com.spring.api.dto;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -16,4 +18,10 @@ import lombok.Setter;
 public class CreateReservationRequestDTO {
 	@JsonProperty("book-id")
 	private Long bookID;
+	
+	@JsonProperty("reservation-description")
+	private String reservationDescription;
+	
+	@JsonProperty("reservation-wish-time")
+	private LocalDateTime reservationWishTime;
 }

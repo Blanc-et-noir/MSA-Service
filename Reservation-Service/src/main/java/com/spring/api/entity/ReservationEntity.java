@@ -57,9 +57,18 @@ public class ReservationEntity {
 	@Column(name="reservation_delete_time")
 	private LocalDateTime reservationDeleteTime;
 	
+	@Column(name="reservation_wish_time")
+	private LocalDateTime reservationWishTime;
+	
+	@Column(name="reservation_description")
+	private String reservationDescription;
+	
 	@Column(name="book_id")
 	private Long bookID;
 	
-	@Column(name="member_id")
-	private String memberID;
+	@Column(name="buyer_member_id")
+	private String buyerMemberID;
+	
+	@Column(name="seller_member_id")
+	private String sellerMemberID;
 }

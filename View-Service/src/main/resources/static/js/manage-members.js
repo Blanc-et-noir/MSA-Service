@@ -1,6 +1,6 @@
 jQuery(function(){
 	if(!isLoggedIn()){
-		location.href=API_GATEWAY+"/api/v1/views/login";
+		location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 	}
 	
 	$(document).on("click",".account-container-body-input-field-input",function(e){
@@ -48,6 +48,11 @@ jQuery(function(){
 			$(".join-container-body-input-field-input[name='member-email']").addClass("selected");
 			return;
 		}
+		
+		openToast({
+			"toast-type":"info",
+			"toast-message":"해당 이메일에 대한 인증코드를 발송하는 중입니다."
+		})
 		
 		$.ajax({
 			"url":API_GATEWAY+"/api/v1/verifications/member-emails",
@@ -137,7 +142,7 @@ jQuery(function(){
 		var name = $(".account-container-header-button.focused").attr("name");
 		
 		if(!isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 		
 		var memberID = readMemberID(loadMemberAccessToken());

@@ -6,46 +6,42 @@ jQuery(function(){
 	}
 	
 	$(document).on("click",".main-side-container-footer-button[name='login']",function(e){
-		location.href=API_GATEWAY+"/api/v1/views/login";
+		location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 	});
 	
 	$(document).on("click",".main-side-container-footer-button[name='join']",function(e){
-		location.href=API_GATEWAY+"/api/v1/views/join";
+		location.href=API_GATEWAY+"/api/v1/views/create/members";
 	});
 	
 	$(document).on("click",".side-container-body-container-box[name='home']",function(e){
 		location.href=API_GATEWAY+"/api/v1/views/home";
 	});
 	
-	$(document).on("click",".side-container-body-container-box[name='intro']",function(e){
-		location.href=API_GATEWAY+"/api/v1/views/intro";
-	});
-	
 	$(document).on("click",".side-container-body-container-box[name='board']",function(e){
-		location.href=API_GATEWAY+"/api/v1/views/board";
+		location.href=API_GATEWAY+"/api/v1/views/read/books";
 	});
 	
 	$(document).on("click",".side-container-body-container-box[name='manage-books']",function(e){
 		if(isLoggedIn()){
 			location.href=API_GATEWAY+"/api/v1/views/manage/books";
 		}else{
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 	});
 	
 	$(document).on("click",".side-container-body-container-box[name='register']",function(e){
 		if(isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/register";
+			location.href=API_GATEWAY+"/api/v1/views/create/books";
 		}else{
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 	});
 	
-	$(document).on("click",".side-container-body-container-box[name='manage-accounts']",function(e){
+	$(document).on("click",".side-container-body-container-box[name='manage-members']",function(e){
 		if(isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/manage/accounts";
+			location.href=API_GATEWAY+"/api/v1/views/manage/members";
 		}else{
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 	});
 	
@@ -53,23 +49,23 @@ jQuery(function(){
 		if(isLoggedIn()){
 			location.href=API_GATEWAY+"/api/v1/views/manage/reservations";
 		}else{
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 	});
 	
 	$(document).on("click",".side-container-body-container-box[name='report']",function(e){
 		if(isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/report";
+			location.href=API_GATEWAY+"/api/v1/views/create/reports";
 		}else{
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 	});
 	
 	$(document).on("click",".side-container-body-container-box[name='withdraw']",function(e){		
 		if(isLoggedIn()){
-			location.href=API_GATEWAY+"/api/v1/views/withdraw";
+			location.href=API_GATEWAY+"/api/v1/views/delete/members";
 		}else{
-			location.href=API_GATEWAY+"/api/v1/views/login";
+			location.href=API_GATEWAY+"/api/v1/views/create/tokens";
 		}
 	});
 	
