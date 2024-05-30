@@ -91,6 +91,11 @@ jQuery(function(){
 			return;
 		}
 		
+		openToast({
+			"toast-type":"info",
+			"toast-message":"해당 이메일에 대한 인증코드를 발송하는 중입니다."
+		})
+		
 		$.ajax({
 			"url":API_GATEWAY+"/api/v1/verifications/member-pws",
 			"type":"post",
