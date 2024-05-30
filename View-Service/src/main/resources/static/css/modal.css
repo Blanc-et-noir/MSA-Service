@@ -37,11 +37,11 @@
 /* 실패 */
 
 .toast-wrapper.fail{
-	background-color:rgba(240, 87, 95,0.15);
+	background-color:#fde6e7;
 }
 
 .toast-wrapper.fail .bar{
-	stroke:rgba(240, 87, 95, 1);
+	stroke:rgb(240, 87, 95);
 }
 
 .toast-wrapper.fail .toast-image, .toast-wrapper.fail .toast-close-button-svg{
@@ -55,11 +55,11 @@
 /* 성공 */
 
 .toast-wrapper.success{
-	background-color:rgba(93,149,40,0.15);
+	background-color:#e7efdf;
 }
 
 .toast-wrapper.success .bar{
-	stroke:rgba(93,149,40,1);
+	stroke:rgb(93,149,40);
 }
 
 .toast-wrapper.success .toast-image, .toast-wrapper.success .toast-close-button-svg{
@@ -73,11 +73,11 @@
 /* 알림 */
 
 .toast-wrapper.info{
-	background-color:rgba(0,89,165,0.15);
+	background-color:#d9e6f2;
 }
 
 .toast-wrapper.info .bar{
-	stroke:rgba(0,89,165, 1);
+	stroke:rgb(0,89,165);
 }
 
 .toast-wrapper.info .toast-image, .toast-wrapper.info .toast-close-button-svg{
@@ -90,11 +90,11 @@
 /* 경고 */
 
 .toast-wrapper.alert{
-	background-color:rgba(242,145,0,0.15);
+	background-color:#fdefd9;
 }
 
 .toast-wrapper.alert .bar{
-	stroke:rgba(242,145,0, 1);
+	stroke:rgb(242,145,0);
 }
 
 .toast-wrapper.alert .toast-image, .toast-wrapper.alert .toast-close-button-svg{
