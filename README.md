@@ -28,6 +28,8 @@
 
   #### Back-end : Java 21, Spring Boot, Spring Security, Spring Cloud, JPA, MariaDB
 
+  #### Server : Oracle Free Tier(사용예정), AWS(차선책)
+
 </details>
 
 <br>
