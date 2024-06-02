@@ -159,7 +159,7 @@ jQuery(function(){
 				"book-status":"NORMAL"
 			})
 		}).done(function(response){
-			location.href=API_GATEWAY+"/api/v1/views/board";
+			location.href=API_GATEWAY+"/api/v1/views/read/books";
 		}).fail(function(xhr, status, error){
 			var data = JSON.parse(xhr.responseText);
 			const code = data.code;
