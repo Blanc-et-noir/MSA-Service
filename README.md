@@ -59,44 +59,46 @@
 <details>
 <summary>회원가입</summary>
 
-  1. 높은 교재 구매 비용에 따른 대학생들의 경제적 부담을 완화하고자 개발중인 중고 직거래 커뮤니티입니다.
+![ezgif-6-c250e18983](https://github.com/Blanc-et-noir/MSA-Service/assets/83106564/e42745d4-0b39-40b9-94ce-8ef072596ba2)
 
-  2. MSA 구조로 개발된 RESTful API 서버를 통해 서버 장애 발생시에 일부 기능은 그대로 사용할 수 있도록 가용성을 확보했습니다.
-
-  3. Spring Cloud, Security를 활용하여 JWT 토큰을 활용한 API-Gateway를 개발했으며, 각 서비스에 대한 요청을 처리하기 이전에 사용자 인증을 총괄적으로 처리합니다.
+  1. 회원 가입시 이메일 인증을 통해, 무분별한 회원 가입을 방지하고 있습니다.
 
 </details>
+
+<br>
 
 <details>
 <summary>로그인</summary>
+  
+![ezgif-5-f407c934d6](https://github.com/Blanc-et-noir/MSA-Service/assets/83106564/5b53697f-668a-4e82-beb5-e0c45ca308a3)
 
-  1. 높은 교재 구매 비용에 따른 대학생들의 경제적 부담을 완화하고자 개발중인 중고 직거래 커뮤니티입니다.
-
-  2. MSA 구조로 개발된 RESTful API 서버를 통해 서버 장애 발생시에 일부 기능은 그대로 사용할 수 있도록 가용성을 확보했습니다.
-
-  3. Spring Cloud, Security를 활용하여 JWT 토큰을 활용한 API-Gateway를 개발했으며, 각 서비스에 대한 요청을 처리하기 이전에 사용자 인증을 총괄적으로 처리합니다.
+  1. 로그인 실패를 포함하여 에러가 발생할 경우, 사용자에게 토스트 메세지를 전달합니다. 
 
 </details>
+
+<br>
 
 <details>
 <summary>도서 등록</summary>
 
-  1. 높은 교재 구매 비용에 따른 대학생들의 경제적 부담을 완화하고자 개발중인 중고 직거래 커뮤니티입니다.
+![ezgif-6-5d02562ade](https://github.com/Blanc-et-noir/MSA-Service/assets/83106564/f386eca4-839e-4823-b149-528799d36f17)
 
-  2. MSA 구조로 개발된 RESTful API 서버를 통해 서버 장애 발생시에 일부 기능은 그대로 사용할 수 있도록 가용성을 확보했습니다.
+  1. 도서 등록 과정을 단계별로 진행하여, 모든 등록절차가 완료되지 않더라도, 도서 정보가 임시 저장될 수 있도록 했습니다.
 
-  3. Spring Cloud, Security를 활용하여 JWT 토큰을 활용한 API-Gateway를 개발했으며, 각 서비스에 대한 요청을 처리하기 이전에 사용자 인증을 총괄적으로 처리합니다.
+  2. 임시 저장된 도서 정보는, 나중에 다시 불러와서 그대로 등록 절차를 진행하실 수 있습니다.
 
 </details>
+
+<br>
 
 <details>
 <summary>도서 목록 조회</summary>
 
-  1. 높은 교재 구매 비용에 따른 대학생들의 경제적 부담을 완화하고자 개발중인 중고 직거래 커뮤니티입니다.
+![도서목록조회](https://github.com/Blanc-et-noir/MSA-Service/assets/83106564/42074f35-fb97-4dfb-b5d9-0058d3bd1b48)
 
-  2. MSA 구조로 개발된 RESTful API 서버를 통해 서버 장애 발생시에 일부 기능은 그대로 사용할 수 있도록 가용성을 확보했습니다.
+1. 사이드바 메뉴를 통해 카테고리, 등급, 가격, 도서명, 출판사명 등을 기준으로 필터링하여 원하는 중고 도서를 쉽게 검색할 수 있습니다.
 
-  3. Spring Cloud, Security를 활용하여 JWT 토큰을 활용한 API-Gateway를 개발했으며, 각 서비스에 대한 요청을 처리하기 이전에 사용자 인증을 총괄적으로 처리합니다.
+2. 각 도서별로 도서의 정보를 간단히 묘사한 태그를 표시함으로써, 사용자의 편의를 돕고 있습니다.
 
 </details>
 
