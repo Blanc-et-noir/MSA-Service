@@ -90,7 +90,7 @@ jQuery(function(){
 			"contentType":"application/json"
 		}).done(function(response){
 			openToast({
-				"toast-type":"fail",
+				"toast-type":"success",
 				"toast-message":"해당 이메일에 대한 소유권 인증에 성공했습니다. 이메일에 대한 인증정보는 30분간 유효합니다."
 			})
 		}).fail(function(xhr, status, error){
